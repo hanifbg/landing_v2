@@ -13,7 +13,9 @@ import Link from '@mui/material/Link';
 import SearchIcon from '@mui/icons-material/Search';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AppLogo from './logo';
+import AppLogo from '../template/Logo';
+import "@fontsource/poppins";
+
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
@@ -32,7 +34,6 @@ const Header = () => {
   return (
     <AppBar
       position='sticky'
-      color='inherit'
       sx={{
         boxShadow: 'none',
         backgroundColor: 'background.paper',
@@ -46,13 +47,12 @@ const Header = () => {
         sx={{
           boxSizing: 'border-box',
           minHeight: {xs: 56, sm: 70},
-          paddingLeft: {xs: 5},
+          paddingLeft: {xs: 2},
           paddingRight: {xs: 5, md: 7.5, xl: 12.5},
         }}
         disableGutters
       >
         <Box
-          noWrap
           sx={{mr: 2, display: {xs: 'none', md: 'flex'}, paddingLeft: '0px'}}
         >
           <AppLogo />
@@ -65,7 +65,6 @@ const Header = () => {
             aria-controls='menu-appbar'
             aria-haspopup='true'
             onClick={handleOpenNavMenu}
-            color='inherit'
           >
             <MenuIcon />
           </IconButton>
@@ -88,11 +87,11 @@ const Header = () => {
             }}
           >
             <MenuItem key={'Home'} onClick={handleCloseNavMenu}>
-              <Typography textAlign='center'>Home</Typography>
+              <Typography textAlign='center' sx={{ color:'#000'}}>Home</Typography>
             </MenuItem>
           </Menu>
         </Box>
-        <Box noWrap sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
+        <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}}}>
           <AppLogo />
         </Box>
         <Box

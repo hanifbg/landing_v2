@@ -1,18 +1,18 @@
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import * as React from 'react';
-import Header from './header';
+import Header from '../header';
+import "@fontsource/poppins";
+
 
 export default function Layout({ children }) {
     return (
-      <React.Fragment>
-      <Container fixed>
+      <Container  maxWidth="lg" disableGutters={true}>
         <Header />
-        <Box sx={{ height: '100vh', padding:7}} >
+        <Box sx={{padding:5}}>
           <main>{children}</main>
         </Box>
       </Container>
-    </React.Fragment>
     )
         
   }
