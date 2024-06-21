@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "packageManager": "yarn@3.3.1",
   "dependencies": {
     "@brainhubeu/react-carousel": "^2.0.4",
     "@emotion/react": "^11.10.5",

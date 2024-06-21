@@ -5,8 +5,6 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import theme from "./_theme";
 import '../styles/globals.css';
 
-
-
 export default function TransporterApp({  Component,  pageProps }) {
     return (
       <ThemeProvider theme={theme}>
