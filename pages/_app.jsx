@@ -2,7 +2,7 @@
 import Layout from "../components/template/Layout"
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
-import theme from "./_theme";
+import theme from "../theme/_theme";
 import '../styles/globals.css';
 
 export default function IqiblaApp({  Component,  pageProps }) {
