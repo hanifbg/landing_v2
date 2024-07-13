@@ -1,9 +1,93 @@
 import React from "react";
 
-import { Box } from "@mui/material";
+import { Box, Container, Grid, Typography, TextField, Button, Link, IconButton } from "@mui/material";
+
+import { Facebook, Instagram, YouTube, Twitter, Pinterest } from "@mui/icons-material";
 
 const Footer = () => {
-  return <Box sx={{ width: "100%", position: "fixed", bottom: "0", left: "0", background: "white", color: "#000" }}>Footer</Box>;
+  return (
+    <Box sx={{ backgroundColor: "black", color: "white", p: 2 }}>
+      <Container maxWidth="lg">
+        <Grid container spacing={4}>
+          {/* Newsletter Signup */}
+          <Grid item xs={12} md={6}>
+            <Typography variant="h6" gutterBottom>
+              Receive the latest articles, tips, and offers from iQIBLA
+            </Typography>
+            <Box sx={{ display: "flex", mt: 2 }}>
+              <TextField
+                variant="outlined"
+                placeholder="Email"
+                fullWidth
+                sx={{
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": { borderColor: "white" },
+                    "&:hover fieldset": { borderColor: "white" },
+                    "&.Mui-focused fieldset": { borderColor: "white" },
+                  },
+                  input: { color: "white" },
+                }}
+              />
+              <Button variant="contained" sx={{ ml: 1, bgcolor: "white", color: "black", "&:hover": { bgcolor: "grey.300" } }}>
+                →
+              </Button>
+            </Box>
+            <Typography variant="body2" sx={{ mt: 2 }}>
+              We care about protecting your data. Read more in our{" "}
+              <Link href="#" color="inherit" underline="always">
+                Privacy policy
+              </Link>
+              .
+            </Typography>
+          </Grid>
+
+          {/* Footer Links */}
+          <Grid item xs={12} md={6}>
+            <Grid container spacing={2}>
+              {["About us", "Blog", "News", "FAQ", "Distributors", "Affiliate Program"].map((item) => (
+                <Grid item xs={6} key={item}>
+                  <Link href="#" color="inherit" underline="none">
+                    <Typography variant="body1">{item}</Typography>
+                  </Link>
+                </Grid>
+              ))}
+            </Grid>
+          </Grid>
+        </Grid>
+
+        {/* Payment Methods and Social Icons */}
+        <Box sx={{ mt: 4, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Box>
+            {[Facebook, Instagram, YouTube, Twitter, Pinterest].map((Icon, index) => (
+              <IconButton key={index} color="inherit" sx={{ ml: 1 }}>
+                <Icon />
+              </IconButton>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Copyright and Policies */}
+        <Typography variant="body2" sx={{ mt: 4, textAlign: "center" }}>
+          © 2024, iQIBLA •
+          <Link href="#" color="inherit" sx={{ mx: 1 }}>
+            Refund policy
+          </Link>{" "}
+          •
+          <Link href="#" color="inherit" sx={{ mx: 1 }}>
+            Privacy policy
+          </Link>{" "}
+          •
+          <Link href="#" color="inherit" sx={{ mx: 1 }}>
+            Terms of service
+          </Link>{" "}
+          •
+          <Link href="#" color="inherit" sx={{ mx: 1 }}>
+            Shipping policy
+          </Link>
+        </Typography>
+      </Container>
+    </Box>
+  );
 };
 
 export default Footer;

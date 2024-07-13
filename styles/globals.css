@@ -67,3 +67,7 @@ p {
 .pointer {
   cursor: pointer;
 }
+
+.video-section iframe {
+  width: 100%;
+}

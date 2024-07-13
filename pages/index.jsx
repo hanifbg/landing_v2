@@ -2,16 +2,15 @@ import React from "react";
 
 import HeroSection from "../components/home/HeroSection";
 import FeaturedProducts from "../components/home/FeaturedProducts";
-
-import { Container } from "@mui/material";
+import VideoSection from "../components/home/VideoSection";
 
 const HomePage = () => {
   return (
-    <Container sx={{ color: "white" }}>
+    <>
       <HeroSection />
       <FeaturedProducts />
-      
-    </Container>
+      <VideoSection />
+    </>
   );
 };
 

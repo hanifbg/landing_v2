@@ -41,7 +41,7 @@ const FeaturedProducts = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 300000000,
+    autoplaySpeed: 3000,
     centerMode: true,
     centerPadding: "60px", // Adjust spacing around the centered slide
     responsive: [
@@ -63,7 +63,7 @@ const FeaturedProducts = () => {
   return (
     <Box
       sx={{
-        padding: "40px 0 80px",
+        padding: { xs: "40px 16px 80px", md: "40px 0 80px" },
       }}
     >
       <Box

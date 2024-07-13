@@ -57,7 +57,7 @@ const HeroSection = () => {
     <Box
       sx={{
         width: "100%",
-        height: "100%",
+        height: "100vh",
         position: "relative",
         ".slick-dots": {
           bottom: "10px",
@@ -84,7 +84,7 @@ const HeroSection = () => {
               flexDirection: "column",
               alignItems: index === 0 ? { xs: "center", md: "flex-start" } : "center",
               justifyContent: index === 0 ? { xs: "flex-end", md: "flex-end" } : { xs: "flex-end", md: "center" },
-              height: "80vh",
+              height: { xs: "100vh !important", md: "96vh !important" },
               backgroundImage: `url(${product.image})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
