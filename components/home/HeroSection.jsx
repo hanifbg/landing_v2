@@ -9,13 +9,13 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 const HeroSection = () => {
   const products = [
     {
-      image: "/product-hero.png",
+      image: "/home/product-hero.png",
       title: "Qwatch",
       detail: "The wearable device that helps you stay connected to your faith, wherever you go.",
       link: "/products/product1",
     },
     {
-      image: "/product-hero2.png",
+      image: "/home/product-hero2.png",
       title: "Zikr Rings",
       detail: "Smartwatch for Muslims, featuring essential Islamic functionalities and all the features of a modern",
       link: "/products/product2",
@@ -48,7 +48,7 @@ const HeroSection = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000000000000,
+    autoplaySpeed: 3000,
     nextArrow: <CustomArrow direction="right" />,
     prevArrow: <CustomArrow direction="left" />,
   };
@@ -82,8 +82,7 @@ const HeroSection = () => {
             sx={{
               display: "flex !important",
               flexDirection: "column",
-              // alignItems: { xs: "center", md: "flex-start" },
-              alignItems: index === 0 ? { xs: "center", md: "flex-start" } : "center", // Align left for first slide, center for others
+              alignItems: index === 0 ? { xs: "center", md: "flex-start" } : "center",
               justifyContent: index === 0 ? { xs: "flex-end", md: "flex-end" } : { xs: "flex-end", md: "center" },
               height: "80vh",
               backgroundImage: `url(${product.image})`,
@@ -121,7 +120,7 @@ const HeroSection = () => {
             >
               {product.detail}
             </Typography>
-            <Link href={product.link} passHref>
+            <Link href={`/products/${product.title}`} passHref>
               <Button
                 variant="contained"
                 color="primary"

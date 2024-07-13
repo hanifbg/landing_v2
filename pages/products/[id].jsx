@@ -5,7 +5,7 @@ const ProductsPage = () => {
   const { query } = useRouter();
 
   return (
-    <div>
+    <div style={{ color: "white" }}>
       <h1>Detail Product</h1>
       <p>Product : {query.id}</p>
     </div>
