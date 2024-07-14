@@ -2,10 +2,11 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import logo from "../../../assets/home/logo.png";
 
-import { AppBar, Toolbar, Typography, IconButton, Button, MenuItem, Select, Box, Drawer, List, ListItem, ListItemText, Link } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Button, MenuItem, Select, Box, Drawer, List, ListItemText, ListItemButton } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
@@ -55,17 +56,17 @@ const Navbar = () => {
       <List>
         {navLinks.map((link) => (
           <Link key={link.name} href={link.path} passHref>
-            <ListItem button component="a">
+            <ListItemButton component="a">
               <ListItemText primary={link.name} />
-            </ListItem>
+            </ListItemButton>
           </Link>
         ))}
-        <ListItem button>
+        <ListItemButton>
           <Select defaultValue="EN" sx={{ color: "inherit" }} fullWidth>
             <MenuItem value="EN">English</MenuItem>
             <MenuItem value="IND">Indonesia</MenuItem>
           </Select>
-        </ListItem>
+        </ListItemButton>
       </List>
     </Box>
   );

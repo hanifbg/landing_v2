@@ -1,46 +1,47 @@
 import React from "react";
 import Slider from "react-slick";
+import Link from "next/link";
 
-import { Box, Button, IconButton, Link, Typography } from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 
 import ArrowBackIosNewRoundedIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
+// 1. Extracting CustomArrow Component
+const CustomArrow = React.memo(({ onClick, direction }) => (
+  <IconButton
+    onClick={onClick}
+    sx={{
+      position: "absolute",
+      top: "50%",
+      transform: "translateY(-50%)",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
+      color: "white",
+      zIndex: 1,
+      ...(direction === "left" ? { left: "10px" } : { right: "10px" }),
+    }}
+  >
+    {direction === "left" ? <ArrowBackIosNewRoundedIcon /> : <ArrowForwardIosRoundedIcon />}
+  </IconButton>
+));
+
+// 2. Using map More Effectively
+const products = [
+  {
+    image: "/home/product-hero.png",
+    title: "Qwatch",
+    detail: "The wearable device that helps you stay connected to your faith, wherever you go.",
+    link: "/products/product1",
+  },
+  {
+    image: "/home/product-hero2.png",
+    title: "Zikr Rings",
+    detail: "Smartwatch for Muslims, featuring essential Islamic functionalities and all the features of a modern",
+    link: "/products/product2",
+  },
+];
+
 const HeroSection = () => {
-  const products = [
-    {
-      image: "/home/product-hero.png",
-      title: "Qwatch",
-      detail: "The wearable device that helps you stay connected to your faith, wherever you go.",
-      link: "/products/product1",
-    },
-    {
-      image: "/home/product-hero2.png",
-      title: "Zikr Rings",
-      detail: "Smartwatch for Muslims, featuring essential Islamic functionalities and all the features of a modern",
-      link: "/products/product2",
-    },
-  ];
-
-  const CustomArrow = ({ onClick, direction }) => {
-    return (
-      <IconButton
-        onClick={onClick}
-        sx={{
-          position: "absolute",
-          top: "50%",
-          transform: "translateY(-50%)",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          color: "white",
-          zIndex: 1,
-          ...(direction === "left" ? { left: "10px" } : { right: "10px" }),
-        }}
-      >
-        {direction === "left" ? <ArrowBackIosNewRoundedIcon /> : <ArrowForwardIosRoundedIcon />}
-      </IconButton>
-    );
-  };
-
   const settings = {
     dots: true,
     infinite: true,
@@ -146,4 +147,4 @@ const HeroSection = () => {
   );
 };
 
-export default HeroSection;
+export default React.memo(HeroSection);
