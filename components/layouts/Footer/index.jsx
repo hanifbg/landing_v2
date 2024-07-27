@@ -1,8 +1,25 @@
 import React from "react";
-
 import { Box, Container, Grid, Typography, TextField, Button, Link, IconButton } from "@mui/material";
-
 import { Facebook, Instagram, YouTube, Twitter, Pinterest } from "@mui/icons-material";
+
+const styles = {
+  textField: {
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": { borderColor: "white" },
+      "&:hover fieldset": { borderColor: "white" },
+      "&.Mui-focused fieldset": { borderColor: "white" },
+    },
+    input: { color: "white" },
+  },
+  button: {
+    ml: 1,
+    bgcolor: "white",
+    color: "black",
+    "&:hover": { bgcolor: "grey.300" },
+  },
+};
+
+const socialIcons = [Facebook, Instagram, YouTube, Twitter, Pinterest];
 
 const Footer = () => {
   return (
@@ -15,20 +32,8 @@ const Footer = () => {
               Receive the latest articles, tips, and offers from iQIBLA
             </Typography>
             <Box sx={{ display: "flex", mt: 2 }}>
-              <TextField
-                variant="outlined"
-                placeholder="Email"
-                fullWidth
-                sx={{
-                  "& .MuiOutlinedInput-root": {
-                    "& fieldset": { borderColor: "white" },
-                    "&:hover fieldset": { borderColor: "white" },
-                    "&.Mui-focused fieldset": { borderColor: "white" },
-                  },
-                  input: { color: "white" },
-                }}
-              />
-              <Button variant="contained" sx={{ ml: 1, bgcolor: "white", color: "black", "&:hover": { bgcolor: "grey.300" } }}>
+              <TextField variant="outlined" placeholder="Email" fullWidth sx={styles.textField} />
+              <Button variant="contained" sx={styles.button}>
                 →
               </Button>
             </Box>
@@ -58,8 +63,8 @@ const Footer = () => {
         {/* Payment Methods and Social Icons */}
         <Box sx={{ mt: 4, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Box>
-            {[Facebook, Instagram, YouTube, Twitter, Pinterest].map((Icon, index) => (
-              <IconButton key={index} color="inherit" sx={{ ml: 1 }}>
+            {socialIcons.map((Icon, index) => (
+              <IconButton key={index} color="inherit" sx={{ ml: 1 }} aria-label={Icon.displayName}>
                 <Icon />
               </IconButton>
             ))}
@@ -69,19 +74,19 @@ const Footer = () => {
         {/* Copyright and Policies */}
         <Typography variant="body2" sx={{ mt: 4, textAlign: "center" }}>
           © 2024, iQIBLA •
-          <Link href="#" color="inherit" sx={{ mx: 1 }}>
+          <Link href="#" color="inherit" sx={{ mx: 1 }} rel="noopener noreferrer" target="_blank">
             Refund policy
           </Link>{" "}
           •
-          <Link href="#" color="inherit" sx={{ mx: 1 }}>
+          <Link href="#" color="inherit" sx={{ mx: 1 }} rel="noopener noreferrer" target="_blank">
             Privacy policy
           </Link>{" "}
           •
-          <Link href="#" color="inherit" sx={{ mx: 1 }}>
+          <Link href="#" color="inherit" sx={{ mx: 1 }} rel="noopener noreferrer" target="_blank">
             Terms of service
           </Link>{" "}
           •
-          <Link href="#" color="inherit" sx={{ mx: 1 }}>
+          <Link href="#" color="inherit" sx={{ mx: 1 }} rel="noopener noreferrer" target="_blank">
             Shipping policy
           </Link>
         </Typography>
