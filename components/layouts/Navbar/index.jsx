@@ -11,8 +11,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import logo from "../../../assets/home/logo.png";
-
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
