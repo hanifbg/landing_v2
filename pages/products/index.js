@@ -1,15 +1,14 @@
-import React from "react";
-import { useRouter } from "next/router";
+import React from 'react';
+import ProductCatalog from '@components/products/ProductCatalog';
+import categories from '@api/constants/products.json';
 
-const ProductsPage = () => {
-  const { query } = useRouter();
-
+const ProductPages = () => {
   return (
     <div>
-      <h1>Detail Product</h1>
-      <p>Product : {query.id}</p>
+      <h1>Product Catalog</h1>
+      <ProductCatalog categories={categories} />
     </div>
   );
 };
 
-export default ProductsPage;
+export default ProductPages;

@@ -1,16 +1,12 @@
-// components/Navbar.js
-
 import React, { useState } from "react";
 import Image from "next/image";
-
-import logo from "../../../assets/home/logo.png";
-
 import { AppBar, Toolbar, Typography, IconButton, Button, MenuItem, Select, Box, Drawer, List, ListItem, ListItemText, Link } from "@mui/material";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
+import logo from "../../../assets/home/logo.png";
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -19,19 +15,24 @@ const Navbar = () => {
     setDrawerOpen(!drawerOpen);
   };
 
+  const handleClickWa = () => {
+    window.open("https://wa.me/6285183003849", "_blank");
+  };
+
   const navLinks = [
     { name: "Products", path: "/products" },
     { name: "Accessories", path: "/accessories" },
     { name: "iQibla Life", path: "/iqibla-life" },
     { name: "Brand Story", path: "/brand-story" },
-    { name: "Contact Us", path: "/contact-us" },
+    { name: "Contact Us", path: "whatsapp" },  // Modified link to a special keyword
   ];
 
   const renderNavLinks = () => (
     <>
       {navLinks.map((link) => (
-        <Link key={link.name} href={link.path} passHref>
+        link.path === "whatsapp" ? (
           <Button
+            key={link.name}
             color="inherit"
             sx={{
               "&.MuiButtonBase-root": {
@@ -42,10 +43,28 @@ const Navbar = () => {
                 textTransform: "none",
               },
             }}
+            onClick={handleClickWa}
           >
             {link.name}
           </Button>
-        </Link>
+        ) : (
+          <Link key={link.name} href={link.path} passHref>
+            <Button
+              color="inherit"
+              sx={{
+                "&.MuiButtonBase-root": {
+                  fontSize: "18px",
+                  fontWeight: "600",
+                  color: "white",
+                  opacity: "0.75",
+                  textTransform: "none",
+                },
+              }}
+            >
+              {link.name}
+            </Button>
+          </Link>
+        )
       ))}
     </>
   );
@@ -54,11 +73,17 @@ const Navbar = () => {
     <Box sx={{ width: 250 }}>
       <List>
         {navLinks.map((link) => (
-          <Link key={link.name} href={link.path} passHref>
-            <ListItem button component="a">
+          link.path === "whatsapp" ? (
+            <ListItem button key={link.name} onClick={handleClickWa}>
               <ListItemText primary={link.name} />
             </ListItem>
-          </Link>
+          ) : (
+            <Link key={link.name} href={link.path} passHref>
+              <ListItem button component="a">
+                <ListItemText primary={link.name} />
+              </ListItem>
+            </Link>
+          )
         ))}
         <ListItem button>
           <Select defaultValue="EN" sx={{ color: "inherit" }} fullWidth>
