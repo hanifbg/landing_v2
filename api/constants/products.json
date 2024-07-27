@@ -1,0 +1,90 @@
+[
+    {
+      "name": "Quran Phone",
+      "products": [
+        {
+          "id": 1,
+          "name": "Q Phone",
+          "price": 99.99,
+          "cover": "https://iqibla.com/cdn/shop/files/Q_phone.1468a.png?v=1720699718",
+          "images": [
+            "https://iqibla.com/cdn/shop/files/Q_phone.1468a.png?v=1720699718",
+            "https://via.placeholder.com/400",
+            "https://via.placeholder.com/400"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Zikr Rings",
+      "products": [
+        {
+          "id": 2,
+          "name": "Zikr Jood Pro",
+          "price": 79.99,
+          "cover": "https://iqibla.com/cdn/shop/files/1500-F.png?v=1718159386",
+          "images": [
+            "https://iqibla.com/cdn/shop/files/1500-F.png?v=1718159386",
+            "https://via.placeholder.com/400",
+            "https://via.placeholder.com/400"
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Zikr Noor",
+          "price": 89.99,
+          "cover": "https://iqibla.com/cdn/shop/files/lALPM45VIILL4R7NBdzNBdw_1500_1500_57b7c089-df7d-43a6-8a6c-5f20df351604.png?v=1710559691",
+          "images": [
+            "https://iqibla.com/cdn/shop/files/lALPM45VIILL4R7NBdzNBdw_1500_1500_57b7c089-df7d-43a6-8a6c-5f20df351604.png?v=1710559691",
+            "https://via.placeholder.com/400",
+            "https://via.placeholder.com/400"
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Zikr M02 Premium",
+          "price": 99.99,
+          "cover": "https://iqibla.com/cdn/shop/files/iQIBLA-SWAROVSKI-zikr-ring-M02Premium-Graphite-f.png?v=1691488553",
+          "images": [
+            "https://iqibla.com/cdn/shop/files/iQIBLA-SWAROVSKI-zikr-ring-M02Premium-Graphite-f.png?v=1691488553",
+            "https://via.placeholder.com/400",
+            "https://via.placeholder.com/400"
+          ]
+        },
+        {
+          "id": 5,
+          "name": "Zikr Flex Pro",
+          "price": 109.99,
+          "cover": "https://iqibla.com/cdn/shop/files/iQIBLA-zikr-ring-flexpro-Spacegray-f_be8d1829-500d-4c55-8be0-9d39761de5d4.png?v=1692327744",
+          "images": [
+            "https://iqibla.com/cdn/shop/files/iQIBLA-zikr-ring-flexpro-Spacegray-f_be8d1829-500d-4c55-8be0-9d39761de5d4.png?v=1692327744",
+            "https://via.placeholder.com/400",
+            "https://via.placeholder.com/400"
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Zikr M02 Pro",
+          "price": 69.99,
+          "cover": "https://iqibla.com/cdn/shop/files/iQIBLA-zikr-ring-M02Rro-spacegray-f.png?v=1692259385",
+          "images": [
+            "https://iqibla.com/cdn/shop/files/iQIBLA-zikr-ring-M02Rro-spacegray-f.png?v=1692259385",
+            "https://via.placeholder.com/400",
+            "https://via.placeholder.com/400"
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Zikr M02",
+          "price": 59.99,
+          "cover": "https://iqibla.com/cdn/shop/files/iQIBLA-zikr-ring-M02Rro-BrightRose-f_97055b8f-fc8a-4131-be8e-3d23deb47450.png?v=1692254084",
+          "images": [
+            "https://iqibla.com/cdn/shop/files/iQIBLA-zikr-ring-M02Rro-BrightRose-f_97055b8f-fc8a-4131-be8e-3d23deb47450.png?v=1692254084",
+            "https://via.placeholder.com/400",
+            "https://via.placeholder.com/400"
+          ]
+        }
+      ]
+    }
+  ]
+  
