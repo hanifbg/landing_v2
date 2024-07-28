@@ -1,5 +1,4 @@
-
-# Iqibla Indonesia
+# IQIBLA-INDONESIA REPO
 
 This project https://iqibla-indonesia.vercel.app/
 
