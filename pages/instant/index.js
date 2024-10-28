@@ -15,9 +15,9 @@ import {
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import MenuIcon from "@mui/icons-material/Menu"; 
+import MenuIcon from "@mui/icons-material/Menu";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp"; // Import WhatsApp icon
-import Image from "next/image"; 
+import Image from "next/image";
 
 const theme = createTheme({
   palette: {
@@ -34,19 +34,43 @@ const theme = createTheme({
 });
 
 const sections = [
-  { id: "home", title: "Beranda", content: "Selamat datang di Zikr Ring Noor." },
-  { id: "about", title: "Tentang Kami", content: "Ring dengan makna mendalam dalam beribadah." },
-  { id: "features", title: "Fitur", content: "Desain modern dan nyaman digunakan." },
+  {
+    id: "home",
+    title: "Beranda",
+    content: "Selamat datang di Zikr Ring Noor.",
+  },
+  {
+    id: "about",
+    title: "Tentang Kami",
+    content: "Ring dengan makna mendalam dalam beribadah.",
+  },
+  {
+    id: "features",
+    title: "Fitur",
+    content: "Desain modern dan nyaman digunakan.",
+  },
   { id: "lightweight", title: "Ringan", content: "Berat 7.2g seperti bulu." },
-  { id: "benefits", title: "Manfaat", content: "Membantu menjaga hubungan dengan Allah SWT." },
-  { id: "pricing", title: "Harga", content: "Harga promo spesial untuk bulan ini." },
-  { id: "contact", title: "Hubungi Kami", content: "Kontak kami untuk info lebih lanjut." },
+  {
+    id: "benefits",
+    title: "Manfaat",
+    content: "Membantu menjaga hubungan dengan Allah SWT.",
+  },
+  {
+    id: "pricing",
+    title: "Harga",
+    content: "Harga promo spesial untuk bulan ini.",
+  },
+  {
+    id: "contact",
+    title: "Hubungi Kami",
+    content: "Kontak kami untuk info lebih lanjut.",
+  },
 ];
 
 const App = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [appBarStyle, setAppBarStyle] = useState({
-    backgroundColor: "rgba(36, 40, 51, 1)", 
+    backgroundColor: "rgba(36, 40, 51, 1)",
   });
 
   const toggleDrawer = (open) => () => {
@@ -169,6 +193,11 @@ const App = () => {
           variant="contained"
           color="primary"
           startIcon={<WhatsAppIcon />}
+          sx={{
+            backgroundColor: "#EBC884",
+            textAlign: "center",
+            color: "text.primary",
+          }}
           onClick={() =>
             window.open(
               "https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring.",
@@ -186,9 +215,8 @@ const App = () => {
           py: 3,
           px: 2,
           mt: "auto",
-          backgroundColor: "#EBC884",
+          backgroundColor: "#f5f5f5",
           textAlign: "center",
-          color: "text.primary",
         }}
       >
         <Typography variant="body2" color="text.primary">
