@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -15,8 +15,9 @@ import {
 } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import MenuIcon from "@mui/icons-material/Menu"; // Import the hamburger menu icon
-import Image from "next/image";
+import MenuIcon from "@mui/icons-material/Menu"; 
+import WhatsAppIcon from "@mui/icons-material/WhatsApp"; // Import WhatsApp icon
+import Image from "next/image"; 
 
 const theme = createTheme({
   palette: {
@@ -33,41 +34,20 @@ const theme = createTheme({
 });
 
 const sections = [
-  {
-    id: "home",
-    title: "Beranda",
-    content: "Selamat datang di Zikr Ring Noor.",
-  },
-  {
-    id: "about",
-    title: "Tentang Kami",
-    content: "Ring dengan makna mendalam dalam beribadah.",
-  },
-  {
-    id: "features",
-    title: "Fitur",
-    content: "Desain modern dan nyaman digunakan.",
-  },
+  { id: "home", title: "Beranda", content: "Selamat datang di Zikr Ring Noor." },
+  { id: "about", title: "Tentang Kami", content: "Ring dengan makna mendalam dalam beribadah." },
+  { id: "features", title: "Fitur", content: "Desain modern dan nyaman digunakan." },
   { id: "lightweight", title: "Ringan", content: "Berat 7.2g seperti bulu." },
-  {
-    id: "benefits",
-    title: "Manfaat",
-    content: "Membantu menjaga hubungan dengan Allah SWT.",
-  },
-  {
-    id: "pricing",
-    title: "Harga",
-    content: "Harga promo spesial untuk bulan ini.",
-  },
-  {
-    id: "contact",
-    title: "Hubungi Kami",
-    content: "Kontak kami untuk info lebih lanjut.",
-  },
+  { id: "benefits", title: "Manfaat", content: "Membantu menjaga hubungan dengan Allah SWT." },
+  { id: "pricing", title: "Harga", content: "Harga promo spesial untuk bulan ini." },
+  { id: "contact", title: "Hubungi Kami", content: "Kontak kami untuk info lebih lanjut." },
 ];
 
 const App = () => {
-  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [appBarStyle, setAppBarStyle] = useState({
+    backgroundColor: "rgba(36, 40, 51, 1)", 
+  });
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
@@ -77,28 +57,35 @@ const App = () => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      setDrawerOpen(false); // Close the drawer after navigating
+      setDrawerOpen(false);
     }
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setAppBarStyle({ backgroundColor: "rgba(36, 40, 51, 0.5)" });
+      } else {
+        setAppBarStyle({ backgroundColor: "rgba(36, 40, 51, 1)" });
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
-      <AppBar
-        position="sticky"
-        sx={{
-          "&.MuiAppBar-root": {
-            background: "#242833",
-            boxShadow: "0px -1.94px 19px 0px rgba(16, 14, 62, 0.10)",
-          },
-        }}
-      >
+      <AppBar position="sticky" sx={appBarStyle}>
         <Toolbar>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="menu"
             onClick={toggleDrawer(true)}
-            sx={{ mr: 2, color: "#fff" }}
+            sx={{ mr: 2 }}
           >
             <MenuIcon />
           </IconButton>
@@ -117,10 +104,9 @@ const App = () => {
         </Toolbar>
       </AppBar>
 
-      {/* Drawer for Navigation */}
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
         <Box
-          sx={{ width: 250, backgroundColor: "#242833", color: "#fff", height: "100%" }}
+          sx={{ width: 250 }}
           role="presentation"
           onClick={toggleDrawer(false)}
           onKeyDown={toggleDrawer(false)}
@@ -169,14 +155,40 @@ const App = () => {
         ))}
       </Container>
 
+      {/* Floating WhatsApp Button */}
+      <Box
+        sx={{
+          position: "fixed",
+          bottom: 16,
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 1000,
+        }}
+      >
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<WhatsAppIcon />}
+          onClick={() =>
+            window.open(
+              "https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring.",
+              "_blank"
+            )
+          }
+        >
+          Beli Sekarang
+        </Button>
+      </Box>
+
       <Box
         component="footer"
         sx={{
           py: 3,
           px: 2,
           mt: "auto",
-          backgroundColor: "#f5f5f5",
+          backgroundColor: "#EBC884",
           textAlign: "center",
+          color: "text.primary",
         }}
       >
         <Typography variant="body2" color="text.primary">
