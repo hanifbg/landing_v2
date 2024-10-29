@@ -1,35 +1,46 @@
 import React, { useState, useEffect } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Container,
-  Box,
-  Button,
-  IconButton,
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from "@mui/material";
+
+import { Typography, Container, Box, Button } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import MenuIcon from "@mui/icons-material/Menu";
+
 import WhatsAppIcon from "@mui/icons-material/WhatsApp"; // Import WhatsApp icon
-import Image from "next/image";
+
+import Home from "@components/instants/Home";
+import About from "@components/instants/About";
+import Features from "@components/instants/Features";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#FDCC4D", // Gold-like color to match the theme
+      main: "#FDCC4D",
+    },
+    secondary: {
+      main: "#9B9B9B", // Custom secondary color
     },
     text: {
-      primary: "#585778", // Muted gray text
+      primary: "#585778",
     },
   },
   typography: {
-    fontFamily: "Arial, sans-serif",
+    fontFamily: "Montserrat, sans-serif",
+    fontWeightRegular: 300,
+
+    customLarge: {
+      fontFamily: "Montserrat, sans-serif",
+      fontSize: "2.25rem", //36px
+    },
+    h1: {
+      fontSize: "2rem", //32px
+    },
+    h2: {
+      fontSize: "1.5rem", //24px
+    },
+    h3: {
+      fontSize: "1.125rem", //18px
+    },
+    h4: {
+      fontSize: "1rem", //16px
+    },
   },
 });
 
@@ -102,78 +113,32 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="sticky" sx={appBarStyle}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            onClick={toggleDrawer(true)}
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-
-          <IconButton
-            onClick={() => scrollToSection("contact")}
-            sx={{ p: 0, ml: "auto" }}
-          >
-            <Image
-              src="/assets/icon/logo-instant.svg"
-              alt="Logo Instant"
-              width={100}
-              height={50}
-            />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-
-      <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <Box
-          sx={{ width: 250 }}
-          role="presentation"
-          onClick={toggleDrawer(false)}
-          onKeyDown={toggleDrawer(false)}
-        >
-          <List>
-            {sections.map((section) => (
-              <ListItem key={section.id} disablePadding>
-                <ListItemButton onClick={() => scrollToSection(section.id)}>
-                  <ListItemText primary={section.title} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-        </Box>
-      </Drawer>
-
-      <Container maxWidth="sm" sx={{ mt: 2, mb: 10 }}>
+      <Container maxWidth="md" sx={{ m: "0 auto", p: 0 }}>
         {sections.map((section) => (
           <Box
             key={section.id}
             id={section.id}
             sx={{
-              py: 5,
-              borderBottom: "1px solid #E0E0E0",
+              pb: 5,
+              // borderBottom: "1px solid #E0E0E0",
               textAlign: "center",
             }}
           >
-            <Typography variant="h4" gutterBottom>
-              {section.title}
-            </Typography>
-            <Typography variant="body1" color="text.primary">
-              {section.content}
-            </Typography>
-            {section.id === "home" && (
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{ mt: 2 }}
-                endIcon={<ArrowDownwardIcon />}
-                onClick={() => scrollToSection("about")}
-              >
-                Pelajari Lebih Lanjut
-              </Button>
+            {section.id === "home" ? (
+              <Home onLearnMoreClick={() => scrollToSection("about")} />
+            ) : section.id === "about" ? (
+              <About />
+            ) : section.id === "features" ? (
+              <Features />
+            ) : (
+              <>
+                <Typography variant="h4" gutterBottom>
+                  {section.title}
+                </Typography>
+                <Typography variant="body1" color="text.primary">
+                  {section.content}
+                </Typography>
+              </>
             )}
           </Box>
         ))}
@@ -198,12 +163,7 @@ const App = () => {
             textAlign: "center",
             color: "text.primary",
           }}
-          onClick={() =>
-            window.open(
-              "https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring.",
-              "_blank"
-            )
-          }
+          onClick={() => window.open("https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring.", "_blank")}
         >
           Beli Sekarang
         </Button>
