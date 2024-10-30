@@ -1,69 +1,118 @@
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
+import { Box, Step, StepLabel, Stepper, Typography } from "@mui/material";
 
-import vector from "../../assets/icon/vector.webp";
+import noor from "../../assets/icon/noor.webp";
+import watch from "../../assets/icon/watch.webp";
+import ellipse from "../../assets/icon/ellipse.webp";
 
 const Features = () => {
-  const productVariants = [
-    { color: "black", image: "/home/feature_black.webp" },
-    { color: "pink", image: "/home/feature_pink.webp" },
-    { color: "blue", image: "/home/feature_blue.webp" },
-    { color: "green", image: "/home/feature_green.webp" },
-  ];
-
-  const [selectedVariant, setSelectedVariant] = useState(0);
-
-  const nextImage = () => {
-    setSelectedVariant((prev) => (prev === productVariants.length - 1 ? 0 : prev + 1));
-  };
-
-  const previousImage = () => {
-    setSelectedVariant((prev) => (prev === 0 ? productVariants.length - 1 : prev - 1));
-  };
+  const steps = ["Pengingat Jadwal Shalat", "Penghitung Tasbih Pintar", "Personalisai Tasbih", "Pengingat Tasbih", "Konektivitas Bluetooth", "Ketahanan Baterai Hingga 7 Hari"];
 
   return (
-    <div className="carousel-container">
-      <div className="carousel-image-wrapper">
-        <img src={productVariants[selectedVariant].image} alt={`Product in ${productVariants[selectedVariant].color}`} className="carousel-image" />
-
-        <button onClick={previousImage} className="carousel-button carousel-button-left" aria-label="Previous image">
-          <ChevronLeftRoundedIcon className="icon" />
-        </button>
-
-        <button onClick={nextImage} className="carousel-button carousel-button-right" aria-label="Next image">
-          <ChevronRightRoundedIcon className="icon" />
-        </button>
-
+    <Box>
+      <Typography
+        variant="customLarge"
+        component="h2"
+        color="primary"
+        textAlign="center"
+        sx={{
+          fontWeight: "800",
+          textTransform: "uppercase",
+          padding: "0 24px",
+          marginBottom: "40px",
+        }}
+      >
+        Fitur unggulan
+      </Typography>
+      <Box sx={{ position: "relative", height: "11.25rem" }}>
         <Image
-          src={vector}
-          alt="vector"
-          width={300}
-          height={300}
+          src={noor}
+          alt="noor"
+          width={343}
+          height={80}
           style={{
             position: "absolute",
-            top: "-30px",
-            right: "0",
-            zIndex: "-1",
-            width: "250px",
+            top: "0",
+            left: "0",
+            width: "100%",
           }}
         />
-      </div>
-
-      <div className="color-selector">
-        {productVariants.map((variant, index) => (
-          <button
-            key={variant.color}
-            onClick={() => setSelectedVariant(index)}
-            className={`color-dot ${variant.color} ${selectedVariant === index ? "color-dot-active" : ""}`}
-            aria-label={`Select ${variant.color} variant`}
-            aria-pressed={selectedVariant === index}
-          />
-        ))}
-      </div>
-    </div>
+        <Image
+          src={watch}
+          alt="noor"
+          width={448}
+          height={280}
+          style={{
+            position: "absolute",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            top: "3.75rem",
+            zIndex: "1",
+          }}
+        />
+        <Image
+          src={ellipse}
+          alt="noor"
+          width={185}
+          height={185}
+          style={{
+            position: "absolute",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            top: "6.125rem",
+            zIndex: "0",
+          }}
+        />
+        <Box
+          sx={{
+            display: "block",
+            borderColor: "#DDC29E",
+            borderLeftStyle: "solid",
+            borderLeftWidth: "2px",
+            minHeight: "24px",
+            position: "absolute",
+            top: "9.375rem",
+            left: "50%",
+            borderRadius: "4px",
+            marginLeft: "-1px",
+          }}
+        ></Box>
+      </Box>
+      <Box sx={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <Stepper
+          orientation="vertical"
+          sx={{
+            "&.MuiStepper-root": {
+              alignItems: "center",
+              "&  .MuiStepConnector-root": {
+                margin: "0",
+                "&  .MuiStepConnector-line": {
+                  borderLeftWidth: "2px",
+                  borderRadius: "4px",
+                  borderColor: "#DDC29E",
+                },
+              },
+            },
+          }}
+        >
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel
+                sx={{
+                  "& .MuiStepLabel-iconContainer": {
+                    display: "none",
+                  },
+                }}
+              >
+                {label}
+              </StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </Box>
+    </Box>
   );
 };
 

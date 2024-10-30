@@ -132,12 +132,12 @@ const App = () => {
               <Features />
             ) : (
               <>
-                <Typography variant="h4" gutterBottom>
+                {/* <Typography variant="h4" gutterBottom>
                   {section.title}
                 </Typography>
                 <Typography variant="body1" color="text.primary">
                   {section.content}
-                </Typography>
+                </Typography> */}
               </>
             )}
           </Box>
