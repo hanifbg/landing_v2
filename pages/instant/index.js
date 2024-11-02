@@ -175,9 +175,20 @@ const App = () => {
         sx={{
           position: "fixed",
           bottom: 16,
-          left: "50%",
+          left: {
+            xs: "50%",
+            sm: "auto",
+          },
+          right: {
+            xs: "auto",
+            sm: 0,
+          },
           transform: "translateX(-50%)",
           zIndex: 1000,
+          width: {
+            xs: "100%",
+            sm: "auto",
+          },
         }}
       >
         <Button
@@ -188,6 +199,12 @@ const App = () => {
             backgroundColor: "#EBC884",
             textAlign: "center",
             color: "text.primary",
+            padding: "12px 24px",
+            borderRadius: 8,
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "18px",
+            width: "100%",
+            fontWeight: 500,
           }}
           onClick={() =>
             window.open(
