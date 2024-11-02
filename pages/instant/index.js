@@ -8,6 +8,9 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp"; // Import WhatsApp icon
 import Home from "@components/instants/Home";
 import About from "@components/instants/About";
 import Features from "@components/instants/Features";
+import Size from "@components/instants/Size";
+import IqiblaApp from "@components/instants/IQiblaApp";
+import FollowUs from "@components/instants/FollowUs";
 
 const theme = createTheme({
   palette: {
@@ -19,12 +22,15 @@ const theme = createTheme({
     },
     text: {
       primary: "#585778",
+      color: "#45494E",
+      fontFamily: "Montserrat, sans-serif",
     },
   },
   typography: {
     fontFamily: "Montserrat, sans-serif",
-    fontWeightRegular: 300,
-
+    fontWeightRegular: 400,
+    fontSize: 16,
+    lineHeight: 1.5, // 150%
     customLarge: {
       fontFamily: "Montserrat, sans-serif",
       fontSize: "2.25rem", //36px
@@ -40,6 +46,30 @@ const theme = createTheme({
     },
     h4: {
       fontSize: "1rem", //16px
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+          textTransform: "none",
+        },
+      },
+    },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+    MuiBox: {
+      styleOverrides: {
+        root: {
+          textAlign: "center",
+        },
+      },
     },
   },
 });
@@ -60,20 +90,19 @@ const sections = [
     title: "Fitur",
     content: "Desain modern dan nyaman digunakan.",
   },
-  { id: "lightweight", title: "Ringan", content: "Berat 7.2g seperti bulu." },
   {
-    id: "benefits",
-    title: "Manfaat",
-    content: "Membantu menjaga hubungan dengan Allah SWT.",
+    id: "size",
+    title: "Ukuran",
+    content: "Tersedia dalam 3 ukuran",
   },
   {
-    id: "pricing",
-    title: "Harga",
-    content: "Harga promo spesial untuk bulan ini.",
+    id: "app",
+    title: "Iqibla Live App",
+    content: "Aplikasi penunjuk arah kiblat yang akurat.",
   },
   {
-    id: "contact",
-    title: "Hubungi Kami",
+    id: "follow-us",
+    title: "Ikuti Kami",
     content: "Kontak kami untuk info lebih lanjut.",
   },
 ];
@@ -119,7 +148,7 @@ const App = () => {
             key={section.id}
             id={section.id}
             sx={{
-              pb: 5,
+              pb: 2,
               // borderBottom: "1px solid #E0E0E0",
               textAlign: "center",
             }}
@@ -130,15 +159,12 @@ const App = () => {
               <About />
             ) : section.id === "features" ? (
               <Features />
+            ) : section.id === "size" ? (
+              <Size />
+            ) : section.id === "app" ? (
+              <IqiblaApp />
             ) : (
-              <>
-                {/* <Typography variant="h4" gutterBottom>
-                  {section.title}
-                </Typography>
-                <Typography variant="body1" color="text.primary">
-                  {section.content}
-                </Typography> */}
-              </>
+              <FollowUs />
             )}
           </Box>
         ))}
@@ -163,7 +189,12 @@ const App = () => {
             textAlign: "center",
             color: "text.primary",
           }}
-          onClick={() => window.open("https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring.", "_blank")}
+          onClick={() =>
+            window.open(
+              "https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring.",
+              "_blank"
+            )
+          }
         >
           Beli Sekarang
         </Button>
@@ -172,15 +203,25 @@ const App = () => {
       <Box
         component="footer"
         sx={{
-          py: 3,
+          pb: 3,
           px: 2,
-          mt: "auto",
-          backgroundColor: "#f5f5f5",
           textAlign: "center",
+          mb:7,
         }}
       >
-        <Typography variant="body2" color="text.primary">
-          © 2024 Zikr Ring Noor. All Rights Reserved.
+        <Typography variant="body2" color="text.primary"
+          sx={
+            {
+              color: "var(--iqibla-com-shuttle-gray, #5F6368)",
+              fontFamily: "Montserrat, sans-serif",
+              fontSize: "11px",
+              fontStyle: "normal",
+              fontWeight: 400,
+              lineHeight: "normal",
+            }
+          }
+        >
+            © iQIBLA Indonesia 2024
         </Typography>
       </Box>
     </ThemeProvider>

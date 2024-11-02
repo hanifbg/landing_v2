@@ -52,7 +52,7 @@ const About = () => {
         <Typography variant="h2" color="secondary" textAlign="left" sx={{ margin: "0 24px" }}>
           Bercahaya seperti Bulan di tengah malam
         </Typography>
-        <Typography variant="h4" color="text.primary" textAlign="left" sx={{ margin: "0 24px" }}>
+        <Typography variant="h4" color="text.primary" textAlign="justify" sx={{ margin: "0 24px" }}>
           iQIBLA NOOR memancarkan kemewahan modernnya. Desainnya yang memikat menambahkan sentuhan keindahan abadi di tangan Anda, membisikkan rasa percaya diri di setiap pandangan.
         </Typography>
       </Box>
