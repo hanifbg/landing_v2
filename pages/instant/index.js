@@ -163,9 +163,9 @@ const App = () => {
               <Size />
             ) : section.id === "app" ? (
               <IqiblaApp />
-            ) : (
+            ) : section.id === "follow-us" ? (
               <FollowUs />
-            )}
+            ) : null }
           </Box>
         ))}
       </Container>
@@ -178,6 +178,13 @@ const App = () => {
           left: "50%",
           transform: "translateX(-50%)",
           zIndex: 1000,
+          width: {
+            xs: "calc(100% - 32px)",
+            sm: "calc(50% - 32px)",
+            md: "calc(33.33% - 32px)",
+            lg: "calc(25% - 32px)",
+            xl: "calc(20% - 32px)",
+          },
         }}
       >
         <Button
@@ -188,6 +195,12 @@ const App = () => {
             backgroundColor: "#EBC884",
             textAlign: "center",
             color: "text.primary",
+            padding: "12px 24px",
+            borderRadius: 8,
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "18px",
+            width: "100%",
+            fontWeight: 500,
           }}
           onClick={() =>
             window.open(
