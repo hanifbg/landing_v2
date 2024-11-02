@@ -4,7 +4,7 @@ import Image from "next/image";
 import logoIG from "../../assets/icon/instagram.png";
 import logoTokopedia from "../../assets/icon/tokopedia.png";
 import logoShopee from "../../assets/icon/shopee.png";
-import logoTiktok from "../../assets/icon/tiktok.png"; // Fixed import
+import logoTiktok from "../../assets/icon/tiktok.png";
 
 const FollowUs = () => {
   const commonTextStyle = {
@@ -44,45 +44,55 @@ const FollowUs = () => {
 
   return (
     <Box
-      textAlign="left"
       sx={{
-        padding: "0 24px",
-        background:
-          "linear-gradient(180deg, #FFF 46.72%, rgba(255, 255, 255, 0.00) 99.71%)",
+        display: "flex",
+        justifyContent: "center",
+        padding: "24px 0",
+        background: "linear-gradient(180deg, #FFF 46.72%, rgba(255, 255, 255, 0.00) 99.71%)",
       }}
     >
-      <Typography
-        variant="h6"
+      <Box
+        textAlign="left"
         sx={{
-          fontWeight: "bold",
-          fontFamily: "Montserrat, sans-serif",
-          fontSize: "14px",
-          marginBottom: "18px",
+          maxWidth: "600px",
+          width: "100%",
+          padding: "0 24px",
         }}
       >
-        Kunjungi Kami
-      </Typography>
-      {social_medias.map((item, index) => (
-        <Box
-          key={index}
-          sx={{ display: "flex", alignItems: "center", marginBottom: "12px" }}
+        <Typography
+          variant="h6"
+          sx={{
+            fontWeight: "bold",
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "14px",
+            marginBottom: "18px",
+          }}
         >
-          <Box sx={{ marginRight: "8px" }}>
-            <Image src={item.logo} alt={item.label} width={24} height={24} />
-          </Box>
-          <Typography
-            sx={commonTextStyle}
-            component="a"
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
+          Kunjungi Kami
+        </Typography>
+        {social_medias.map((item, index) => (
+          <Box
+            key={index}
+            sx={{ display: "flex", alignItems: "center", marginBottom: "12px" }}
           >
-            {item.value}
-          </Typography>
-        </Box>
-      ))}
+            <Box sx={{ marginRight: "8px" }}>
+              <Image src={item.logo} alt={item.label} width={24} height={24} />
+            </Box>
+            <Typography
+              sx={commonTextStyle}
+              component="a"
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {item.value}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 };
 
 export default FollowUs;
+    

@@ -163,9 +163,9 @@ const App = () => {
               <Size />
             ) : section.id === "app" ? (
               <IqiblaApp />
-            ) : (
+            ) : section.id === "follow-us" ? (
               <FollowUs />
-            )}
+            ) : null }
           </Box>
         ))}
       </Container>
@@ -175,19 +175,15 @@ const App = () => {
         sx={{
           position: "fixed",
           bottom: 16,
-          left: {
-            xs: "50%",
-            sm: "auto",
-          },
-          right: {
-            xs: "auto",
-            sm: 0,
-          },
+          left: "50%",
           transform: "translateX(-50%)",
           zIndex: 1000,
           width: {
-            xs: "100%",
-            sm: "auto",
+            xs: "calc(100% - 32px)",
+            sm: "calc(50% - 32px)",
+            md: "calc(33.33% - 32px)",
+            lg: "calc(25% - 32px)",
+            xl: "calc(20% - 32px)",
           },
         }}
       >
