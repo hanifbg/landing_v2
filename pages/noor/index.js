@@ -5,14 +5,12 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import WhatsAppIcon from "@mui/icons-material/WhatsApp"; // Import WhatsApp icon
 
-import Home from "@components/instants/lite/Landing";
-import Reminder from "@components/instants/lite/Reminder";
-import Dzikir from "@components/instants/lite/Dzikir";
-import Weight from "@components/instants/lite/Weight";
-import Battery from "@components/instants/lite/Battery";
-import TypeColor from "@components/instants/lite/TypeColor";
-import Specifications from "@components/instants/noor/Specifications";
-import LifeAppSection from "@components/jood/LifeAppSection";
+import Home from "@components/instants/noor/Home";
+import About from "@components/instants/noor/About";
+import Features from "@components/instants/noor/Features";
+import Size from "@components/instants/noor/Size";
+import IqiblaApp from "@components/instants/noor/IQiblaApp";
+import FollowUs from "@components/instants/noor/FollowUs";
 
 const theme = createTheme({
   palette: {
@@ -144,32 +142,32 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container
-        sx={{
-          m: "0 auto",
-          p: 0,
-          maxWidth: {
-            xs: "100%", // Full width untuk perangkat kecil (mobile)
-            md: "400px", // 400px untuk perangkat desktop (md ke atas)
-          },
-        }}
-      >
-        <Home />
-        <Reminder />
-        <Dzikir />
-        <Weight />
-        <Battery />
-        <TypeColor />
-        <Box
-          sx={{
-            paddingTop: "50px",
-          }}
-        >
-          <LifeAppSection />
-        </Box>
-        <Box sx={{ paddingTop: "220px" }}>
-          <Specifications />
-        </Box>
+      <Container maxWidth="md" sx={{ m: "0 auto", p: 0 }}>
+        {sections.map((section) => (
+          <Box
+            key={section.id}
+            id={section.id}
+            sx={{
+              pb: 2,
+              // borderBottom: "1px solid #E0E0E0",
+              textAlign: "center",
+            }}
+          >
+            {section.id === "home" ? (
+              <Home onLearnMoreClick={() => scrollToSection("about")} />
+            ) : section.id === "about" ? (
+              <About />
+            ) : section.id === "features" ? (
+              <Features />
+            ) : section.id === "size" ? (
+              <Size />
+            ) : section.id === "app" ? (
+              <IqiblaApp />
+            ) : section.id === "follow-us" ? (
+              <FollowUs />
+            ) : null }
+          </Box>
+        ))}
       </Container>
 
       {/* Floating WhatsApp Button */}
@@ -221,25 +219,22 @@ const App = () => {
           pb: 3,
           px: 2,
           textAlign: "center",
-          mb: 7,
-          bottom: 0,
-          justifyContent: "center",
-          display: "flex",
+          mb:7,
         }}
       >
-        <Typography
-          variant="body2"
-          color="text.primary"
-          sx={{
-            color: "var(--iqibla-com-shuttle-gray, #5F6368)",
-            fontFamily: "Montserrat, sans-serif",
-            fontSize: "11px",
-            fontStyle: "normal",
-            fontWeight: 400,
-            lineHeight: "normal",
-          }}
+        <Typography variant="body2" color="text.primary"
+          sx={
+            {
+              color: "var(--iqibla-com-shuttle-gray, #5F6368)",
+              fontFamily: "Montserrat, sans-serif",
+              fontSize: "11px",
+              fontStyle: "normal",
+              fontWeight: 400,
+              lineHeight: "normal",
+            }
+          }
         >
-          © iQIBLA Indonesia 2024
+            © iQIBLA Indonesia 2024
         </Typography>
       </Box>
     </ThemeProvider>
