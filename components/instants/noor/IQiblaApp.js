@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { Box, Typography } from "@mui/material";
-import background from "../../assets/icon/iqibla_live_app_background.webp";
-import header from "../../assets/icon/iqibla_live_app.png";
-import body from "../../assets/icon/iqiblaApps.png";
+import background from "../../../assets/icon/iqibla_live_app_background.webp";
+import header from "../../../assets/icon/iqibla_live_app.png";
+import body from "../../../assets/icon/iqiblaApps.png";
 import Specifications from "./Specifications";
 
 const IQiblaApp = () => {

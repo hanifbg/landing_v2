@@ -3,9 +3,9 @@ import Image from "next/image";
 
 import { Box, Step, StepLabel, Stepper, Typography } from "@mui/material";
 
-import noor from "../../assets/icon/noor.webp";
-import watch from "../../assets/icon/watch.webp";
-import ellipse from "../../assets/icon/ellipse.webp";
+import noor from "../../../assets/icon/noor.webp";
+import watch from "../../../assets/icon/watch.webp";
+import ellipse from "../../../assets/icon/ellipse.webp";
 
 const Features = () => {
   const steps = ["Pengingat Jadwal Shalat", "Penghitung Tasbih Pintar", "Personalisai Tasbih", "Pengingat Tasbih", "Konektivitas Bluetooth", "Ketahanan Baterai Hingga 7 Hari"];

@@ -2,10 +2,10 @@ import React from "react";
 import Image from "next/image";
 
 import { Box, Grid, Step, StepLabel, Stepper, Typography } from "@mui/material";
-import background from "../../assets/icon/background_2.webp";
-import noor22 from "../../assets/icon/noor_22_mm.png";
-import noor20 from "../../assets/icon/noor_20_mm.png";
-import noor18 from "../../assets/icon/noor_18_mm.png";
+import background from "../../../assets/icon/background_2.webp";
+import noor22 from "../../../assets/icon/noor_22_mm.png";
+import noor20 from "../../../assets/icon/noor_20_mm.png";
+import noor18 from "../../../assets/icon/noor_18_mm.png";
 
 const Size = () => {
   return (

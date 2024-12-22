@@ -6,13 +6,13 @@ import { Box, Typography, Button, Container } from "@mui/material";
 
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
-import logo from "../../assets/icon/logo-instant.webp";
-import zikrRing from "../../assets/icon/zikr.webp";
-import noor from "../../assets/icon/noor.webp";
-import practice from "../../assets/icon/practice.webp";
-import iqibla_1 from "../../assets/icon/zikr_leaf.webp";
+import logo from "../../../assets/icon/logo-instant.webp";
+import zikrRing from "../../../assets/icon/zikr.webp";
+import noor from "../../../assets/icon/noor.webp";
+import practice from "../../../assets/icon/practice.webp";
+import iqibla_1 from "../../../assets/icon/zikr_leaf.webp";
 
-import image1 from "../../assets/home/hero_1.svg";
+import image1 from "../../../assets/home/hero_1.svg";
 
 const Home = ({ onLearnMoreClick }) => {
   return (
