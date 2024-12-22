@@ -5,12 +5,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import WhatsAppIcon from "@mui/icons-material/WhatsApp"; // Import WhatsApp icon
 
-import Home from "@components/instants/noor/Home";
-import About from "@components/instants/noor/About";
-import Features from "@components/instants/noor/Features";
-import Size from "@components/instants/noor/Size";
-import IqiblaApp from "@components/instants/noor/IQiblaApp";
-import FollowUs from "@components/instants/noor/FollowUs";
+import Home from "@components/instants/lite/Landing";
 
 const theme = createTheme({
   palette: {
@@ -155,17 +150,7 @@ const App = () => {
           >
             {section.id === "home" ? (
               <Home onLearnMoreClick={() => scrollToSection("about")} />
-            ) : section.id === "about" ? (
-              <About />
-            ) : section.id === "features" ? (
-              <Features />
-            ) : section.id === "size" ? (
-              <Size />
-            ) : section.id === "app" ? (
-              <IqiblaApp />
-            ) : section.id === "follow-us" ? (
-              <FollowUs />
-            ) : null }
+            ) : null}
           </Box>
         ))}
       </Container>
@@ -219,22 +204,22 @@ const App = () => {
           pb: 3,
           px: 2,
           textAlign: "center",
-          mb:7,
+          mb: 7,
         }}
       >
-        <Typography variant="body2" color="text.primary"
-          sx={
-            {
-              color: "var(--iqibla-com-shuttle-gray, #5F6368)",
-              fontFamily: "Montserrat, sans-serif",
-              fontSize: "11px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "normal",
-            }
-          }
+        <Typography
+          variant="body2"
+          color="text.primary"
+          sx={{
+            color: "var(--iqibla-com-shuttle-gray, #5F6368)",
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "11px",
+            fontStyle: "normal",
+            fontWeight: 400,
+            lineHeight: "normal",
+          }}
         >
-            © iQIBLA Indonesia 2024
+          © iQIBLA Indonesia 2024
         </Typography>
       </Box>
     </ThemeProvider>

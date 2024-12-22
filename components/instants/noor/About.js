@@ -3,8 +3,8 @@ import Image from "next/image";
 
 import { Box, Typography } from "@mui/material";
 
-import about_1 from "../../assets/icon/about_1.webp";
-import vector from "../../assets/icon/vector.webp";
+import about_1 from "../../../assets/icon/about_1.webp";
+import vector from "../../../assets/icon/vector.webp";
 
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";

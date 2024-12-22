@@ -1,10 +1,10 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import logoIG from "../../assets/icon/instagram.png";
-import logoTokopedia from "../../assets/icon/tokopedia.png";
-import logoShopee from "../../assets/icon/shopee.png";
-import logoTiktok from "../../assets/icon/tiktok.png";
+import logoIG from "../../../assets/icon/instagram.png";
+import logoTokopedia from "../../../assets/icon/tokopedia.png";
+import logoShopee from "../../../assets/icon/shopee.png";
+import logoTiktok from "../../../assets/icon/tiktok.png";
 
 const FollowUs = () => {
   const commonTextStyle = {
