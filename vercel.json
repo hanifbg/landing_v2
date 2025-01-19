@@ -4,12 +4,12 @@
         "source": "/(.*)",
         "headers": [
           {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
+            "key": "X-Frame-Options",
+            "value": "ALLOWALL"
           },
           {
-            "key": "Access-Control-Allow-Methods",
-            "value": "GET,POST,PUT,PATCH,DELETE,OPTIONS"
+            "key": "Content-Security-Policy",
+            "value": "frame-ancestors 'self' https://www.instagram.com https://t.me"
           }
         ]
       }
