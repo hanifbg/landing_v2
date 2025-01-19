@@ -3,10 +3,23 @@ import "slick-carousel/slick/slick-theme.css";
 import "../styles/globals.css";
 import AppShell from "../components/layouts/AppShell/index";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 function IqiblaApp({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => <AppShell>{page}</AppShell>);
+  const router = useRouter();
 
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (router.query && router.query["fbclid"]) {
+      delete router.query["fbclid"];
+      router.replace({
+        pathname: router.pathname,
+        query: router.query,
+      });
+    }
+  }, [router]);
   return getLayout(
     <>
       <Head>

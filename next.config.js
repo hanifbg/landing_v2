@@ -2,16 +2,20 @@ module.exports = {
   async headers() {
     return [
       {
-        source: "/(.*)", // Menerapkan header untuk semua halaman
+        source: "/(.*)", // Terapkan ke semua rute
         headers: [
           {
             key: "X-Frame-Options",
-            value: "ALLOWALL", // Memungkinkan situs dimuat dalam iframe (WebView)
+            value: "ALLOWALL", // Memungkinkan halaman dimuat dalam iframe (untuk in-app browser)
           },
           {
             key: "Content-Security-Policy",
             value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; frame-ancestors *;", // Menetapkan kebijakan keamanan konten
+              "default-src * data: blob: 'unsafe-inline' 'unsafe-eval'; frame-ancestors *;",
+          },
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*", // Pastikan tidak ada masalah CORS
           },
         ],
       },
