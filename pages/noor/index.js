@@ -204,7 +204,7 @@ const App = () => {
           }}
           onClick={() =>
             window.open(
-              "https://wa.me/+6285179766847?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Noor.",
+              "https://api.whatsapp.com/send?phone=6285179766847&text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Noor.",
               "_blank"
             )
           }

@@ -146,7 +146,7 @@ const IqiblaJood = () => {
             width: "100%",
             fontWeight: 600,
           }}
-          onClick={() => window.open("https://wa.me/+6285179766847?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Jood.", "_blank")}
+          onClick={() => window.open("https://api.whatsapp.com/send?phone=6285179766847&text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Jood.", "_blank")}
         >
           Beli Sekarang
         </Button>

@@ -2,20 +2,28 @@ module.exports = {
   async headers() {
     return [
       {
-        source: "/(.*)", // Terapkan ke semua rute
+        // Terapkan ke semua rute
+        source: "/(.*)",
         headers: [
           {
+            key: "Access-Control-Allow-Origin",
+            value: "*", // Atur origin spesifik jika perlu, misalnya "https://www.instagram.com"
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET, POST, PUT, DELETE, OPTIONS",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "Content-Type, Authorization, X-Requested-With",
+          },
+          {
             key: "X-Frame-Options",
-            value: "ALLOWALL", // Memungkinkan halaman dimuat dalam iframe (untuk in-app browser)
+            value: "ALLOW-FROM https://www.instagram.com", // Atur sesuai kebutuhan
           },
           {
             key: "Content-Security-Policy",
-            value:
-              "default-src * data: blob: 'unsafe-inline' 'unsafe-eval'; frame-ancestors *;",
-          },
-          {
-            key: "Access-Control-Allow-Origin",
-            value: "*", // Pastikan tidak ada masalah CORS
+            value: "frame-ancestors 'self' https://www.instagram.com",
           },
         ],
       },
