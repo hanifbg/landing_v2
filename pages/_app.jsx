@@ -33,6 +33,11 @@ function IqiblaApp({ Component, pageProps }) {
         <meta name="referrer" content="origin-when-cross-origin" />
         <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+
+        <meta property="og:title" content="Iqibla" />
+        <meta property="og:description" content="Iqibla - Your ultimate app for prayer timings and Qibla direction" />
+        <meta property="og:image" content="https://www.iqibla-indonesia.com/assets/icon/logo.png" />
+        <meta property="og:url" content="https://www.iqibla-indonesia.com" />
         
         {/* Allow iframe in Instagram/Telegram */}
         <meta name="apple-mobile-web-app-capable" content="yes" />

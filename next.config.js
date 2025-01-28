@@ -19,11 +19,11 @@ module.exports = {
           },
           {
             key: "X-Frame-Options",
-            value: "ALLOW-FROM https://www.instagram.com", // Atur sesuai kebutuhan
+            value: "ALLOWALL", // Atau SAMEORIGIN jika halaman Anda hanya untuk domain yang sama
           },
           {
             key: "Content-Security-Policy",
-            value: "frame-ancestors 'self' https://www.instagram.com",
+            value: "frame-ancestors *;", // Mengizinkan semua sumber untuk menyematkan halaman
           },
         ],
       },
