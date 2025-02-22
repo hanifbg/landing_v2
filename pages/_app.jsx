@@ -43,7 +43,6 @@ function IqiblaApp({ Component, pageProps }) {
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta httpEquiv="X-Frame-Options" content="ALLOWALL" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
-        <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; img-src * data:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; frame-src 'self' https://www.instagram.com;" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.instagram.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
