@@ -138,7 +138,7 @@ const Landing = () => {
         </Box>
       </Box>
 
-      <Box onClick={() => window.open("https://api.whatsapp.com/send?phone=6285179766847&text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Noor.", "_blank")}>
+      <Box onClick={() => window.open("https://api.whatsapp.com/send?phone=6285179766847&text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Lite.", "_blank")}>
         <Image src={promo} alt="promo" width={360} height={193} style={{ cursor: "pointer" }} />
       </Box>
     </Box>
