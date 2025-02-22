@@ -8,13 +8,14 @@ import ringBlue from "../../../assets/images/ringblue.png";
 import Image from "next/image";
 import ringPurplePink from "../../../assets/images/ringpurplepink.png";
 import bg from "../../../public/jood/vector.webp";
+import promo from "../../../assets/images/promo-lite.svg";
 
 const Landing = () => {
   return (
     <Box
       sx={{
         textAlign: "center",
-        padding: 3,
+        padding: "24px 0 0",
         backgroundColor: "#f9f9f9",
         margin: "auto",
         height: "auto",
@@ -45,11 +46,7 @@ const Landing = () => {
             filter: "blur(2px)",
           }}
         >
-          <Image
-            src={ringRed}
-            alt="Top Header Background"
-            layout="responsive"
-          />
+          <Image src={ringRed} alt="Top Header Background" layout="responsive" />
         </Box>
 
         {/* Content Section */}
@@ -71,11 +68,7 @@ const Landing = () => {
               filter: "blur(2px)",
             }}
           >
-            <Image
-              src={ringBlue}
-              alt="Top Header Background"
-              layout="responsive"
-            />
+            <Image src={ringBlue} alt="Top Header Background" layout="responsive" />
           </Box>
           <Typography
             sx={{
@@ -95,7 +88,7 @@ const Landing = () => {
         <Box
           sx={{
             display: "flex",
-            justifyContent: "end",
+            justifyContent: "center",
             gap: "16px",
             marginTop: "16px",
           }}
@@ -108,17 +101,13 @@ const Landing = () => {
               left: "0%",
             }}
           >
-            <Image
-              src={ringGreen}
-              alt="Top Header Background"
-              layout="responsive"
-            />
+            <Image src={ringGreen} alt="Top Header Background" layout="responsive" />
           </Box>
           <Box
             sx={{
               width: "254px",
               alignItems: "center",
-              textAlign: "left",
+              textAlign: "center",
             }}
           >
             <Typography
@@ -130,8 +119,7 @@ const Landing = () => {
                 lineHeight: "26px",
               }}
             >
-              Permudah ibadah Anda dengan teknologi modern dan desain minimalis
-              yang nyaman dipakai sepanjang hari.
+              Permudah ibadah Anda dengan teknologi modern dan desain minimalis yang nyaman dipakai sepanjang hari.
             </Typography>
           </Box>
         </Box>
@@ -145,13 +133,13 @@ const Landing = () => {
           }}
         >
           <Box>
-            <Image
-              src={ringPurplePink}
-              alt="Top Header Background"
-              maxHeight="200px"
-            />
+            <Image src={ringPurplePink} alt="Top Header Background" maxHeight="200px" />
           </Box>
         </Box>
+      </Box>
+
+      <Box onClick={() => window.open("https://api.whatsapp.com/send?phone=6285179766847&text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Lite.", "_blank")}>
+        <Image src={promo} alt="promo" width={360} height={193} style={{ cursor: "pointer" }} />
       </Box>
     </Box>
   );
