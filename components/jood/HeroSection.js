@@ -20,6 +20,7 @@ import hero3 from "../../public/jood/hero_3.webp";
 import hero4 from "../../public/jood/hero_4.webp";
 import hero5 from "../../public/jood/hero_5.webp";
 import hero6 from "../../public/jood/hero_6.webp";
+import promo from "../../assets/images/promo-jood.svg";
 
 const HeroSection = () => {
   return (
@@ -82,6 +83,11 @@ const HeroSection = () => {
           </Typography>
         </Box>
       </Box>
+
+      <Box onClick={() => window.open("https://api.whatsapp.com/send?phone=6285179766847&text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Noor.", "_blank")}>
+        <Image src={promo} alt="promo" width={360} height={193} style={{ cursor: "pointer" }} />
+      </Box>
+
       <Box
         sx={{
           backgroundImage: "url('/jood/vector.webp')",

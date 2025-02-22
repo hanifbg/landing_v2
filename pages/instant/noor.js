@@ -149,7 +149,6 @@ const App = () => {
             id={section.id}
             sx={{
               pb: 2,
-              // borderBottom: "1px solid #E0E0E0",
               textAlign: "center",
             }}
           >
@@ -165,7 +164,7 @@ const App = () => {
               <IqiblaApp />
             ) : section.id === "follow-us" ? (
               <FollowUs />
-            ) : null }
+            ) : null}
           </Box>
         ))}
       </Container>
@@ -202,12 +201,7 @@ const App = () => {
             width: "100%",
             fontWeight: 500,
           }}
-          onClick={() =>
-            window.open(
-              "https://api.whatsapp.com/send?phone=6285179766847&text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Noor.",
-              "_blank"
-            )
-          }
+          onClick={() => window.open("https://api.whatsapp.com/send?phone=6285179766847&text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20Zikr%20Ring%20Noor.", "_blank")}
         >
           Beli Sekarang
         </Button>
@@ -219,22 +213,22 @@ const App = () => {
           pb: 3,
           px: 2,
           textAlign: "center",
-          mb:7,
+          mb: 7,
         }}
       >
-        <Typography variant="body2" color="text.primary"
-          sx={
-            {
-              color: "var(--iqibla-com-shuttle-gray, #5F6368)",
-              fontFamily: "Montserrat, sans-serif",
-              fontSize: "11px",
-              fontStyle: "normal",
-              fontWeight: 400,
-              lineHeight: "normal",
-            }
-          }
+        <Typography
+          variant="body2"
+          color="text.primary"
+          sx={{
+            color: "var(--iqibla-com-shuttle-gray, #5F6368)",
+            fontFamily: "Montserrat, sans-serif",
+            fontSize: "11px",
+            fontStyle: "normal",
+            fontWeight: 400,
+            lineHeight: "normal",
+          }}
         >
-            © iQIBLA Indonesia 2024
+          © iQIBLA Indonesia 2024
         </Typography>
       </Box>
     </ThemeProvider>
