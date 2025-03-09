@@ -136,7 +136,7 @@ const IqiblaJood = () => {
           color="primary"
           startIcon={<WhatsAppIcon />}
           sx={{
-            backgroundColor: "#EBC884",
+            backgroundColor: "#3D715A",
             textAlign: "center",
             color: "#1B1B1B",
             padding: "12px 24px",
