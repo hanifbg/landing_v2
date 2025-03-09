@@ -193,7 +193,7 @@ const App = () => {
           sx={{
             backgroundColor: "#3D715A",
             textAlign: "center",
-            color: "text.primary",
+            color: "#fff",
             padding: "12px 24px",
             borderRadius: 8,
             fontFamily: "Montserrat, sans-serif",

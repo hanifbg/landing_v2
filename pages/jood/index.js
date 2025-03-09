@@ -138,7 +138,7 @@ const IqiblaJood = () => {
           sx={{
             backgroundColor: "#3D715A",
             textAlign: "center",
-            color: "#1B1B1B",
+            color: "#fff",
             padding: "12px 24px",
             borderRadius: "12px",
             fontFamily: "Montserrat, sans-serif",
