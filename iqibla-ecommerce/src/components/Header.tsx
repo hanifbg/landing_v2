@@ -32,9 +32,14 @@ const Header = () => {
           <Link href="/brand-story" className="hover:text-gray-300 transition-colors">
             Brand Story
           </Link>
-          <Link href="/contact" className="hover:text-gray-300 transition-colors">
+          <a
+            href={`https://api.whatsapp.com/send?phone=6285179766847&text=${encodeURIComponent('Halo iQibla Indonesia, saya ingin bertanya lebih lanjut mengenai produk Anda. Bisakah Anda bantu?')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-300 transition-colors"
+          >
             Contact Us
-          </Link>
+          </a>
         </div>
 
         {/* Right Side Icons */}
