@@ -1,13 +1,16 @@
 import React from 'react';
-import ProductCatalog from '@components/products/ProductCatalog';
-import categories from '@api/constants/products.json';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import ProductList from '@components/products/ProductList';
 
 const ProductPages = () => {
   return (
-    <div>
-      <h1>Product Catalog</h1>
-      <ProductCatalog categories={categories} />
-    </div>
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" component="h1" sx={{ mb: 4, textAlign: 'center' }}>
+        Product Catalog
+      </Typography>
+      <ProductList />
+    </Box>
   );
 };
 

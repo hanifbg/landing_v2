@@ -1,13 +1,21 @@
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/v1/:path*',
+        destination: 'http://localhost:8080/api/v1/:path*',
+      },
+    ];
+  },
   async headers() {
     return [
       {
-        // Terapkan ke semua rute
         source: "/(.*)",
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "*", // Atur origin spesifik jika perlu, misalnya "https://www.instagram.com"
+            value: "*",
           },
           {
             key: "Access-Control-Allow-Methods",
@@ -19,14 +27,16 @@ module.exports = {
           },
           {
             key: "X-Frame-Options",
-            value: "ALLOWALL", // Atau SAMEORIGIN jika halaman Anda hanya untuk domain yang sama
+            value: "ALLOWALL",
           },
           {
             key: "Content-Security-Policy",
-            value: "frame-ancestors *;", // Mengizinkan semua sumber untuk menyematkan halaman
+            value: "frame-ancestors *;",
           },
         ],
       },
     ];
   },
 };
+
+module.exports = nextConfig;

@@ -1,27 +1,20 @@
-import React from "react";
+import React from 'react';
+import Box from '@mui/material/Box';
+import HeroSection from '../components/home/HeroSection';
+import ProductList from '../components/products/ProductList';
+import ServiceSection from '../components/home/ServiceSection';
 
-import HeroSection from "../components/home/HeroSection";
-
-import { Container } from "@mui/material";
-import ServiceSection from "../components/home/ServiceSection";
-import FeatureBestSection from "../components/home/FeatureBestSection";
-import PopulerSection from "../components/home/PopulerSection";
-
-const Home = () => {
+const HomePage = () => {
   return (
-    <Container
-      sx={{
-        "&.MuiContainer-root": {
-          padding: { xs: "0 16px", md: "0 16px", lg: "0" },
-        },
-      }}
-    >
+    <Box sx={{ 
+      minHeight: '100vh',
+      backgroundColor: '#ffffff',
+    }}>
       <HeroSection />
+      <ProductList />
       <ServiceSection />
-      <FeatureBestSection />
-      <PopulerSection />
-    </Container>
+    </Box>
   );
 };
 
-export default Home;
+export default HomePage;

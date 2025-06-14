@@ -1,30 +1,71 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { Box, Typography, Grid, Card, CardMedia, CardContent, Button, TextField, MenuItem, Accordion, AccordionSummary, AccordionDetails } from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import categories from '@api/constants/products';
+import { Box, Typography, Grid, Card, CardMedia, Button, CircularProgress, Alert } from '@mui/material';
+import { getProductById } from '../../services/productService';
 
 const ProductDetailPage = () => {
-  const { query } = useRouter();
-  const { id } = query;
+  const router = useRouter();
+  const { id } = router.query;
 
-  const product = categories.reduce((acc, category) => {
-    const foundProduct = category.products.find((product) => product.id === parseInt(id, 10));
-    if (foundProduct) {
-      return foundProduct;
-    }
-    return acc;
-  }, {});
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(0);
 
-  if (!product || !product.name) {
-    return <Typography variant="h6">Product not found</Typography>;
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!id) return;
+
+      try {
+        const data = await getProductById(id);
+        setProduct(data);
+        setError(null);
+      } catch (err) {
+        setError('Failed to fetch product details. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        minHeight: '400px' 
+      }}>
+        <CircularProgress />
+      </Box>
+    );
   }
 
+  if (error) {
+    return (
+      <Box sx={{ p: 3 }}>
+        <Alert severity="error">{error}</Alert>
+      </Box>
+    );
+  }
+
+  if (!product) {
+    return (
+      <Box sx={{ p: 3 }}>
+        <Typography variant="h6">Product not found</Typography>
+      </Box>
+    );
+  }
+
+  const images = product.ImageURLs || 
+                 (product.variants?.[0]?.ImageURL ? [product.variants[0].ImageURL] : []);
+
   return (
-    <Box sx={{ p: 4,  marginTop: 10, backgroundColor: '#fff' }}>
+    <Box sx={{ p: 4, marginTop: 10, backgroundColor: '#fff' }}>
       <Grid container spacing={4}>
-        <Grid item xs={12} md={6}
-        >
+        <Grid item xs={12} md={6}>
           <Card sx={{
             backgroundColor: 'transparent',
             boxShadow: 'none',
@@ -32,90 +73,89 @@ const ProductDetailPage = () => {
           }}>
             <CardMedia
               component="img"
-              image={product.cover}
+              image={images[selectedImage] || '/images/placeholder.jpg'}
               alt={product.name}
-              sx={{ height: 500, objectFit: 'scale-down', backgroundColor: 'transparent', }}
+              sx={{ 
+                height: 500, 
+                objectFit: 'contain', 
+                backgroundColor: '#f5f5f5',
+                borderRadius: 2,
+              }}
             />
             <Grid container spacing={2} sx={{ mt: 2, justifyContent: 'center' }}>
-              {product.images.map((image, index) => (
+              {images.map((image, index) => (
                 <Grid item key={index}>
                   <CardMedia
                     component="img"
                     image={image}
-                    alt={`${product.name} - ${index}`}
-                    sx={{ width: 80, height: 80, cursor: 'pointer', objectFit: 'cover' }}
+                    alt={`${product.name} - ${index + 1}`}
+                    onClick={() => setSelectedImage(index)}
+                    sx={{
+                      width: 80,
+                      height: 80,
+                      cursor: 'pointer',
+                      objectFit: 'cover',
+                      borderRadius: 1,
+                      border: index === selectedImage ? '2px solid #1976d2' : '2px solid transparent',
+                    }}
                   />
                 </Grid>
               ))}
             </Grid>
           </Card>
         </Grid>
+
         <Grid item xs={12} md={6}>
-          <Typography variant="h4" component="h1" sx={{ fontWeight: 'bold', mb: 2 }}>
+          <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
             {product.name}
           </Typography>
-          <Typography variant="h5" component="div" sx={{ mb: 2 }}>
-            ${product.price.toFixed(2)}
-            {product.originalPrice && (
-              <Typography component="span" sx={{ textDecoration: 'line-through', ml: 2, color: 'grey' }}>
-                ${product.originalPrice.toFixed(2)}
-              </Typography>
-            )}
+
+          <Typography variant="h5" color="primary" sx={{ mb: 3 }}>
+            ${product.price?.toFixed(2) || '0.00'}
           </Typography>
-          {product.options && (
-            <TextField
-              select
-              label="Color"
-              defaultValue={product.options[0]}
-              sx={{ mb: 2, width: '100%' }}
-            >
-              {product.options.map((option, index) => (
-                <MenuItem key={index} value={option}>
-                  {option}
-                </MenuItem>
-              ))}
-            </TextField>
+
+          <Typography variant="body1" sx={{ mb: 4 }}>
+            {product.description}
+          </Typography>
+
+          {product.variants && product.variants.length > 0 && (
+            <Box sx={{ mb: 4 }}>
+              <Typography variant="h6" sx={{ mb: 2 }}>
+                Available Variants
+              </Typography>
+              <Grid container spacing={2}>
+                {product.variants.map((variant, index) => (
+                  <Grid item key={index}>
+                    <Button
+                      variant="outlined"
+                      sx={{
+                        minWidth: 120,
+                        textTransform: 'none',
+                      }}
+                    >
+                      {variant.name}
+                      {variant.price && ` - $${variant.price.toFixed(2)}`}
+                    </Button>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           )}
-          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-            <TextField
-              type="number"
-              defaultValue={1}
-              inputProps={{ min: 1 }}
-              sx={{ width: 60, mr: 2 }}
-            />
-            <Button variant="contained" color="primary" sx={{ mr: 2 }}>
-              Add To Cart
-            </Button>
-            <Button variant="contained" color="secondary">
-              Beli Sekarang
-            </Button>
-          </Box>
-          {product.description && (
-            <Accordion sx={{ mb: 2 }}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>Highlights</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>{product.description}</Typography>
-              </AccordionDetails>
-            </Accordion>
-          )}
-          <Accordion sx={{ mb: 2 }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>What's in the Box?</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>Details about the contents of the box.</Typography>
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>Shipping and Return Policy</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>Details about the shipping and return policy.</Typography>
-            </AccordionDetails>
-          </Accordion>
+
+          <Button
+            variant="contained"
+            size="large"
+            fullWidth
+            sx={{
+              mt: 2,
+              backgroundColor: '#1976d2',
+              '&:hover': {
+                backgroundColor: '#1565c0',
+              },
+            }}
+          >
+            Add to Cart
+          </Button>
         </Grid>
       </Grid>
     </Box>
