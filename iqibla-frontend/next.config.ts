@@ -1,0 +1,25 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ugc.production.linktr.ee',
+        port: '',
+        pathname: '/**', // This allows any path from this domain
+      },
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '8081',
+        pathname: '/**', // This allows any path from this domain
+      },
+      // Add other remote patterns if you have images from other domains
+    ],
+  },
+  // other Next.js configurations...
+};
+
+export default nextConfig;
