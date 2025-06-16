@@ -1,7 +1,7 @@
 // src/app/shop/[id]/page.tsx
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-
+import { use } from "react";
 type JSONArray = string[];
 type JSONMap = { [key: string]: unknown };
 
@@ -45,14 +45,6 @@ interface Product {
     updated_at: string;
     deleted_at?: string;
 }
-// Define the correct props interface here
-interface ProductPageProps {
-    params: {
-        id: string;
-    };
-    // Add searchParams here if your page component also takes them
-    searchParams?: { [key: string]: string | string[] | undefined };
-}
 
 async function getProduct(id: string) {
     try {
@@ -72,12 +64,12 @@ async function getProduct(id: string) {
     }
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
+export default function ProductPage({ params }: {params: Promise<{ id: string }>}) {
     let product: Product | null = null;
     let fetchError: string | null = null;
-
+    const { id } = use(params);
     try {
-        product = await getProduct(params.id);
+        product =  use(getProduct(id));
         if (!product) {
             notFound();
         }
