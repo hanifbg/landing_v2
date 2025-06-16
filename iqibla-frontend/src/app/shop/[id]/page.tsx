@@ -1,10 +1,9 @@
 // src/app/shop/[id]/page.tsx
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { use } from "react";
 type JSONArray = string[];
 type JSONMap = { [key: string]: unknown };
-
+type Params = Promise<{ id: string }>
 interface ProductVariant {
     id: string;
     product_id: string;
@@ -64,12 +63,12 @@ async function getProduct(id: string) {
     }
 }
 
-export default function ProductPage({ params }: {params: Promise<{ id: string }>}) {
+export default async function ProductPage({ params }: {params: Params}) {
     let product: Product | null = null;
     let fetchError: string | null = null;
-    const { id } = use(params);
+
     try {
-        product =  use(getProduct(id));
+        product =  await getProduct((await params).id);
         if (!product) {
             notFound();
         }
