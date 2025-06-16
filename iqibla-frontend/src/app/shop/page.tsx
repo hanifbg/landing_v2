@@ -1,7 +1,7 @@
 import ProductCard from '@/components/ProductCard';
 
 type JSONArray = string[];
-type JSONMap = { [key: string]: any };
+type JSONMap = { [key: string]: unknown };
 
 interface ProductVariant {
     id: string;
@@ -46,14 +46,14 @@ interface Product {
 
 async function getProducts() {
     try {
-        const res = await fetch('http://localhost:8081/api/v1/products', {
+        const res = await fetch('https://iqibla-backend.onrender.com/api/v1/products', {
             next: { revalidate: 60 } // Revalidate every minute
         });
         
         if (!res.ok) throw new Error('Failed to fetch products');
         
         return res.json();
-    } catch (error) {
+    } catch (_error: unknown) { // Add 'unknown' for type safety, prefix with _
         throw new Error('Failed to fetch products');
     }
 }

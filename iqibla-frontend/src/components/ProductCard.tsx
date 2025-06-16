@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 type JSONArray = string[];
-type JSONMap = { [key: string]: any };
+type JSONMap = { [key: string]: unknown };
 
 interface ProductVariant {
     id: string;
