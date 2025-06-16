@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 
 type JSONArray = string[];
-type JSONMap = { [key: string]: any };
+type JSONMap = { [key: string]: unknown };
 
 interface ProductVariant {
     id: string;
@@ -48,7 +48,7 @@ interface Product {
 
 async function getProduct(id: string) {
     try {
-        const res = await fetch(`http://localhost:8081/api/v1/products/${id}`, {
+        const res = await fetch(`https://iqibla-backend.onrender.com/api/v1/products/${id}`, {
             next: { revalidate: 60 }
         });
 
@@ -73,8 +73,15 @@ export default async function ProductPage({ params }: { params: { id: string } }
         if (!product) {
             notFound();
         }
-    } catch (e: any) {
-        fetchError = e.message;
+    } catch (e: unknown) { // 'e' is now 'unknown'
+        if (e instanceof Error) {
+            fetchError = e.message; // Safe: 'e' is an Error, so it has 'message'
+        } else {
+            // Handle cases where 'e' is not an Error object (e.g., a string, number, or plain object)
+            fetchError = 'An unknown error occurred';
+            // Optionally, log the actual 'e' if you want to inspect its value
+            console.error("Caught non-Error type:", e);
+        }
     }
 
     if (fetchError || !product) {

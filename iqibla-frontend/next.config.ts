@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
         port: '8081',
         pathname: '/**', // This allows any path from this domain
       },
+      {
+        protocol: 'https',
+        hostname: 'iqibla-backend.onrender.com',
+        port: '',
+        pathname: '/**', // This allows any path from this domain
+      },
       // Add other remote patterns if you have images from other domains
     ],
   },
