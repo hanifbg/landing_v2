@@ -45,6 +45,14 @@ interface Product {
     updated_at: string;
     deleted_at?: string;
 }
+// Define the correct props interface here
+interface ProductPageProps {
+    params: {
+        id: string;
+    };
+    // Add searchParams here if your page component also takes them
+    searchParams?: { [key: string]: string | string[] | undefined };
+}
 
 async function getProduct(id: string) {
     try {
@@ -64,7 +72,7 @@ async function getProduct(id: string) {
     }
 }
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
+export default async function ProductPage({ params }: ProductPageProps) {
     let product: Product | null = null;
     let fetchError: string | null = null;
 
