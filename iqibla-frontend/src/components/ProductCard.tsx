@@ -36,6 +36,8 @@ interface Product {
     features: JSONArray;
     in_box_items: JSONArray;
     image_urls: JSONArray;
+    tokopedia_url?: string; // Added: Optional string for Tokopedia URL
+    shopee_url?: string;    // Added: Optional string for Shopee URL
     is_active: boolean;
     variants: ProductVariant[];
     created_at: string;
@@ -62,7 +64,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                 <div className="p-4">
                     <h3 className="text-lg font-bold text-gray-900 mb-2">{product.name}</h3>
                     <p className="text-xl font-semibold text-blue-600">
-                        ${firstVariant.price.toFixed(2)}
+                        Rp{firstVariant.price.toFixed(0)}
                     </p>
                 </div>
             </div>

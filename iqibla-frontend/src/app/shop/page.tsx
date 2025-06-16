@@ -35,6 +35,8 @@ interface Product {
     features: JSONArray;
     in_box_items: JSONArray;
     image_urls: JSONArray;
+    tokopedia_url?: string; // Added: Optional string for Tokopedia URL
+    shopee_url?: string;    // Added: Optional string for Shopee URL
     is_active: boolean;
     variants: ProductVariant[];
     created_at: string;
