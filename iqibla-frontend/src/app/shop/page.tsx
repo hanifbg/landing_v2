@@ -53,8 +53,18 @@ async function getProducts() {
         if (!res.ok) throw new Error('Failed to fetch products');
         
         return res.json();
-    } catch (_error: unknown) { // Add 'unknown' for type safety, prefix with _
-        throw new Error('Failed to fetch products');
+    } catch (error: unknown) { // Use 'unknown' for type safety
+        // Log the error for debugging (this 'uses' the error variable)
+        console.error("An error occurred during product fetch:", error);
+    
+        // Or include the original error message in your new error
+        let errorMessage = 'Failed to fetch products';
+        if (error instanceof Error) {
+            errorMessage += `: ${error.message}`;
+        } else if (typeof error === 'string') {
+            errorMessage += `: ${error}`;
+        }
+        throw new Error(errorMessage);
     }
 }
 
