@@ -118,8 +118,16 @@ export default function ProductPage() {
                 if (fetchedProduct && fetchedProduct.variants && fetchedProduct.variants.length > 0) {
                     setSelectedVariant(fetchedProduct.variants[0]);
                 }
-            } catch (e: any) {
-                setFetchError(e.message);
+            } catch (e: unknown) { // Change 'any' to 'unknown'
+                // Now, 'e' is of type 'unknown'.
+                // You need to assert or check its type before accessing properties like 'message'.
+                if (e instanceof Error) {
+                    setFetchError(e.message);
+                } else if (typeof e === 'string') {
+                    setFetchError(e); // If the error is a plain string
+                } else {
+                    setFetchError('An unknown error occurred');
+                }
             } finally {
                 setLoading(false);
             }
@@ -165,7 +173,7 @@ export default function ProductPage() {
 
         try {
             // *** FIX: Retrieve cart_id from localStorage ***
-            let currentCartId = localStorage.getItem('cart_id');
+            const currentCartId = localStorage.getItem('cart_id');
 
             const payload = {
                 cart_id: currentCartId || undefined, // Send undefined if no cart_id exists
@@ -192,7 +200,7 @@ export default function ProductPage() {
             } else {
                 setNotification('Failed to add item to cart.');
             }
-        } catch (e: any) {
+        } catch (e: unknown) {
             console.error("Error adding to cart:", e);
             setNotification("Network error. Could not add item to cart.");
         } finally {
