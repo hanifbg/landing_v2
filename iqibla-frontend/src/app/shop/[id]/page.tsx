@@ -1,12 +1,12 @@
-'use client';
+// src/app/shop/[id]/page.tsx
+'use client'; // This needs to be a client component for interactivity
 
-import { useState, useEffect } from 'react';
 import { notFound, useParams } from 'next/navigation';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 type JSONArray = string[];
 type JSONMap = { [key: string]: unknown };
-type SearchParams = { [key: string]: string | string[] | undefined };
 
 interface ProductVariant {
     id: string;
@@ -49,170 +49,181 @@ interface Product {
     deleted_at?: string;
 }
 
-async function getProduct(id: string) {
+// Assuming the backend's CartResponse structure for the AddItem endpoint
+interface AddItemResponse {
+    cart_id: string;
+    total_items: number;
+    subtotal_amount: number;
+    items: Array<{
+        id: string;
+        variant_id: string;
+        variant_name: string;
+        variant_price: number;
+        quantity: number;
+        image_url: string;
+        product_attributes: JSONMap;
+    }>;
+}
+
+
+async function fetchProductData(id: string): Promise<Product | null> {
     try {
         const res = await fetch(`http://localhost:8081/api/v1/products/${id}`, {
             next: { revalidate: 60 }
         });
 
         if (!res.ok) {
-            if (res.status === 404) return null;
-            throw new Error(`Failed to fetch product: ${res.status} ${res.statusText}`);
+            if (res.status === 404) {
+                console.warn(`Product with ID ${id} not found (404).`);
+                return null;
+            }
+            console.error(`Failed to fetch product ${id}: ${res.status} ${res.statusText}`);
+            throw new Error(`Server responded with status ${res.status}`);
         }
 
         return res.json();
     } catch (error) {
-        console.error("Error fetching product:", error);
-        throw new Error('Failed to load product. Please check server logs.');
+        console.error("Network or parsing error fetching product:", error);
+        throw new Error('Failed to load product due to a network or data issue.');
     }
 }
 
 export default function ProductPage() {
-    // State variables
+    const { id } = useParams(); // Get ID from URL params in client component
+    const productId = Array.isArray(id) ? id[0] : id; // Handle potential array for id
+
     const [product, setProduct] = useState<Product | null>(null);
     const [fetchError, setFetchError] = useState<string | null>(null);
     const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
     const [quantity, setQuantity] = useState<number>(1);
-    const [notification, setNotification] = useState<{ message: string; type: 'success' | 'error' } | null>(null);
+    const [notification, setNotification] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    // Get the product ID from the URL
-    const params = useParams();
-    const id = params.id as string;
-
-    // Fetch product data on component mount
+    // Effect for fetching product data
     useEffect(() => {
-        const fetchProductData = async () => {
+        if (!productId) {
+            setLoading(false);
+            setFetchError("Product ID is missing.");
+            return;
+        }
+
+        const loadProduct = async () => {
             try {
-                const productData = await getProduct(id);
-                if (!productData) {
-                    setFetchError("Product not found");
-                    setLoading(false);
-                    return;
+                const fetchedProduct = await fetchProductData(productId);
+                if (!fetchedProduct) {
+                    notFound(); // Triggers Next.js not-found page
                 }
-                
-                setProduct(productData);
-                setSelectedVariant(productData.variants[0]);
-                setLoading(false);
-            } catch (e: unknown) {
-                if (e instanceof Error) {
-                    setFetchError(e.message);
-                } else {
-                    setFetchError('An unknown error occurred');
-                    console.error("Caught non-Error type:", e);
+                setProduct(fetchedProduct);
+                // Set initial selected variant to the first one
+                if (fetchedProduct && fetchedProduct.variants && fetchedProduct.variants.length > 0) {
+                    setSelectedVariant(fetchedProduct.variants[0]);
                 }
+            } catch (e: any) {
+                setFetchError(e.message);
+            } finally {
                 setLoading(false);
             }
         };
 
-        fetchProductData();
-    }, [id]);
+        loadProduct();
+    }, [productId]); // Depend on productId to re-fetch if URL param changes
 
-    // Handle variant selection
+    // Handle variant selection change
     const handleVariantChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const variantId = e.target.value;
-        if (product) {
-            const newVariant = product.variants.find(v => v.id === variantId) || null;
-            setSelectedVariant(newVariant);
+        const newSelectedVariant = product?.variants.find(v => v.id === variantId);
+        if (newSelectedVariant) {
+            setSelectedVariant(newSelectedVariant);
             setQuantity(1); // Reset quantity when variant changes
         }
     };
 
-    // Handle quantity changes
-    const decreaseQuantity = () => {
-        if (quantity > 1) {
-            setQuantity(quantity - 1);
-        }
-    };
-
-    const increaseQuantity = () => {
-        if (selectedVariant && quantity < selectedVariant.stock_quantity) {
-            setQuantity(quantity + 1);
-        }
-    };
-
-    const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newQuantity = parseInt(e.target.value, 10);
-        if (!isNaN(newQuantity) && selectedVariant) {
-            if (newQuantity >= 1 && newQuantity <= selectedVariant.stock_quantity) {
-                setQuantity(newQuantity);
-            }
-        }
-    };
-
-    // Handle add to cart
-    const handleAddToCart = async () => {
+    // Handle quantity change
+    const handleQuantityChange = (type: 'increase' | 'decrease') => {
         if (!selectedVariant) return;
 
-        try {
-            // Get cart ID from localStorage
-            const currentCartId = localStorage.getItem('cart_id');
-
-            // Prepare request body
-            const requestBody = {
-                cart_id: currentCartId || undefined,
-                variant_id: selectedVariant.id,
-                quantity: quantity
-            };
-
-            // Make API call
-            const response = await fetch('http://localhost:8081/api/v1/cart/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            });
-
-            const data = await response.json();
-
-            if (response.ok) {
-                // Store cart ID in localStorage
-                if (data.id) {
-                    localStorage.setItem('cart_id', data.id);
-                }
-
-                // Show success notification
-                setNotification({
-                    message: "Item added to cart successfully!",
-                    type: 'success'
-                });
+        setQuantity(prevQty => {
+            let newQty = prevQty;
+            if (type === 'increase') {
+                newQty = Math.min(prevQty + 1, selectedVariant.stock_quantity);
             } else {
-                // Show error notification
-                setNotification({
-                    message: `Error: ${data.error || 'Failed to add item to cart'}`,
-                    type: 'error'
-                });
+                newQty = Math.max(prevQty - 1, 1); // Quantity cannot go below 1
             }
-        } catch (error) {
-            console.error("Error adding to cart:", error);
-            setNotification({
-                message: "Error: Could not connect to the server",
-                type: 'error'
-            });
-        }
-
-        // Clear notification after 3 seconds
-        setTimeout(() => {
-            setNotification(null);
-        }, 3000);
+            return newQty;
+        });
     };
 
-    // Loading state
+    // Handle Add to Cart
+    const handleAddToCart = async () => {
+        if (!product || !selectedVariant || quantity <= 0 || quantity > selectedVariant.stock_quantity) {
+            setNotification("Please select a valid variant and quantity.");
+            setTimeout(() => setNotification(null), 3000);
+            return;
+        }
+
+        setNotification("Adding to cart..."); // Provide immediate feedback
+
+        try {
+            // *** FIX: Retrieve cart_id from localStorage ***
+            let currentCartId = localStorage.getItem('cart_id');
+
+            const payload = {
+                cart_id: currentCartId || undefined, // Send undefined if no cart_id exists
+                variant_id: selectedVariant.id,
+                quantity: quantity,
+            };
+
+            const res = await fetch('http://localhost:8081/api/v1/cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+
+            const data: AddItemResponse = await res.json();
+
+            if (res.ok) {
+                // *** FIX: Store the cart_id from the response ***
+                if (data.cart_id) {
+                    localStorage.setItem('cart_id', data.cart_id);
+                }
+                setNotification("Item added to cart successfully!");
+            } else {
+                setNotification('Failed to add item to cart.');
+            }
+        } catch (e: any) {
+            console.error("Error adding to cart:", e);
+            setNotification("Network error. Could not add item to cart.");
+        } finally {
+            setTimeout(() => setNotification(null), 3000); // Clear notification after 3 seconds
+        }
+    };
+
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8">
+            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
                 <p className="text-gray-600 text-xl font-semibold">Loading product...</p>
             </div>
         );
     }
 
-    // Error state
-    if (fetchError || !product || !selectedVariant) {
+    if (fetchError || !product) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8">
+            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
                 <p className="text-red-600 text-xl font-semibold">
-                    Error: {fetchError || "Product data could not be loaded."} Please try again later.
+                    Error: {fetchError || "Product data could not be loaded."} Please ensure the backend is running and data exists.
+                </p>
+            </div>
+        );
+    }
+
+    // Ensure selectedVariant is not null before rendering main content
+    if (!selectedVariant) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
+                <p className="text-red-600 text-xl font-semibold">
+                    Error: No product variants found.
                 </p>
             </div>
         );
@@ -223,14 +234,12 @@ export default function ProductPage() {
 
     return (
         <main className="min-h-screen bg-gray-100 py-8 pt-20">
-            {/* Notification */}
-            {notification && (
-                <div className={`fixed top-20 right-4 p-3 rounded-md shadow-lg z-50 ${notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white`}>
-                    {notification.message}
-                </div>
-            )}
-
             <div className="container mx-auto px-4">
+                {notification && (
+                    <div className={`fixed top-20 right-4 p-3 rounded-md shadow-lg transition-opacity duration-300 ${notification.includes("Error") ? 'bg-red-500' : 'bg-green-500'} text-white`}>
+                        {notification}
+                    </div>
+                )}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white p-6 rounded-lg shadow-lg">
                     {/* Product Images */}
                     <div className="relative aspect-square w-full rounded-lg overflow-hidden">
@@ -252,7 +261,7 @@ export default function ProductPage() {
                         </div>
 
                         <div className="text-2xl font-bold text-blue-600">
-                            Rp {selectedVariant.price.toLocaleString('id-ID')}
+                            Rp {selectedVariant.price.toLocaleString('id-ID')} {/* Display price of selected variant */}
                         </div>
 
                         <div>
@@ -268,7 +277,7 @@ export default function ProductPage() {
                             <select
                                 id="variant-select"
                                 className="w-full border border-gray-300 rounded-md py-2 px-3 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                value={selectedVariant.id}
+                                value={selectedVariant.id} // Controlled component
                                 onChange={handleVariantChange}
                             >
                                 {product.variants.map((variant) => (
@@ -292,9 +301,9 @@ export default function ProductPage() {
                                 Quantity
                             </label>
                             <div className="flex items-center space-x-2">
-                                <button 
-                                    className="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
-                                    onClick={decreaseQuantity}
+                                <button
+                                    className="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    onClick={() => handleQuantityChange('decrease')}
                                     disabled={quantity <= 1}
                                 >
                                     -
@@ -304,13 +313,18 @@ export default function ProductPage() {
                                     type="number"
                                     min="1"
                                     max={selectedVariant.stock_quantity}
-                                    value={quantity}
-                                    onChange={handleQuantityChange}
+                                    value={quantity} // Controlled component
+                                    onChange={(e) => {
+                                        const value = parseInt(e.target.value);
+                                        if (!isNaN(value)) {
+                                            setQuantity(Math.max(1, Math.min(value, selectedVariant.stock_quantity)));
+                                        }
+                                    }}
                                     className="w-20 text-center border border-gray-300 rounded-md py-1 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
-                                <button 
-                                    className="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors"
-                                    onClick={increaseQuantity}
+                                <button
+                                    className="px-3 py-1 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                    onClick={() => handleQuantityChange('increase')}
                                     disabled={quantity >= selectedVariant.stock_quantity}
                                 >
                                     +
@@ -320,8 +334,8 @@ export default function ProductPage() {
 
                         {/* Add to Cart Button and WhatsApp Button */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-6">
-                            <button 
-                                className="flex-1 bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:bg-blue-300 disabled:cursor-not-allowed"
+                            <button
+                                className="flex-1 bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                                 onClick={handleAddToCart}
                                 disabled={selectedVariant.stock_quantity <= 0 || quantity <= 0}
                             >
@@ -361,7 +375,7 @@ export default function ProductPage() {
                         <div>
                             <h2 className="text-lg font-semibold mb-2 text-gray-800">Specifications</h2>
                             <dl className="space-y-2">
-                                {Object.entries(selectedVariant.specifications).map(([key, value]) => (
+                                {Object.entries(selectedVariant.specifications).map(([key, value]) => ( // Use selectedVariant specs
                                     <div key={key} className="grid grid-cols-2">
                                         <dt className="text-gray-600">{key}</dt>
                                         <dd className="text-gray-800">{String(value)}</dd>
