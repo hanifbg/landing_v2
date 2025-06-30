@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 
 type JSONMap = { [key: string]: unknown }; // Use unknown for safety
@@ -130,7 +129,7 @@ export default function CheckoutPage() {
                 return;
             }
 
-            const response = await fetch(`http://localhost:8081/api/v1/cart/${cartId}`);
+            const response = await fetch(`https://iqibla-backend.onrender.com/api/v1/cart/${cartId}`);
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch cart: ${response.status} ${response.statusText}`);
@@ -160,7 +159,7 @@ export default function CheckoutPage() {
         setError(null);
 
         try {
-            const response = await fetch('http://localhost:8081/api/v1/shipping/provinces');
+            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/shipping/provinces');
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch provinces: ${response.status} ${response.statusText}`);
@@ -184,7 +183,7 @@ export default function CheckoutPage() {
         setError(null);
 
         try {
-            const response = await fetch(`http://localhost:8081/api/v1/shipping/cities?province_id=${provinceId}`);
+            const response = await fetch(`https://iqibla-backend.onrender.com/api/v1/shipping/cities?province_id=${provinceId}`);
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch cities: ${response.status} ${response.statusText}`);
@@ -215,7 +214,7 @@ export default function CheckoutPage() {
                 courier: 'jne' // Using JNE as the courier
             };
 
-            const response = await fetch('http://localhost:8081/api/v1/shipping/cost', {
+            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/shipping/cost', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -406,7 +405,7 @@ export default function CheckoutPage() {
                                         name="name"
                                         value={customerDetails.name}
                                         onChange={handleCustomerDetailsChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
                                         required
                                     />
                                 </div>
@@ -418,7 +417,7 @@ export default function CheckoutPage() {
                                         name="email"
                                         value={customerDetails.email}
                                         onChange={handleCustomerDetailsChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
                                         required
                                     />
                                 </div>
@@ -430,7 +429,7 @@ export default function CheckoutPage() {
                                         name="phone"
                                         value={customerDetails.phone}
                                         onChange={handleCustomerDetailsChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
                                         required
                                     />
                                 </div>
@@ -449,7 +448,7 @@ export default function CheckoutPage() {
                                         name="street"
                                         value={shippingAddress.street}
                                         onChange={handleShippingAddressChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
                                         required
                                     />
                                 </div>
@@ -460,7 +459,7 @@ export default function CheckoutPage() {
                                         name="province_id"
                                         value={shippingAddress.province_id}
                                         onChange={handleShippingAddressChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
                                         required
                                     >
                                         <option value="">Select Province</option>
@@ -482,7 +481,7 @@ export default function CheckoutPage() {
                                         name="city_id"
                                         value={shippingAddress.city_id}
                                         onChange={handleShippingAddressChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
                                         required
                                         disabled={!shippingAddress.province_id || loadingCities}
                                     >
@@ -506,7 +505,7 @@ export default function CheckoutPage() {
                                         name="postalCode"
                                         value={shippingAddress.postalCode}
                                         onChange={handleShippingAddressChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
                                         required
                                     />
                                 </div>
@@ -518,7 +517,7 @@ export default function CheckoutPage() {
                                         name="country"
                                         value={shippingAddress.country}
                                         readOnly
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100"
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100 text-gray-900"
                                     />
                                 </div>
                             </div>
