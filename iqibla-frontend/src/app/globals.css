@@ -31,3 +31,20 @@ body {
 .page-content-padding {
   padding-top: theme('spacing.20');
 }
+
+/* Custom styles for Feed My Soul With Zikr section */
+.feed-my-soul-swiper .swiper-button-prev,
+.feed-my-soul-swiper .swiper-button-next {
+  display: none;
+}
+
+.swiper-button-prev-custom,
+.swiper-button-next-custom {
+  transition: all 0.2s ease;
+}
+
+.swiper-button-prev-custom:hover,
+.swiper-button-next-custom:hover {
+  background-color: theme('colors.white');
+  transform: translateY(-50%) scale(1.1);
+}
