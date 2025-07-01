@@ -25,6 +25,7 @@ interface CartResponse {
     discount_amount?: number; // Use optional property for nullable
     discount_code_applied?: string; // Use optional property for nullable
     items: CartItemResponse[]; // Crucial: 'items' array
+    totalWeight?: number; // Total weight in grams
 }
 
 // Province response from API
@@ -57,6 +58,45 @@ interface ShippingOptionResponse {
     description: string;
     cost: number;
     etd: string;
+}
+
+// Order request payload
+interface CreateOrderRequestPayload {
+    cart_id: string;
+    customer_name: string;
+    customer_email: string;
+    customer_phone: string;
+    shipping_address: string; // The street address
+    shipping_city_id: string;
+    shipping_province_id: string;
+    shipping_postal_code: string;
+    shipping_courier: string; // e.g., "jne"
+    shipping_service: string; // e.g., "REG", "OKE", "YES"
+    shipping_cost: number;
+    total_weight: number; // In grams
+    notes?: string; // Optional
+}
+
+// Order payment response
+interface OrderPaymentResponse {
+    id: string; // Payment ID
+    order_id: string;
+    amount: number;
+    status: string; // e.g., "pending"
+    payment_method: string; // e.g., "gopay", "credit_card"
+    transaction_id: string; // From Midtrans
+    payment_token: string; // SNAP token
+    payment_url: string; // SNAP redirect URL
+    expiry_time: string; // ISO 8601
+    created_at: string;
+}
+
+// Order success response
+interface CreateOrderSuccessResponse {
+    id: string; // This is the order_id
+    order_number: string;
+    total_amount: number;
+    message?: string; // Optional message field
 }
 
 // Full API response interfaces
@@ -109,6 +149,7 @@ export default function CheckoutPage() {
     const [loadingProvinces, setLoadingProvinces] = useState<boolean>(false);
     const [loadingCities, setLoadingCities] = useState<boolean>(false);
     const [loadingShippingCosts, setLoadingShippingCosts] = useState<boolean>(false);
+    const [isPlacingOrder, setIsPlacingOrder] = useState<boolean>(false);
     
     // Error and notification states
     const [error, setError] = useState<string | null>(null);
@@ -129,7 +170,7 @@ export default function CheckoutPage() {
                 return;
             }
 
-            const response = await fetch(`https://iqibla-backend.onrender.com/api/v1/cart/${cartId}`);
+            const response = await fetch(`http://localhost:8081/api/v1/cart/${cartId}`);
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch cart: ${response.status} ${response.statusText}`);
@@ -159,7 +200,7 @@ export default function CheckoutPage() {
         setError(null);
 
         try {
-            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/shipping/provinces');
+            const response = await fetch('http://localhost:8081/api/v1/shipping/provinces');
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch provinces: ${response.status} ${response.statusText}`);
@@ -183,7 +224,7 @@ export default function CheckoutPage() {
         setError(null);
 
         try {
-            const response = await fetch(`https://iqibla-backend.onrender.com/api/v1/shipping/cities?province_id=${provinceId}`);
+            const response = await fetch(`http://localhost:8081/api/v1/shipping/cities?province_id=${provinceId}`);
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch cities: ${response.status} ${response.statusText}`);
@@ -214,7 +255,7 @@ export default function CheckoutPage() {
                 courier: 'jne' // Using JNE as the courier
             };
 
-            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/shipping/cost', {
+            const response = await fetch('http://localhost:8081/api/v1/shipping/cost', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -282,11 +323,14 @@ export default function CheckoutPage() {
         setSelectedShippingOption(option);
     };
 
-    // Handle form submission
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        
+    // Handle place order
+    const handlePlaceOrder = async () => {
         // Validate form
+        if (!cart || cart.items.length === 0) {
+            setError('Your cart is empty');
+            return;
+        }
+
         if (!customerDetails.name || !customerDetails.email || !customerDetails.phone) {
             setError('Please fill in all customer details');
             return;
@@ -301,11 +345,81 @@ export default function CheckoutPage() {
             setError('Please select a shipping option');
             return;
         }
-        
-        // Proceed to payment (placeholder for now)
-        alert('Proceeding to payment... This is a placeholder.');
-        // In a real application, you would save the checkout details and redirect to payment page
-        // router.push('/payment');
+
+        if (totalWeight <= 0) {
+            setError('Invalid total weight');
+            return;
+        }
+
+        setIsPlacingOrder(true);
+        setError(null);
+
+        try {
+            // Get cart_id from localStorage
+            const cartId = localStorage.getItem('cart_id');
+            if (!cartId) {
+                throw new Error('Cart ID not found');
+            }
+
+            // Construct the order payload
+            const orderPayload: CreateOrderRequestPayload = {
+                cart_id: cartId,
+                customer_name: customerDetails.name,
+                customer_email: customerDetails.email,
+                customer_phone: customerDetails.phone,
+                shipping_address: shippingAddress.street,
+                shipping_city_id: shippingAddress.city_id,
+                shipping_province_id: shippingAddress.province_id,
+                shipping_postal_code: shippingAddress.postalCode,
+                shipping_courier: 'jne', // Hardcoded to jne for now
+                shipping_service: selectedShippingOption.service,
+                shipping_cost: selectedShippingOption.cost,
+                total_weight: totalWeight,
+                notes: ''
+            };
+
+            // Make the API call
+            const response = await fetch('http://localhost:8081/api/v1/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderPayload)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Failed to place order');
+            }
+
+            // Parse the response
+            const orderResponse: CreateOrderSuccessResponse = await response.json();
+
+            // Clear cart
+            localStorage.removeItem('cart_id');
+
+            // Set success notification
+            setNotification('Order placed successfully! Redirecting to order confirmation...');
+
+            // Redirect to order confirmation page
+            router.push('/order-confirmation/' + orderResponse.id);
+        } catch (error) {
+            console.error('Error placing order:', error);
+            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            
+            // Clear notification after 5 seconds
+            setTimeout(() => {
+                setError(null);
+            }, 5000);
+        } finally {
+            setIsPlacingOrder(false);
+        }
+    };
+
+    // Handle form submission
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        handlePlaceOrder();
     };
 
     // Format price to Rupiah
@@ -582,13 +696,16 @@ export default function CheckoutPage() {
                                 <p className="text-lg font-bold text-blue-600">{formatPrice(calculateTotal())}</p>
                             </div>
                             
-                            {/* Proceed Button */}
+                            {/* Place Order Button */}
                             <button 
                                 type="submit"
                                 className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:bg-gray-400 disabled:cursor-not-allowed"
-                                disabled={!selectedShippingOption}
+                                disabled={loadingShippingCosts || isPlacingOrder || !selectedShippingOption || 
+                                    !customerDetails.name || !customerDetails.email || !customerDetails.phone || 
+                                    !shippingAddress.street || !shippingAddress.province_id || 
+                                    !shippingAddress.city_id || !shippingAddress.postalCode}
                             >
-                                Proceed to Payment
+                                {isPlacingOrder ? 'Placing Order...' : 'Place Order'}
                             </button>
                             
                             {/* Return to Cart */}

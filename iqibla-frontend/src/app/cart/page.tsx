@@ -51,7 +51,7 @@ export default function CartPage() {
                 return;
             }
 
-            const response = await fetch(`https://iqibla-backend.onrender.com/api/v1/cart/${cartId}`);
+            const response = await fetch(`http://localhost:8081/api/v1/cart/${cartId}`);
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch cart: ${response.status} ${response.statusText}`);
@@ -86,7 +86,7 @@ export default function CartPage() {
                 return;
             }
 
-            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/cart/update-quantity', {
+            const response = await fetch('http://localhost:8081/api/v1/cart/update-quantity', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -139,7 +139,7 @@ export default function CartPage() {
                 return;
             }
 
-            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/cart/remove', {
+            const response = await fetch('http://localhost:8081/api/v1/cart/remove', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
