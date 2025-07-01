@@ -39,17 +39,51 @@ export default function HomePage() {
                     </div>
                 </SwiperSlide>
                 
-                {/* Zikr Premium Slide - Placeholder */}
+                {/* Zikr Premium Slide */}
                 <SwiperSlide>
-                    <div className="relative w-full h-full bg-gray-800 flex justify-center items-center">
-                        <h2 className="text-4xl text-white">Zikr Premium - Coming Soon</h2>
+                    <div className="relative w-full h-full">
+                        <video 
+                            src="/videos/zikr-premium.mp4" 
+                            autoPlay 
+                            loop 
+                            muted 
+                            playsInline 
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-start p-12 md:p-24">
+                            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">Zikr Premium</h2>
+                            <p className="text-xl md:text-2xl text-white mb-8">99 Diamond Shine Faith</p>
+                            <Link 
+                                href="https://iqibla.com/products/zikr-m02-premium"
+                                className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
+                            >
+                                Learn More
+                            </Link>
+                        </div>
                     </div>
                 </SwiperSlide>
                 
-                {/* Qwatch S3 Slide - Placeholder */}
+                {/* Qwatch S3 Slide */}
                 <SwiperSlide>
-                    <div className="relative w-full h-full bg-gray-700 flex justify-center items-center">
-                        <h2 className="text-4xl text-white">Qwatch S3 - Coming Soon</h2>
+                    <div className="relative w-full h-full">
+                        <video 
+                            src="/videos/qwatch-s3.mp4" 
+                            autoPlay 
+                            loop 
+                            muted 
+                            playsInline 
+                            className="absolute inset-0 w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-start p-12 md:p-24">
+                            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">Qwatch S3</h2>
+                            <p className="text-xl md:text-2xl text-white mb-8">S3 on my wrist, Faith guides every important moment.</p>
+                            <Link 
+                                href="https://iqibla.com/products/qwatch-s3"
+                                className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
+                            >
+                                Learn More
+                            </Link>
+                        </div>
                     </div>
                 </SwiperSlide>
             </Swiper>
