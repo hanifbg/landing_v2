@@ -231,7 +231,7 @@ export default function CartPage() {
     }
 
     return (
-        <main className="min-h-screen bg-gray-100 py-8 pt-20">
+        <main className="min-h-screen bg-gray-100 py-8 page-content-padding">
             {/* Notification */}
             {notification && (
                 <div className={`fixed top-20 right-4 p-3 rounded-md shadow-lg z-50 ${notification.type === 'success' ? 'bg-green-500' : 'bg-red-500'} text-white`}>

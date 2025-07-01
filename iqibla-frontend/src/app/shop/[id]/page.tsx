@@ -241,7 +241,7 @@ export default function ProductPage() {
     const whatsappLink = `https://api.whatsapp.com/send?phone=6285179766847&text=${whatsappMessage}`;
 
     return (
-        <main className="min-h-screen bg-gray-100 py-8 pt-20">
+        <main className="min-h-screen bg-gray-100 py-8 page-content-padding">
             <div className="container mx-auto px-4">
                 {notification && (
                     <div className={`fixed top-20 right-4 p-3 rounded-md shadow-lg transition-opacity duration-300 ${notification.includes("Error") ? 'bg-red-500' : 'bg-green-500'} text-white`}>

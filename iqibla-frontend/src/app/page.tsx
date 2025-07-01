@@ -1,26 +1,58 @@
+'use client';
+
 import Link from 'next/link';
+import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 
 export default function HomePage() {
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <div className="max-w-3xl mx-auto px-4 text-center">
-                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                    Welcome to iQibla Indonesia - Your Journey of Zikr Starts Here
-                </h1>
+        <div className="page-content-padding">
+            <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                slidesPerView={1}
+                loop={true}
+                autoplay={{ delay: 5000, disableOnInteraction: false }}
+                pagination={{ clickable: true }}
+                navigation={true}
+                className="w-full h-screen"
+            >
+                {/* Salat Counter Slide */}
+                <SwiperSlide>
+                    <div className="relative w-full h-full">
+                        <Image 
+                            src="/images/salat-counter.webp" 
+                            alt="Salat Counter" 
+                            fill 
+                            className="object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-start p-12 md:p-24">
+                            <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">Salat Counter</h2>
+                            <p className="text-xl md:text-2xl text-white mb-8">Helps you focus on the prayer.</p>
+                            <Link 
+                                href="https://iqibla.com/products/salat-counter"
+                                className="bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
+                            >
+                                Learn More
+                            </Link>
+                        </div>
+                    </div>
+                </SwiperSlide>
                 
-                <p className="text-xl text-gray-600 mb-8">
-                    Discover our innovative iQibla Zikr Ring - a beautiful blend of tradition and technology.
-                    Designed to enhance your spiritual journey with elegant craftsmanship and mindful functionality.
-                    Perfect for maintaining your daily zikr practice with grace and convenience.
-                </p>
-
-                <Link 
-                    href="/shop"
-                    className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-transform"
-                >
-                    Shop Now
-                </Link>
-            </div>
+                {/* Zikr Premium Slide - Placeholder */}
+                <SwiperSlide>
+                    <div className="relative w-full h-full bg-gray-800 flex justify-center items-center">
+                        <h2 className="text-4xl text-white">Zikr Premium - Coming Soon</h2>
+                    </div>
+                </SwiperSlide>
+                
+                {/* Qwatch S3 Slide - Placeholder */}
+                <SwiperSlide>
+                    <div className="relative w-full h-full bg-gray-700 flex justify-center items-center">
+                        <h2 className="text-4xl text-white">Qwatch S3 - Coming Soon</h2>
+                    </div>
+                </SwiperSlide>
+            </Swiper>
         </div>
     );
 }
