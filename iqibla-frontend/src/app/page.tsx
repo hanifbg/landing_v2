@@ -104,7 +104,7 @@ export default function HomePage() {
 
             {/* "Feed My Soul With Zikr" Section */}
             {/* Added bg-gray-50 for a very light gray background */}
-            <section className="bg-gray-50 py-16 page-content-padding">
+            <section className="bg-gray-200 py-16 page-content-padding">
                 <div className="container mx-auto px-4 text-center">
                     <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Feed My Soul With Zikr</h2>
 
@@ -172,6 +172,73 @@ export default function HomePage() {
                             </div>
                         </SwiperSlide>
                     </Swiper>
+                </div>
+            </section>
+
+            {/* "Our Product Categories" Section */}
+            <section className="bg-white py-16 page-content-padding">
+                <div className="container mx-auto px-4 text-center">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Our product categories</h2>
+                    
+                    {/* Responsive Grid Layout */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        {/* Category Card 1: Zikr Rings */}
+                        <Link href="/shop?category=Zikr%20Rings" className="block h-[400px]">
+                            <div className="relative w-full h-full bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-105">
+                                <Image 
+                                    src="/images/category-zikr-rings.webp" 
+                                    alt="Zikr Rings Category" 
+                                    fill 
+                                    className="object-cover opacity-70"
+                                />
+                                <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6 text-white">
+                                    <h3 className="text-2xl font-bold mb-2">Zikr Rings</h3>
+                                    <p className="text-sm mb-6">The Inventor of the Zikr Ring.</p>
+                                    <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors duration-200">
+                                        Learn More
+                                    </button>
+                                </div>
+                            </div>
+                        </Link>
+                        
+                        {/* Category Card 2: Qwatch */}
+                        <Link href="/shop?category=Qwatch" className="block h-[400px]">
+                            <div className="relative w-full h-full bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-105">
+                                <Image 
+                                    src="/images/category-qwatch.webp" 
+                                    alt="Qwatch Category" 
+                                    fill 
+                                    className="object-cover opacity-70"
+                                />
+                                <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6 text-white">
+                                    <h3 className="text-2xl font-bold mb-2">Qwatch</h3>
+                                    <p className="text-sm mb-6">My spiritual companion for Daily Guidance.</p>
+                                    <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors duration-200">
+                                        Learn More
+                                    </button>
+                                </div>
+                            </div>
+                        </Link>
+                        
+                        {/* Category Card 3: Salat Counter */}
+                        <Link href="/shop?category=Salat%20Counter" className="block h-[400px]">
+                            <div className="relative w-full h-full bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-105">
+                                <Image 
+                                    src="/images/category-salat-counter.webp" 
+                                    alt="Salat Counter Category" 
+                                    fill 
+                                    className="object-cover opacity-70"
+                                />
+                                <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6 text-white">
+                                    <h3 className="text-2xl font-bold mb-2">Salat Counter</h3>
+                                    <p className="text-sm mb-6">Helps you focus on the prayer.</p>
+                                    <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors duration-200">
+                                        Learn More
+                                    </button>
+                                </div>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
             </section>
         </main>
