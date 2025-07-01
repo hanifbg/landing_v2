@@ -78,18 +78,18 @@ interface CreateOrderRequestPayload {
 }
 
 // Order payment response
-interface OrderPaymentResponse {
-    id: string; // Payment ID
-    order_id: string;
-    amount: number;
-    status: string; // e.g., "pending"
-    payment_method: string; // e.g., "gopay", "credit_card"
-    transaction_id: string; // From Midtrans
-    payment_token: string; // SNAP token
-    payment_url: string; // SNAP redirect URL
-    expiry_time: string; // ISO 8601
-    created_at: string;
-}
+// interface OrderPaymentResponse {
+//     id: string; // Payment ID
+//     order_id: string;
+//     amount: number;
+//     status: string; // e.g., "pending"
+//     payment_method: string; // e.g., "gopay", "credit_card"
+//     transaction_id: string; // From Midtrans
+//     payment_token: string; // SNAP token
+//     payment_url: string; // SNAP redirect URL
+//     expiry_time: string; // ISO 8601
+//     created_at: string;
+// }
 
 // Order success response
 interface CreateOrderSuccessResponse {
