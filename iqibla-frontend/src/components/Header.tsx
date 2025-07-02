@@ -16,12 +16,29 @@ export default function Header() {
                 <div className="flex items-center justify-start w-full md:w-auto"> {/* Adjusted for flexible width */}
                     {/* Left Navigation */}
                     <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-                        {/* Shop with Dropdown (placeholder for now) */}
+                        {/* Shop with Dropdown */}
                         <div className="relative group">
                             <Link href="/shop" className="flex items-center text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
                                 Shop <ChevronDown size={16} className="ml-1 group-hover:rotate-180 transition-transform duration-200" />
                             </Link>
-                            {/* Dropdown content would go here, hidden by default */}
+                            {/* Dropdown content */}
+                            <div className="absolute top-full left-0 mt-2 hidden group-hover:block bg-white rounded-md shadow-lg py-2 z-20">
+                                <Link href="/shop?category=Zikr%20Rings" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                                    Zikr Rings
+                                </Link>
+                                <Link href="/shop?category=Qwatch" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                                    Qwatch
+                                </Link>
+                                <Link href="/shop?category=Salat%20Counter" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                                    Salat Counter
+                                </Link>
+                                <Link href="/shop?category=Qphone" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                                    Qphone
+                                </Link>
+                                <Link href="/shop?category=Accessories" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
+                                    Accessories
+                                </Link>
+                            </div>
                         </div>
                         {/* Order Tracker */}
                         <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
