@@ -68,7 +68,7 @@ interface AddItemResponse {
 
 async function fetchProductData(id: string): Promise<Product | null> {
     try {
-        const res = await fetch(`http://localhost:8081/api/v1/products/${id}`, {
+        const res = await fetch(`https://iqibla-backend.onrender.com/api/v1/products/${id}`, {
             next: { revalidate: 60 }
         });
 
@@ -181,7 +181,7 @@ export default function ProductPage() {
                 quantity: quantity,
             };
 
-            const res = await fetch('http://localhost:8081/api/v1/cart/add', {
+            const res = await fetch('https://iqibla-backend.onrender.com/api/v1/cart/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

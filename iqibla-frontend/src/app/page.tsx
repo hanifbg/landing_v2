@@ -320,7 +320,7 @@ export default function HomePage() {
                             <div className="bg-green-50 rounded-xl p-6 shadow-md overflow-hidden flex flex-col justify-between min-h-[800px]">
                                 <div>
                                     <h3 className="text-xl font-semibold text-green-600 mb-4">The Holy Quran Player</h3>
-                                    <p className="text-gray-700 mb-6">In every quiet moment, iQIBLA Life's Quran Player brings you spiritual strength. Whether it's under the first rays of morning sun or under the stars at night, the gentle sound of the recitation will guide us will guide you in your communion with Allah. In iQIBLA Life, you can add all your favorite chapters to the list. They are all your trusted companions accompanying you through every moment of life and feeling the power of faith. Walking with the Quran brings true Walking with the Quran brings tranquility and peace to your soul.</p>
+                                    <p className="text-gray-700 mb-6">In every quiet moment, iQIBLA Life&apos;s Quran Player brings you spiritual strength. Whether it&apos;s under the first rays of morning sun or under the stars at night, the gentle sound of the recitation will guide us will guide you in your communion with Allah. In iQIBLA Life, you can add all your favorite chapters to the list. They are all your trusted companions accompanying you through every moment of life and feeling the power of faith. Walking with the Quran brings true Walking with the Quran brings tranquility and peace to your soul.</p>
                                 </div>
                                 <div className="w-full relative h-[450px] rounded-lg overflow-hidden mt-auto">
                                     <video 

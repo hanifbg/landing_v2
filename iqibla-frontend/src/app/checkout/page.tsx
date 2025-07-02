@@ -170,7 +170,7 @@ export default function CheckoutPage() {
                 return;
             }
 
-            const response = await fetch(`http://localhost:8081/api/v1/cart/${cartId}`);
+            const response = await fetch(`https://iqibla-backend.onrender.com/api/v1/cart/${cartId}`);
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch cart: ${response.status} ${response.statusText}`);
@@ -200,7 +200,7 @@ export default function CheckoutPage() {
         setError(null);
 
         try {
-            const response = await fetch('http://localhost:8081/api/v1/shipping/provinces');
+            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/shipping/provinces');
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch provinces: ${response.status} ${response.statusText}`);
@@ -224,7 +224,7 @@ export default function CheckoutPage() {
         setError(null);
 
         try {
-            const response = await fetch(`http://localhost:8081/api/v1/shipping/cities?province_id=${provinceId}`);
+            const response = await fetch(`https://iqibla-backend.onrender.com/api/v1/shipping/cities?province_id=${provinceId}`);
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch cities: ${response.status} ${response.statusText}`);
@@ -255,7 +255,7 @@ export default function CheckoutPage() {
                 courier: 'jne' // Using JNE as the courier
             };
 
-            const response = await fetch('http://localhost:8081/api/v1/shipping/cost', {
+            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/shipping/cost', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -379,7 +379,7 @@ export default function CheckoutPage() {
             };
 
             // Make the API call
-            const response = await fetch('http://localhost:8081/api/v1/orders', {
+            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/orders', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

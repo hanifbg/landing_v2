@@ -46,7 +46,7 @@ interface Product {
 
 async function getProducts() {
     try {
-        const res = await fetch('http://localhost:8081/api/v1/products', {
+        const res = await fetch('https://iqibla-backend.onrender.com/api/v1/products', {
             next: { revalidate: 60 } // Revalidate every minute
         });
         
