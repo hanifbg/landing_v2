@@ -283,6 +283,37 @@ export default function HomePage() {
                     ></iframe>
                 )}
             </section>
+
+            {/* iQIBLA Life Section */}
+            <section className="bg-white py-16 page-content-padding">
+                <div className="container mx-auto px-4">
+                    {/* Main Section Headline */}
+                    <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">iQIBLA Life: Embrace our faith, anywhere, anytime</h2>
+                    
+                    {/* Part 1: Two-Column Layout with Card Frame */}
+                    <div className="bg-green-50 rounded-xl p-8 overflow-hidden shadow-md">
+                        <div className="flex flex-col md:flex-row md:space-x-8 items-center">
+                            {/* Left Column (Text Content - 20% width) */}
+                            <div className="w-full md:w-1/5 mb-8 md:mb-0">
+                                <h3 className="text-2xl font-semibold text-green-600 mb-4">What is iQIBLA Life</h3>
+                                <p className="text-gray-700 mb-4">With over 1 million downloads worldwide, iQIBLA Life stands as the most reliable and popular app for Muslim lifestyle.</p>
+                                <p className="text-gray-700">In the past 5 years, iQIBLA Life has helped Muslims around the world Maintain accurate prayer times at all times, anywhere, correctly find the direction of Qibla, and lListen to Quran in peace, record every Tasbih, and customize their own Tasbih goals.iQIBLA became an indispensable Islamic companion.</p>
+                            </div>
+                            
+                            {/* Right Column (Image - 80% width) */}
+                            <div className="w-full md:w-4/5 overflow-hidden rounded-xl">
+                                <Image
+                                    src="/images/iqibla-life-part1.webp"
+                                    alt="iQIBLA Life App"
+                                    width={1200}
+                                    height={800}
+                                    className="w-full h-full object-cover rounded-xl transition-transform duration-300 hover:scale-105"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     );
 }
