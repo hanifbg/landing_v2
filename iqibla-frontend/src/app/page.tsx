@@ -1,6 +1,7 @@
 // src/app/page.tsx
 'use client';
 
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
@@ -12,6 +13,12 @@ import Link from 'next/link';
 // import 'swiper/css/pagination';
 
 export default function HomePage() {
+    // State for video playback
+    const [isPlayingVideo, setIsPlayingVideo] = useState(false);
+    
+    // Handler for video playback
+    const handlePlayVideo = () => setIsPlayingVideo(true);
+    
     return (
         // Removed bg-gray-100 from main here, sections will have their own backgrounds
         <main className="min-h-screen">
@@ -240,6 +247,41 @@ export default function HomePage() {
                         </Link>
                     </div>
                 </div>
+            </section>
+
+            {/* Full-screen Video Section */}
+            <section className="relative w-full h-screen bg-neutral-900 flex items-center justify-center">
+                {!isPlayingVideo ? (
+                    <>
+                        {/* Background Image */}
+                        <Image
+                            src="/images/video-section-bg.webp"
+                            alt="Video Background"
+                            fill
+                            className="object-cover opacity-80"
+                        />
+                        
+                        {/* Play Button */}
+                        <button 
+                            onClick={handlePlayVideo}
+                            className="absolute z-10 bg-white/30 backdrop-blur-sm rounded-full p-6 cursor-pointer hover:bg-white/50 transition-colors duration-200"
+                            aria-label="Play video"
+                        >
+                            {/* Play Icon (Triangle) */}
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </button>
+                    </>
+                ) : (
+                    <iframe
+                        src="https://www.youtube.com/embed/rF_kLJ87zMQ?autoplay=1&rel=0&modestbranding=1&controls=1"
+                        title="iQIBLA Product Video"
+                        className="absolute inset-0 w-full h-full"
+                        allow="autoplay; fullscreen; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                )}
             </section>
         </main>
     );
