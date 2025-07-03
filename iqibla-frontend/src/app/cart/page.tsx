@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { API_CONFIG } from '@/config/api';
 
 type JSONMap = { [key: string]: unknown }; // Use unknown for safety
 
@@ -51,7 +52,7 @@ export default function CartPage() {
                 return;
             }
 
-            const response = await fetch(`https://iqibla-backend.onrender.com/api/v1/cart/${cartId}`);
+            const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.CART}/${cartId}`);
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch cart: ${response.status} ${response.statusText}`);
@@ -86,7 +87,7 @@ export default function CartPage() {
                 return;
             }
 
-            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/cart/update-quantity', {
+            const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.CART_UPDATE_QUANTITY}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -139,7 +140,7 @@ export default function CartPage() {
                 return;
             }
 
-            const response = await fetch('https://iqibla-backend.onrender.com/api/v1/cart/remove', {
+            const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.CART_REMOVE}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

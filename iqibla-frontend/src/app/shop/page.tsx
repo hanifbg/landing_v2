@@ -1,4 +1,5 @@
 import ProductCard from '@/components/ProductCard';
+import { API_CONFIG } from '@/config/api';
 
 type JSONArray = string[];
 type JSONMap = { [key: string]: unknown };
@@ -46,7 +47,7 @@ interface Product {
 
 async function getProducts() {
     try {
-        const res = await fetch('https://iqibla-backend.onrender.com/api/v1/products', {
+        const res = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PRODUCTS}`, {
             next: { revalidate: 60 } // Revalidate every minute
         });
         

@@ -4,6 +4,7 @@
 import { notFound, useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import { API_CONFIG } from '@/config/api';
 
 type JSONArray = string[];
 type JSONMap = { [key: string]: unknown };
@@ -68,7 +69,7 @@ interface AddItemResponse {
 
 async function fetchProductData(id: string): Promise<Product | null> {
     try {
-        const res = await fetch(`https://iqibla-backend.onrender.com/api/v1/products/${id}`, {
+        const res = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PRODUCTS}/${id}`, {
             next: { revalidate: 60 }
         });
 
@@ -181,7 +182,7 @@ export default function ProductPage() {
                 quantity: quantity,
             };
 
-            const res = await fetch('https://iqibla-backend.onrender.com/api/v1/cart/add', {
+            const res = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.CART_ADD}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
