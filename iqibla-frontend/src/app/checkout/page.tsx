@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { API_CONFIG } from '@/config/api';
+import { CreatePaymentRequest, CreatePaymentResponse } from '@/types/payment';
 
 type JSONMap = { [key: string]: unknown }; // Use unknown for safety
 
@@ -396,14 +397,34 @@ export default function CheckoutPage() {
             // Parse the response
             const orderResponse: CreateOrderSuccessResponse = await response.json();
 
+            // Create payment for the order
+            const paymentPayload: CreatePaymentRequest = {
+                order_id: orderResponse.id
+            };
+
+            const paymentResponse = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PAYMENTS}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(paymentPayload)
+            });
+
+            if (!paymentResponse.ok) {
+                const errorData = await paymentResponse.json();
+                throw new Error(errorData.error || 'Failed to create payment');
+            }
+
+            const paymentData: CreatePaymentResponse = await paymentResponse.json();
+
             // Clear cart
             localStorage.removeItem('cart_id');
 
             // Set success notification
-            setNotification('Order placed successfully! Redirecting to order confirmation...');
+            setNotification('Order placed successfully! Redirecting to payment...');
 
-            // Redirect to order confirmation page
-            router.push('/order-confirmation/' + orderResponse.id);
+            // Redirect to Midtrans payment page
+            window.location.href = paymentData.redirect_url;
         } catch (error) {
             console.error('Error placing order:', error);
             setError(error instanceof Error ? error.message : 'An unknown error occurred');

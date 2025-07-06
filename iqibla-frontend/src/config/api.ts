@@ -17,7 +17,11 @@ export const API_CONFIG = {
     SHIPPING_COST: '/shipping/cost',
     
     // Order endpoints
-    ORDERS: '/orders'
+    ORDERS: '/orders',
+    
+    // Payment endpoints
+    PAYMENTS: '/payments',
+    PAYMENT_STATUS: '/payments'
   }
 };
 
