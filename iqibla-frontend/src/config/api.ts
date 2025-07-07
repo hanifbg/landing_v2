@@ -1,6 +1,6 @@
 // API Configuration
 export const API_CONFIG = {
-  BASE_URL: 'http://188.166.206.209//api/v1',
+  BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || 'http://188.166.206.209/api/v1',
   ENDPOINTS: {
     // Product endpoints
     PRODUCTS: '/products',
