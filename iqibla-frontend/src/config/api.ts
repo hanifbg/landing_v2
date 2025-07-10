@@ -4,6 +4,9 @@ export const API_CONFIG = {
   ENDPOINTS: {
     // Product endpoints
     PRODUCTS: '/products',
+
+    // Category endpoints
+    CATEGORIES: '/categories',
     
     // Cart endpoints
     CART: '/cart',
