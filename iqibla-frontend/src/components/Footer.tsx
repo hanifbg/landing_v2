@@ -13,27 +13,27 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">Products</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/shop?category=Zikr%20Rings" className="text-gray-700 hover:text-gray-900 transition-colors">
+                <Link href="/category/zikr-rings" className="text-gray-700 hover:text-gray-900 transition-colors">
                   Zikr Rings
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=Qwatch" className="text-gray-700 hover:text-gray-900 transition-colors">
+                <Link href="/category/qwatch" className="text-gray-700 hover:text-gray-900 transition-colors">
                   Qwatch
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=Salat%20Counter" className="text-gray-700 hover:text-gray-900 transition-colors">
+                <Link href="/category/salat-counter" className="text-gray-700 hover:text-gray-900 transition-colors">
                   Salat Counter
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=Qphone" className="text-gray-700 hover:text-gray-900 transition-colors">
+                <Link href="/category/qphone" className="text-gray-700 hover:text-gray-900 transition-colors">
                   Qphone
                 </Link>
               </li>
               <li>
-                <Link href="/shop?category=Accessories" className="text-gray-700 hover:text-gray-900 transition-colors">
+                <Link href="/category/accessories" className="text-gray-700 hover:text-gray-900 transition-colors">
                   Accessories
                 </Link>
               </li>

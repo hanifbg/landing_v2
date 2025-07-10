@@ -30,11 +30,11 @@ export default function Header() {
                                 >
                                 <div className="flex px-8 py-6 gap-x-20">
                                     <div className="flex flex-col space-y-6 w-48">
-                                        <Link href="/shop?category=Zikr%20Rings" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Zikr Rings</Link>
-                                        <Link href="/shop?category=Qwatch" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Qwatch</Link>
-                                        <Link href="/shop?category=Salat%20Counter" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Salat Counter</Link>
-                                        <Link href="/shop?category=Qphone" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Qphone</Link>
-                                        <Link href="/shop?category=Accessories" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Accessories</Link>
+                                        <Link href="/category/zikr-rings" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Zikr Rings</Link>
+                                        <Link href="/category/qwatch" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Qwatch</Link>
+                                        <Link href="/category/salat-counter" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Salat Counter</Link>
+                                        <Link href="/category/qphone" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Qphone</Link>
+                                        <Link href="/category/accessories" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Accessories</Link>
                                     </div>
                                     <div className="flex gap-x-6">
                                         <Image
