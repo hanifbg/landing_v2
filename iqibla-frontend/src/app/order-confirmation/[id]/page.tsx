@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams, useRouter, notFound } from 'next/navigation';
+import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -70,14 +70,48 @@ interface InitiatePaymentResponse {
     created_at: string;
 }
 
+// NEW: Midtrans SNAP callback result interfaces
+interface MidtransSuccessResult {
+    order_id: string;
+    status_code: string;
+    gross_amount: string;
+    payment_type: string;
+    transaction_time: string;
+    transaction_status: string;
+    fraud_status?: string;
+    status_message?: string;
+    merchant_id?: string;
+    masked_card?: string;
+    bank?: string;
+    eci?: string;
+}
+
+interface MidtransPendingResult {
+    order_id: string;
+    status_code: string;
+    gross_amount: string;
+    payment_type: string;
+    transaction_time: string;
+    transaction_status: string;
+    status_message?: string;
+    merchant_id?: string;
+}
+
+interface MidtransErrorResult {
+    order_id: string;
+    status_code: string;
+    status_message: string;
+    merchant_id?: string;
+}
+
 // Declare global snap for TypeScript
 declare global {
     interface Window {
         snap: {
             pay: (token: string, options: {
-                onSuccess?: (result: any) => void;
-                onPending?: (result: any) => void;
-                onError?: (result: any) => void;
+                onSuccess?: (result: MidtransSuccessResult) => void;
+                onPending?: (result: MidtransPendingResult) => void;
+                onError?: (result: MidtransErrorResult) => void;
                 onClose?: () => void;
             }) => void;
         };
@@ -86,7 +120,7 @@ declare global {
 
 export default function OrderConfirmationPage() {
     const params = useParams();
-    const router = useRouter();
+    // const router = useRouter();
     const orderId = params.id as string;
 
     // State Management
@@ -196,17 +230,17 @@ export default function OrderConfirmationPage() {
             
             // Use Midtrans SNAP popup instead of redirect
             window.snap.pay(paymentResponse.payment_token, {
-                onSuccess: (result: any) => {
+                onSuccess: (result: MidtransSuccessResult) => {
                     console.log('Payment successful:', result);
                     setNotification('Payment successful! Order confirmed.');
                     fetchOrder(orderId); // Re-fetch order details
                 },
-                onPending: (result: any) => {
+                onPending: (result: MidtransPendingResult) => {
                     console.log('Payment pending:', result);
                     setNotification('Payment is pending. Please complete payment through Midtrans.');
                     fetchOrder(orderId); // Re-fetch order details
                 },
-                onError: (result: any) => {
+                onError: (result: MidtransErrorResult) => {
                     console.log('Payment error:', result);
                     setNotification('Payment failed. Please try again.');
                     fetchOrder(orderId); // Re-fetch order details
@@ -275,7 +309,7 @@ export default function OrderConfirmationPage() {
                 <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md">
                     <div className="text-gray-400 text-6xl mb-4">📋</div>
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">Order Not Found</h1>
-                    <p className="text-gray-600 mb-6">The order you're looking for doesn't exist or has been removed.</p>
+                    <p className="text-gray-600 mb-6">The order you&apos;re looking for doesn&apos;t exist or has been removed.</p>
                     <Link href="/shop" className="bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
                         Continue Shopping
                     </Link>
