@@ -22,22 +22,50 @@ export default function Header() {
                                 Shop <ChevronDown size={16} className="ml-1 group-hover:rotate-180 transition-transform duration-200" />
                             </Link>
                             {/* Dropdown content */}
-                            <div className="absolute top-full left-0 mt-2 hidden group-hover:block bg-white rounded-md shadow-lg py-2 z-20">
-                                <Link href="/shop?category=Zikr%20Rings" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
-                                    Zikr Rings
-                                </Link>
-                                <Link href="/shop?category=Qwatch" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
-                                    Qwatch
-                                </Link>
-                                <Link href="/shop?category=Salat%20Counter" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
-                                    Salat Counter
-                                </Link>
-                                <Link href="/shop?category=Qphone" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
-                                    Qphone
-                                </Link>
-                                <Link href="/shop?category=Accessories" className="block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100">
-                                    Accessories
-                                </Link>
+                            <div
+                                className="absolute left-0 top-full mt-2 w-[880px] bg-[#121212] border border-gray-800 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 z-50"
+                                role="menu"
+                                aria-orientation="vertical"
+                                aria-labelledby="shopMenuButton"
+                                >
+                                <div className="flex px-8 py-6 gap-x-20">
+                                    <div className="flex flex-col space-y-6 w-48">
+                                        <Link href="/shop?category=Zikr%20Rings" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Zikr Rings</Link>
+                                        <Link href="/shop?category=Qwatch" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Qwatch</Link>
+                                        <Link href="/shop?category=Salat%20Counter" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Salat Counter</Link>
+                                        <Link href="/shop?category=Qphone" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Qphone</Link>
+                                        <Link href="/shop?category=Accessories" className="font-bold text-lg leading-6 hover:text-yellow-400" role="menuitem" tabIndex={-1}>Accessories</Link>
+                                    </div>
+                                    <div className="flex gap-x-6">
+                                        <Image
+                                            alt="Hand wearing silver ring with square face on white robe background"
+                                            className="rounded-md w-40 h-40 object-cover"
+                                            height={160}
+                                            src="/images/dropdown-image-1.webp"
+                                            width={160}
+                                            role="menuitem"
+                                            tabIndex={-1}
+                                        />
+                                        <Image
+                                            alt="Hand wearing black smartwatch with Arabic clock face on white robe background"
+                                            className="rounded-md w-40 h-40 object-cover"
+                                            height={160}
+                                            src="/images/dropdown-image-2.webp"
+                                            width={160}
+                                            role="menuitem"
+                                            tabIndex={-1}
+                                        />
+                                        <Image
+                                            alt="Hand holding black square device with number 7 on blue background"
+                                            className="rounded-md w-40 h-40 object-cover"
+                                            height={160}
+                                            src="/images/dropdown-image-3.webp"
+                                            width={160}
+                                            role="menuitem"
+                                            tabIndex={-1}
+                                        />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         {/* Order Tracker */}
