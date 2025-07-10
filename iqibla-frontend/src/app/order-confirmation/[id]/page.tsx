@@ -51,9 +51,37 @@ interface OrderDetailsResponse {
     source_channel: string;
     notes?: string;
     order_items: OrderItemDetails[]; // Uses the updated interface
-    payment: OrderPaymentResponse; // Crucial: Includes payment_token and payment_url
+    payment?: OrderPaymentResponse; // Optional/nullable
     created_at: string;
     updated_at: string;
+}
+
+// NEW: For the response from POST /api/v1/payments/:order_id
+interface InitiatePaymentResponse {
+    id: string; // Payment ID
+    order_id: string;
+    amount: number;
+    status: string;
+    payment_method: string;
+    transaction_id: string;
+    payment_token: string;
+    payment_url: string; // This is what we need for redirection
+    expiry_time: string;
+    created_at: string;
+}
+
+// Declare global snap for TypeScript
+declare global {
+    interface Window {
+        snap: {
+            pay: (token: string, options: {
+                onSuccess?: (result: any) => void;
+                onPending?: (result: any) => void;
+                onError?: (result: any) => void;
+                onClose?: () => void;
+            }) => void;
+        };
+    }
 }
 
 export default function OrderConfirmationPage() {
@@ -67,6 +95,31 @@ export default function OrderConfirmationPage() {
     const [error, setError] = useState<string | null>(null);
     const [notification, setNotification] = useState<string | null>(null);
     const [isProcessingPayment, setIsProcessingPayment] = useState<boolean>(false);
+    const [snapLoaded, setSnapLoaded] = useState<boolean>(false);
+
+    // Load Midtrans Snap.js dynamically
+    useEffect(() => {
+        const loadSnapScript = () => {
+            if (window.snap) {
+                setSnapLoaded(true);
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
+            script.setAttribute('data-client-key', 'Mid-client-mppH-oT5ZKUeRHT-');
+            script.onload = () => {
+                setSnapLoaded(true);
+            };
+            script.onerror = () => {
+                console.error('Failed to load Midtrans Snap script');
+                setNotification('Failed to load payment system. Please refresh the page.');
+            };
+            document.head.appendChild(script);
+        };
+
+        loadSnapScript();
+    }, []);
 
     // Data Fetching
     const fetchOrder = async (orderId: string) => {
@@ -114,10 +167,62 @@ export default function OrderConfirmationPage() {
         }
     };
 
-    // Proceed to Payment Button Logic
-    const handleProceedToPayment = () => {
-        console.log("Proceed to Payment clicked for order:", order?.id);
-        console.log("Payment URL:", order?.payment?.payment_url);
+    // Proceed to Payment Button Logic with Midtrans SNAP
+    const handleProceedToPayment = async () => {
+        if (!order || !snapLoaded) {
+            setNotification('Payment system not ready. Please wait or refresh the page.');
+            return;
+        }
+        
+        setIsProcessingPayment(true);
+        setNotification('Initiating payment...');
+        
+        try {
+            const response = await fetch(`http://localhost:8081/api/v1/payments/${order.id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Failed to initiate payment: ${response.status} ${response.statusText}`);
+            }
+            
+            const paymentResponse: InitiatePaymentResponse = await response.json();
+            
+            // Clear the notification before opening SNAP
+            setNotification(null);
+            
+            // Use Midtrans SNAP popup instead of redirect
+            window.snap.pay(paymentResponse.payment_token, {
+                onSuccess: (result: any) => {
+                    console.log('Payment successful:', result);
+                    setNotification('Payment successful! Order confirmed.');
+                    fetchOrder(orderId); // Re-fetch order details
+                },
+                onPending: (result: any) => {
+                    console.log('Payment pending:', result);
+                    setNotification('Payment is pending. Please complete payment through Midtrans.');
+                    fetchOrder(orderId); // Re-fetch order details
+                },
+                onError: (result: any) => {
+                    console.log('Payment error:', result);
+                    setNotification('Payment failed. Please try again.');
+                    fetchOrder(orderId); // Re-fetch order details
+                },
+                onClose: () => {
+                    console.log('Payment popup closed');
+                    setNotification('Payment cancelled by user.');
+                    fetchOrder(orderId); // Re-fetch order details
+                }
+            });
+        } catch (err) {
+            console.error('Error initiating payment:', err);
+            setNotification(err instanceof Error ? err.message : 'Failed to initiate payment. Please try again.');
+        } finally {
+            setIsProcessingPayment(false);
+        }
     };
 
     // Format price to Indonesian Rupiah
@@ -230,7 +335,7 @@ export default function OrderConfirmationPage() {
                                 <div className="space-y-2">
                                     <p><span className="font-medium text-gray-800">Order Status:</span> 
                                         <span className={`ml-2 px-2 py-1 rounded-full text-sm ${
-                                            order.order_status === 'paid' ? 'bg-green-100 text-green-800' :
+                                            order.order_status === 'processing' ? 'bg-green-100 text-green-800' :
                                             order.order_status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                                             'bg-gray-100 text-gray-800'
                                         }`}>
@@ -319,14 +424,16 @@ export default function OrderConfirmationPage() {
                             </button>
                         )}
                         
-                        {/* Proceed to Payment Button */}
-                        <button
-                            onClick={handleProceedToPayment}
-                            disabled={isProcessingPayment}
-                            className="bg-blue-600 text-white py-3 px-8 rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            {isProcessingPayment ? 'Processing Payment...' : 'Proceed to Payment'}
-                        </button>
+                        {/* Proceed to Payment Button - Show if order is pending and payment is not paid */}
+                        {order.order_status === 'pending' && order.payment?.status !== 'paid' && (
+                            <button
+                                onClick={handleProceedToPayment}
+                                disabled={isProcessingPayment || !snapLoaded}
+                                className="bg-blue-600 text-white py-3 px-8 rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {isProcessingPayment ? 'Processing Payment...' : 'Proceed to Payment'}
+                            </button>
+                        )}
                         
                         {/* Continue Shopping Link */}
                         <Link 
