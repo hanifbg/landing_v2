@@ -49,6 +49,11 @@ const ProductCard = ({ product }: { product: Product }) => {
     const defaultImage = '/placeholder-product.jpg';
     const firstVariant = product.variants[0];
 
+    // Format price with thousand delimiter using dots
+    const formatPrice = (price: number) => {
+        return price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    };
+
     return (
         <Link href={`/shop/${product.id}`} className="group">
             <div className="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-105">
@@ -64,7 +69,7 @@ const ProductCard = ({ product }: { product: Product }) => {
                 <div className="p-4">
                     <h3 className="text-lg font-bold text-gray-900 mb-2">{product.name}</h3>
                     <p className="text-xl font-semibold text-blue-600">
-                        Rp{firstVariant.price.toFixed(0)}
+                        Rp{formatPrice(firstVariant.price)}
                     </p>
                 </div>
             </div>
