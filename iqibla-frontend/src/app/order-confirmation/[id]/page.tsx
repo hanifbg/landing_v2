@@ -159,7 +159,7 @@ export default function OrderConfirmationPage() {
     const fetchOrder = async (orderId: string) => {
         try {
             setLoading(true);
-            const response = await fetch(`http://localhost:8081/api/v1/orders/${orderId}`);
+            const response = await fetch(`https://188.166.206.209/api/v1/orders/${orderId}`);
             
             if (response.status === 404) {
                 notFound();
@@ -212,7 +212,7 @@ export default function OrderConfirmationPage() {
         setNotification('Initiating payment...');
         
         try {
-            const response = await fetch(`http://localhost:8081/api/v1/payments/${order.id}`, {
+            const response = await fetch(`https://188.166.206.209/api/v1/payments/${order.id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
