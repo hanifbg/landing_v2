@@ -18,7 +18,7 @@ export default function Header() {
                     <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
                         {/* Shop with Dropdown */}
                         <div className="relative group">
-                            <Link href="/shop" className="flex items-center text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
+                            <Link href="/category/zikr-rings" className="flex items-center text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
                                 Shop <ChevronDown size={16} className="ml-1 group-hover:rotate-180 transition-transform duration-200" />
                             </Link>
                             {/* Dropdown content */}
