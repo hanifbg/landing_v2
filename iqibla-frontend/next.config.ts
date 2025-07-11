@@ -28,6 +28,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**', // This allows any path from this domain
       },
+      {
+        protocol: 'https',
+        hostname: '188.166.206.209',
+        port: '',
+        pathname: '/**', // This allows any path from this domain
+      },
       // Add other remote patterns if you have images from other domains
     ],
   },
