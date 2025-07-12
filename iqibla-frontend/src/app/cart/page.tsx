@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { API_CONFIG } from '@/config/api';
+import { useTranslation } from '@/contexts/LanguageContext';
+import * as localStorage from '@/utils/localStorage';
 
 type JSONMap = { [key: string]: unknown }; // Use unknown for safety
 
@@ -31,6 +33,7 @@ interface CartResponse {
 
 export default function CartPage() {
     const router = useRouter();
+    const { t } = useTranslation();
     
     // State management
     const [cart, setCart] = useState<CartResponse | null>(null);
@@ -116,7 +119,7 @@ export default function CartPage() {
         } catch (error) {
             console.error('Error updating quantity:', error);
             setNotification({
-                message: 'Error: Could not connect to the server',
+                message: `${t('common.error')}: ${t('cart.errorNetwork')}`,
                 type: 'error'
             });
         }
@@ -168,7 +171,7 @@ export default function CartPage() {
                 }
             } else {
                 setNotification({
-                    message: `Error: ${data.error || 'Failed to remove item from cart'}`,
+                    message: `${t('common.error')}: ${data.error || t('cart.errorRemove')}`,
                     type: 'error'
                 });
             }
@@ -200,7 +203,7 @@ export default function CartPage() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
-                <p className="text-gray-600 text-xl font-semibold">Loading cart...</p>
+                <p className="text-gray-600 text-xl font-semibold">{t('cart.loading')}</p>
             </div>
         );
     }
@@ -210,10 +213,10 @@ export default function CartPage() {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8 pt-20">
                 <p className="text-red-600 text-xl font-semibold mb-4">
-                    Error: {error}. Please try again later.
+                    {t('common.error')}: {error}. {t('common.tryAgain')}
                 </p>
                 <Link href="/shop" className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
-                    Continue Shopping
+                    {t('common.continueShopping')}
                 </Link>
             </div>
         );
@@ -223,9 +226,9 @@ export default function CartPage() {
     if (!cart || cart.items?.length === 0) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8 pt-20">
-                <p className="text-gray-600 text-xl font-semibold mb-4">Your cart is empty.</p>
+                <p className="text-gray-600 text-xl font-semibold mb-4">{t('cart.empty')}</p>
                 <Link href="/shop" className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
-                    Continue Shopping
+                    {t('common.continueShopping')}
                 </Link>
             </div>
         );
@@ -241,7 +244,7 @@ export default function CartPage() {
             )}
 
             <div className="container mx-auto px-4">
-                <h1 className="text-3xl font-bold text-gray-900 mb-6">Your Shopping Cart</h1>
+                <h1 className="text-3xl font-bold text-gray-900 mb-6">{t('cart.title')}</h1>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Cart Items */}
@@ -307,7 +310,7 @@ export default function CartPage() {
                                                 className="text-red-600 hover:text-red-800 transition-colors"
                                                 onClick={() => handleRemoveItem(item.id, item.variant_id)}
                                             >
-                                                Remove
+                                                {t('common.remove')}
                                             </button>
                                         </div>
                                     </div>
@@ -318,27 +321,27 @@ export default function CartPage() {
 
                     {/* Cart Summary */}
                     <div className="bg-white p-6 rounded-lg shadow-md h-fit">
-                        <h2 className="text-xl font-bold text-gray-900 mb-4">Order Summary</h2>
+                        <h2 className="text-xl font-bold text-gray-900 mb-4">{t('cart.orderSummary')}</h2>
                         
                         <div className="space-y-3 border-b border-gray-200 pb-4 mb-4">
                             <div className="flex justify-between">
-                                <p className="text-gray-600">Subtotal</p>
+                                <p className="text-gray-600">{t('common.subtotal')}</p>
                                 <p className="text-blue-600 font-semibold">{formatPrice(cart.subtotal_amount)}</p>
                             </div>
                             <div className="flex justify-between">
-                                <p className="text-gray-600">Shipping</p>
-                                <p className="text-blue-600 font-semibold">Calculated at checkout</p>
+                                <p className="text-gray-600">{t('common.shipping')}</p>
+                                <p className="text-blue-600 font-semibold">{t('cart.calculatedAtCheckout')}</p>
                             </div>
                             {cart.discount_amount !== undefined && cart.discount_amount > 0 && (
                                 <div className="flex justify-between">
-                                    <p className="text-gray-600">Discount {cart.discount_code_applied ? `(${cart.discount_code_applied})` : ''}</p>
+                                    <p className="text-gray-600">{t('common.discount')} {cart.discount_code_applied ? `(${cart.discount_code_applied})` : ''}</p>
                                     <p className="text-green-600">-{formatPrice(cart.discount_amount)}</p>
                                 </div>
                             )}
                         </div>
                         
                         <div className="flex justify-between mb-6">
-                            <p className="text-lg font-bold text-gray-900">Total</p>
+                            <p className="text-lg font-bold text-gray-900">{t('common.total')}</p>
                             <p className="text-lg font-bold text-blue-600">
                                 {formatPrice(cart.subtotal_amount - (cart.discount_amount || 0))}
                             </p>
@@ -349,13 +352,13 @@ export default function CartPage() {
                                 className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-semibold"
                                 onClick={() => router.push('/checkout')}
                             >
-                                Proceed to Checkout
+                                {t('cart.proceedToCheckout')}
                             </button>
                             <Link 
                                 href="/shop" 
                                 className="block w-full text-center text-blue-600 py-2 hover:underline transition-colors font-semibold"
                             >
-                                Continue Shopping
+                                {t('common.continueShopping')}
                             </Link>
                         </div>
                     </div>

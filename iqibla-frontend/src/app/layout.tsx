@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Header from "@/components/Header"; // Your updated Header component
 import Footer from "@/components/Footer"; // Footer component
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,20 +30,22 @@ export default function RootLayout({
     <html lang="en">
       {/* Apply Geist fonts and antialiasing to the body */}
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* Render the Header component */}
-        <Header />
-        {/*
-          The main content area needs padding-top to prevent it from being
-          hidden under the fixed header. The header has a height, so pt-[header-height]
-          is appropriate. Your header is roughly 64px (py-4 top/bottom + content height),
-          so pt-16 (64px) is a good start.
-          We'll keep the pt-16 on the main tag for now, as individual pages
-          will likely have their own top padding within their main content div.
-          Alternatively, you can apply it directly to the body and remove from main,
-          but pt-16 on main is common.
-        */}
-        {children}
-        <Footer />
+        <LanguageProvider>
+          {/* Render the Header component */}
+          <Header />
+          {/*
+            The main content area needs padding-top to prevent it from being
+            hidden under the fixed header. The header has a height, so pt-[header-height]
+            is appropriate. Your header is roughly 64px (py-4 top/bottom + content height),
+            so pt-16 (64px) is a good start.
+            We'll keep the pt-16 on the main tag for now, as individual pages
+            will likely have their own top padding within their main content div.
+            Alternatively, you can apply it directly to the body and remove from main,
+            but pt-16 on main is common.
+          */}
+          {children}
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -1,5 +1,9 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import ProductCard from '@/components/ProductCard';
 import { API_CONFIG } from '@/config/api';
+import { useTranslation } from '@/contexts/LanguageContext';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -49,9 +53,7 @@ interface Product {
 
 async function getProducts() {
     try {
-        const res = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PRODUCTS}`, {
-            next: { revalidate: 60 }
-        });
+        const res = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PRODUCTS}`);
         
         if (!res.ok) throw new Error('Failed to fetch products');
         
@@ -69,22 +71,39 @@ async function getProducts() {
     }
 }
 
-export default async function ShopPage() {
-    let products: Product[] = [];
-    let error = null;
+export default function ShopPage() {
+    const { t } = useTranslation();
+    const [products, setProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [errorKey, setErrorKey] = useState<string | null>(null);
 
-    try {
-        products = await getProducts();
-    } catch (e) {
-        error = e instanceof Error ? e.message : 'Failed to load products';
+    useEffect(() => {
+        async function fetchProducts() {
+            try {
+                const fetchedProducts = await getProducts();
+                setProducts(fetchedProducts);
+            } catch {
+                setErrorKey('shop.error');
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchProducts();
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
+                <p className="text-gray-600 text-xl font-semibold">{t('common.loading')}</p>
+            </div>
+        );
     }
 
-    if (error) {
+    if (errorKey) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
-                <p className="text-red-500 text-xl">
-                    Failed to load products. Please try again later.
-                </p>
+            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
+                <p className="text-red-600 text-xl font-semibold">{t(errorKey)}</p>
             </div>
         );
     }
@@ -106,10 +125,10 @@ export default async function ShopPage() {
                 />
                 <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center px-6 sm:px-12 md:px-20">
                     <h1 className="text-white font-semibold text-2xl sm:text-3xl md:text-4xl max-w-md leading-tight">
-                        Our Products
+                        {t('shop.title')}
                     </h1>
                     <p className="text-white text-xs sm:text-sm mt-1 max-w-xs">
-                        Discover our complete range of Islamic smart devices.
+                        {t('shop.subtitle')}
                     </p>
                 </div>
             </section>
@@ -119,12 +138,12 @@ export default async function ShopPage() {
                 <ol className="flex flex-wrap gap-1">
                     <li>
                         <Link className="hover:underline text-gray-300" href="/">
-                            Home
+                            {t('common.home')}
                         </Link>
                         <span className="mx-1">/</span>
                     </li>
                     <li aria-current="page" className="text-gray-500">
-                        Shop
+                        {t('header.shop')}
                     </li>
                 </ol>
             </nav>
@@ -149,7 +168,7 @@ export default async function ShopPage() {
                         width={400}
                     />
                     <h2 className="text-xl md:text-2xl font-semibold max-w-md leading-snug">
-                        Elevate Your Spiritual Practice with Innovative Smart Technology
+                        {t('shop.title')}
                     </h2>
                 </div>
             </section>
@@ -158,7 +177,7 @@ export default async function ShopPage() {
             {featuredProducts.length > 0 && (
                 <section className="max-w-[1280px] mx-auto px-4 py-6">
                     <h3 className="text-center font-semibold text-lg mb-6">
-                        You May Also Like
+                        {t('shop.youMayAlsoLike')}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                         {featuredProducts.map((product) => (

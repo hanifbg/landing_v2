@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import { API_CONFIG } from '@/config/api';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 type JSONArray = string[];
 type JSONMap = { [key: string]: unknown };
@@ -73,6 +74,7 @@ interface CategoryDetailsResponse {
 export default function CategoryPage() {
     const params = useParams();
     const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+    const { t } = useTranslation();
     
     const [category, setCategory] = useState<CategoryDetailsResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
@@ -120,7 +122,7 @@ export default function CategoryPage() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <p className="text-gray-500 text-xl">Loading category...</p>
+                <p className="text-gray-500 text-xl">{t('category.loading')}</p>
             </div>
         );
     }
@@ -136,7 +138,7 @@ export default function CategoryPage() {
     if (!category) {
         return (
             <div className="min-h-screen flex items-center justify-center">
-                <p className="text-gray-500 text-xl">Category not found</p>
+                <p className="text-gray-500 text-xl">{t('category.notFound')}</p>
             </div>
         );
     }
@@ -170,7 +172,7 @@ export default function CategoryPage() {
                 <ol className="flex flex-wrap gap-1">
                     <li>
                         <Link className="hover:underline text-gray-300" href="/">
-                            Home
+                            {t('common.home')}
                         </Link>
                         <span className="mx-1">/</span>
                     </li>
