@@ -69,15 +69,6 @@
     "reviews": "Reviews",
     "relatedProducts": "Related Products"
   },
-  "cart": {
-    "title": "Shopping Cart",
-    "empty": "Your cart is empty",
-    "continueShopping": "Continue Shopping",
-    "checkout": "Checkout",
-    "updateCart": "Update Cart",
-    "removeItem": "Remove Item",
-    "itemsInCart": "items in cart"
-  },
   "checkout": {
     "title": "Checkout",
     "customerDetails": "Customer Details",
@@ -171,7 +162,7 @@
     "iqiblaLifeTitle": "iQIBLA Life: Embrace our faith, anywhere, anytime",
     "whatIsIqiblaLife": "What is iQIBLA Life",
     "iqiblaLifeDesc1": "With over 1 million downloads worldwide, iQIBLA Life stands as the most reliable and popular app for Muslim lifestyle.",
-    "iqiblaLifeDesc2": "In the past 5 years, iQIBLA Life has helped Muslims around the world Maintain accurate prayer times at all times, anywhere, correctly find the direction of Qibla, and lListen to Quran in peace, record every Tasbih, and customize their own Tasbih goals.iQIBLA became an indispensable Islamic companion.",
+    "iqiblaLifeDesc2": "In the past 5 years, iQIBLA Life has helped Muslims around the world Maintain accurate prayer times at all times, anywhere, correctly find the direction of Qibla, and listen to Quran in peace, record every Tasbih, and customize their own Tasbih goals.iQIBLA became an indispensable Islamic companion.",
     "holyQuranPlayer": "The Holy Quran Player",
     "holyQuranPlayerDesc": "In every quiet moment, iQIBLA Life's Quran Player brings you spiritual strength. Whether it's under the first rays of morning sun or under the stars at night, the gentle sound of the recitation will guide us will guide you in your communion with Allah. In iQIBLA Life, you can add all your favorite chapters to the list. They are all your trusted companions accompanying you through every moment of life and feeling the power of faith. Walking with the Quran brings true Walking with the Quran brings tranquility and peace to your soul.",
     "qiblaCompass": "Qibla Compass",

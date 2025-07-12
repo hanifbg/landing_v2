@@ -69,15 +69,6 @@
     "reviews": "Ulasan",
     "relatedProducts": "Produk Terkait"
   },
-  "cart": {
-    "title": "Keranjang Belanja",
-    "empty": "Keranjang Anda kosong",
-    "continueShopping": "Lanjut Belanja",
-    "checkout": "Checkout",
-    "updateCart": "Perbarui Keranjang",
-    "removeItem": "Hapus Item",
-    "itemsInCart": "item di keranjang"
-  },
   "checkout": {
     "title": "Checkout",
     "customerDetails": "Detail Pelanggan",

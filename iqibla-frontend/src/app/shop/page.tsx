@@ -75,7 +75,7 @@ export default function ShopPage() {
     const { t } = useTranslation();
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [errorKey, setErrorKey] = useState<string | null>(null);
 
     useEffect(() => {
         async function fetchProducts() {
@@ -83,14 +83,14 @@ export default function ShopPage() {
                 const fetchedProducts = await getProducts();
                 setProducts(fetchedProducts);
             } catch {
-                setError(t('shop.errorLoading'));
+                setErrorKey('shop.error');
             } finally {
                 setLoading(false);
             }
         }
 
         fetchProducts();
-    }, [t]);
+    }, []);
 
     if (loading) {
         return (
@@ -100,10 +100,10 @@ export default function ShopPage() {
         );
     }
 
-    if (error) {
+    if (errorKey) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
-                <p className="text-red-600 text-xl font-semibold">{error}</p>
+                <p className="text-red-600 text-xl font-semibold">{t(errorKey)}</p>
             </div>
         );
     }
@@ -168,7 +168,7 @@ export default function ShopPage() {
                         width={400}
                     />
                     <h2 className="text-xl md:text-2xl font-semibold max-w-md leading-snug">
-                        {t('shop.heroTitle')}
+                        {t('shop.title')}
                     </h2>
                 </div>
             </section>
@@ -177,7 +177,7 @@ export default function ShopPage() {
             {featuredProducts.length > 0 && (
                 <section className="max-w-[1280px] mx-auto px-4 py-6">
                     <h3 className="text-center font-semibold text-lg mb-6">
-                        {t('shop.youMayLike')}
+                        {t('shop.youMayAlsoLike')}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                         {featuredProducts.map((product) => (

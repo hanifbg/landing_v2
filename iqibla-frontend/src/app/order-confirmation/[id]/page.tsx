@@ -128,7 +128,8 @@ export default function OrderConfirmationPage() {
     // State Management
     const [order, setOrder] = useState<OrderDetailsResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const [errorKey, setErrorKey] = useState<string | null>(null);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [notification, setNotification] = useState<string | null>(null);
     const [isProcessingPayment, setIsProcessingPayment] = useState<boolean>(false);
     const [snapLoaded, setSnapLoaded] = useState<boolean>(false);
@@ -176,11 +177,15 @@ export default function OrderConfirmationPage() {
             setOrder(data);
         } catch (err) {
             console.error('Error fetching order:', err);
-            setError(err instanceof Error ? err.message : t('order.fetchError'));
+            if (err instanceof Error) {
+                setErrorMessage(err.message);
+            } else {
+                setErrorKey('order.fetchError');
+            }
         } finally {
             setLoading(false);
         }
-    }, [t]);
+    }, []);
 
     // Pay Now Button Logic
     const handlePayNow = async () => {
@@ -274,7 +279,7 @@ export default function OrderConfirmationPage() {
         if (orderId) {
             fetchOrder(orderId);
         }
-    }, [orderId, t, fetchOrder]);
+    }, [orderId, fetchOrder]);
 
     // Loading state
     if (loading) {
@@ -289,13 +294,13 @@ export default function OrderConfirmationPage() {
     }
 
     // Error state
-    if (error) {
+    if (errorKey || errorMessage) {
         return (
             <div className="min-h-screen bg-gray-100 py-8 page-content-padding flex items-center justify-center">
                 <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md">
                     <div className="text-red-600 text-6xl mb-4">⚠️</div>
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('order.errorLoadingOrder')}</h1>
-                    <p className="text-red-600 mb-6">{error}</p>
+                    <p className="text-red-600 mb-6">{errorMessage || (errorKey ? t(errorKey) : '')}</p>
                     <Link href="/shop" className="bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
                         {t('order.continueShopping')}
                     </Link>

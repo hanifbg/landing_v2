@@ -156,6 +156,7 @@ export default function CheckoutPage() {
     
     // Error and notification states
     const [error, setError] = useState<string | null>(null);
+    const [errorKey, setErrorKey] = useState<string | null>(null);
     const [notification, setNotification] = useState<string | null>(null);
 
     // Function to fetch cart data
@@ -191,7 +192,7 @@ export default function CheckoutPage() {
             setTotalWeight(weight);
         } catch (error) {
             console.error('Error fetching cart:', error);
-            setError(error instanceof Error ? error.message : t('common.unknownError'));
+            setError(error instanceof Error ? error.message : `${t('common.error')}. ${t('common.tryAgain')}`);
         } finally {
             setLoadingCart(false);
         }
@@ -201,6 +202,7 @@ export default function CheckoutPage() {
     const fetchProvinces = useCallback(async () => {
         setLoadingProvinces(true);
         setError(null);
+        setErrorKey(null);
 
         try {
             const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.SHIPPING_PROVINCES}`);
@@ -208,16 +210,20 @@ export default function CheckoutPage() {
             if (!response.ok) {
                 throw new Error(`Failed to fetch provinces: ${response.status} ${response.statusText}`);
             }
-
+            
             const data: ProvincesApiResponse = await response.json();
             setProvinces(data.data);
         } catch (error) {
             console.error('Error fetching provinces:', error);
-            setError(error instanceof Error ? error.message : t('common.unknownError'));
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setErrorKey('common.error');
+            }
         } finally {
             setLoadingProvinces(false);
         }
-    }, [t]);
+    }, []);
 
     // Function to fetch cities based on province
     const fetchCities = useCallback(async (provinceId: string) => {
@@ -225,6 +231,7 @@ export default function CheckoutPage() {
         
         setLoadingCities(true);
         setError(null);
+        setErrorKey(null);
 
         try {
             const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.SHIPPING_CITIES}?province_id=${provinceId}`);
@@ -237,11 +244,15 @@ export default function CheckoutPage() {
             setCities(data.data);
         } catch (error) {
             console.error('Error fetching cities:', error);
-            setError(error instanceof Error ? error.message : t('common.unknownError'));
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setErrorKey('common.error');
+            }
         } finally {
             setLoadingCities(false);
         }
-    }, [t]);
+    }, []);
 
     // Function to calculate shipping costs
     const calculateShippingCosts = useCallback(async () => {
@@ -249,6 +260,7 @@ export default function CheckoutPage() {
         
         setLoadingShippingCosts(true);
         setError(null);
+        setErrorKey(null);
 
         try {
             const payload: ShippingCostRequestPayload = {
@@ -282,7 +294,11 @@ export default function CheckoutPage() {
             }
         } catch (error) {
             console.error('Error calculating shipping costs:', error);
-            setError(error instanceof Error ? error.message : t('common.unknownError'));
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setErrorKey('common.error');
+            }
         } finally {
             setLoadingShippingCosts(false);
             
@@ -291,7 +307,7 @@ export default function CheckoutPage() {
                 setNotification(null);
             }, 3000);
         }
-    }, [shippingAddress.city_id, totalWeight, t, setNotification]);
+    }, [shippingAddress.city_id, totalWeight, setNotification]);
 
     // Handle customer details input change
     const handleCustomerDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -331,31 +347,37 @@ export default function CheckoutPage() {
         // Validate form
         if (!cart || cart.items.length === 0) {
             setError('Your cart is empty');
+            setErrorKey(null);
             return;
         }
 
         if (!customerDetails.name || !customerDetails.email || !customerDetails.phone) {
             setError('Please fill in all customer details');
+            setErrorKey(null);
             return;
         }
         
         if (!shippingAddress.province_id || !shippingAddress.city_id || !shippingAddress.street || !shippingAddress.postalCode) {
             setError('Please fill in all shipping address details');
+            setErrorKey(null);
             return;
         }
         
         if (!selectedShippingOption) {
             setError('Please select a shipping option');
+            setErrorKey(null);
             return;
         }
 
         if (totalWeight <= 0) {
             setError('Invalid total weight');
+            setErrorKey(null);
             return;
         }
 
         setIsPlacingOrder(true);
         setError(null);
+        setErrorKey(null);
 
         try {
             // Get cart_id from localStorage
@@ -408,11 +430,18 @@ export default function CheckoutPage() {
             router.push('/order-confirmation/' + orderResponse.id);
         } catch (error) {
             console.error('Error placing order:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            if (error instanceof Error) {
+                setError(error.message);
+                setErrorKey(null);
+            } else {
+                setError(null);
+                setErrorKey('common.error');
+            }
             
             // Clear notification after 5 seconds
             setTimeout(() => {
                 setError(null);
+                setErrorKey(null);
             }, 5000);
         } finally {
             setIsPlacingOrder(false);
@@ -470,11 +499,11 @@ export default function CheckoutPage() {
     }
 
     // Error state
-    if (error) {
+    if (error || errorKey) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8 pt-20">
                 <p className="text-red-600 text-xl font-semibold mb-4">
-                    Error: {error}. Please try again later.
+                    Error: {error || (errorKey && t(errorKey))}. Please try again later.
                 </p>
                 <Link href="/cart" className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
                     Return to Cart

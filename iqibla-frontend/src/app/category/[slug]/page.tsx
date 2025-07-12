@@ -172,7 +172,7 @@ export default function CategoryPage() {
                 <ol className="flex flex-wrap gap-1">
                     <li>
                         <Link className="hover:underline text-gray-300" href="/">
-                            {t('nav.home')}
+                            {t('common.home')}
                         </Link>
                         <span className="mx-1">/</span>
                     </li>
