@@ -48,6 +48,10 @@
     "address": "Alamat",
     "city": "Kota",
     "province": "Provinsi",
+    "paid": "Dibayar",
+    "pending": "Menunggu",
+    "failed": "Gagal",
+    "processing": "Diproses",
     "postalCode": "Kode Pos",
     "country": "Negara",
     "notes": "Catatan",
@@ -87,6 +91,7 @@
     "shippingMethod": "Metode Pengiriman"
   },
   "order": {
+    "title": "Pesanan",
     "confirmationTitle": "Konfirmasi Pesanan",
     "orderNumber": "Pesanan #{{number}}",
     "thankYou": "Terima kasih atas pesanan Anda!",
@@ -136,9 +141,6 @@
     "orderDate": "Tanggal Pesanan",
     "trackOrder": "Lacak Pesanan",
     "billingAddress": "Alamat Penagihan",
-    "paid": "Dibayar",
-    "pending": "Menunggu",
-    "failed": "Gagal",
     "orderPending": "Tertunda",
     "orderPaid": "Dibayar",
     "orderShipped": "Dikirim",
@@ -168,7 +170,6 @@
   },
   "home": {
     "feedSoulZikr": "Penuhi Jiwa Saya Dengan Zikir",
-    "feedMySoul": "Penuhi Jiwa Saya Dengan Zikir",
     "deepenJourney": "Perdalam Perjalanan Spiritual Harian Saya",
     "everyZikrPraise": "Setiap zikir adalah pujian dan syukur kepada Allah",
     "everyZikrBelief": "Setiap zikir adalah keyakinan yang teguh dan penyucian jiwa",

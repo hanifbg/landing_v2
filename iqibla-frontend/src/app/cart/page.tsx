@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { API_CONFIG } from '@/config/api';
 import { useTranslation } from '@/contexts/LanguageContext';
+import * as localStorage from '@/utils/localStorage';
 
 type JSONMap = { [key: string]: unknown }; // Use unknown for safety
 

@@ -3,6 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import enTranslations from '../locales/en.json';
 import idTranslations from '../locales/id.json';
+import * as localStorage from '../utils/localStorage';
 
 type Language = 'en' | 'id';
 
@@ -31,7 +32,7 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
 
   // Load language from localStorage on mount
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') as Language;
+    const savedLanguage = localStorage.getItem<Language>('language');
     if (savedLanguage && (savedLanguage === 'en' || savedLanguage === 'id')) {
       setLanguageState(savedLanguage);
     }

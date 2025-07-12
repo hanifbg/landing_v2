@@ -48,6 +48,10 @@
     "address": "Address",
     "city": "City",
     "province": "Province",
+    "paid": "Paid",
+    "pending": "Pending",
+    "failed": "Failed",
+    "processing": "Processing",
     "postalCode": "Postal Code",
     "country": "Country",
     "notes": "Notes",
@@ -133,14 +137,10 @@
     "confirmation": "Order Confirmation",
     "orderDate": "Order Date",
     "trackOrder": "Track Order",
-    "billingAddress": "Billing Address",
-    "paid": "Paid",
-    "pending": "Pending",
-    "failed": "Failed"
+    "billingAddress": "Billing Address"
   },
   "home": {
     "feedSoulZikr": "Feed My Soul With Zikr",
-    "feedMySoul": "Feed My Soul With Zikr",
     "deepenJourney": "Deepen My Daily Spiritual Journey",
     "everyZikrPraise": "Every zikr is praise and thanksgiving to Allah",
     "everyZikrBelief": "Every zikr is a firm belief and a purification of the soul",

@@ -380,7 +380,7 @@ export default function OrderConfirmationPage() {
                                             order.order_status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                                             'bg-gray-100 text-gray-800'
                                         }`}>
-                                            {order.order_status}
+                                            {order.order_status ? t(`common.${order.order_status}`) : 'N/A'}
                                         </span>
                                     </p>
                                     <p><span className="font-medium text-gray-800">{t('order.paymentStatus')}:</span> 
@@ -389,7 +389,7 @@ export default function OrderConfirmationPage() {
                                             order.payment?.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                                             'bg-gray-100 text-gray-800'
                                         }`}>
-                                            {order.payment?.status || 'N/A'}
+                                            {order.payment?.status ? t(`common.${order.payment?.status}`) : 'N/A'}
                                         </span>
                                     </p>
                                 </div>
