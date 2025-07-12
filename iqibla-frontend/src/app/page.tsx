@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 // Import Swiper styles (ensure these are also in globals.css as per previous instruction)
 // import 'swiper/css';
@@ -13,6 +14,7 @@ import Link from 'next/link';
 // import 'swiper/css/pagination';
 
 export default function HomePage() {
+    const { t } = useTranslation();
     // State for video playback
     const [isPlayingVideo, setIsPlayingVideo] = useState(false);
     
@@ -46,12 +48,12 @@ export default function HomePage() {
                         {/* Content Overlay */}
                         <div className="absolute inset-0 bg-black/50 flex items-center justify-start p-8 md:p-16 text-white">
                             <div className="max-w-xl text-left">
-                                <h1 className="text-4xl md:text-6xl font-bold mb-4">Salat Counter</h1>
-                                <p className="text-lg md:text-xl mb-8">Helps you focus on the prayer.</p>
+                                <h1 className="text-4xl md:text-6xl font-bold mb-4">{t('home.salatCounter')}</h1>
+                                <p className="text-lg md:text-xl mb-8">{t('home.salatCounterDesc')}</p>
                                 <Link href="https://iqibla.com/products/salat-counter" target="_blank" rel="noopener noreferrer"
                                     className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-md transition-colors duration-200"
                                 >
-                                    Learn More
+                                    {t('common.learnMore')}
                                 </Link>
                             </div>
                         </div>
@@ -71,12 +73,12 @@ export default function HomePage() {
                         {/* Content Overlay */}
                         <div className="absolute inset-0 bg-black/50 flex items-center justify-start p-8 md:p-16 text-white">
                             <div className="max-w-xl text-left">
-                                <h1 className="text-4xl md:text-6xl font-bold mb-4">Zikr Premium</h1>
-                                <p className="text-lg md:text-xl mb-8">99 Diamond Shine Faith</p>
+                                <h1 className="text-4xl md:text-6xl font-bold mb-4">{t('home.zikrPremium')}</h1>
+                                <p className="text-lg md:text-xl mb-8">{t('home.zikrPremiumDesc')}</p>
                                 <Link href="https://iqibla.com/products/zikr-m02-premium" target="_blank" rel="noopener noreferrer"
                                     className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-md transition-colors duration-200"
                                 >
-                                    Learn More
+                                    {t('common.learnMore')}
                                 </Link>
                             </div>
                         </div>
@@ -96,12 +98,12 @@ export default function HomePage() {
                         {/* Content Overlay */}
                         <div className="absolute inset-0 bg-black/50 flex items-center justify-start p-8 md:p-16 text-white">
                             <div className="max-w-xl text-left">
-                                <h1 className="text-4xl md:text-6xl font-bold mb-4">Qwatch S3</h1>
-                                <p className="text-lg md:text-xl mb-8">S3 on my wrist, Faith guides every important moment.</p>
+                                <h1 className="text-4xl md:text-6xl font-bold mb-4">{t('home.qwatchS3')}</h1>
+                                <p className="text-lg md:text-xl mb-8">{t('home.qwatchS3Desc')}</p>
                                 <Link href="https://iqibla.com/products/qwatch-s3" target="_blank" rel="noopener noreferrer"
                                     className="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-8 rounded-md transition-colors duration-200"
                                 >
-                                    Learn More
+                                    {t('common.learnMore')}
                                 </Link>
                             </div>
                         </div>
@@ -113,7 +115,7 @@ export default function HomePage() {
             {/* Added bg-gray-50 for a very light gray background */}
             <section className="bg-gray-200 py-16 page-content-padding">
                 <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Feed My Soul With Zikr</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">{t('home.feedSoulZikr')}</h2>
 
                     <Swiper
                         modules={[Navigation, Autoplay]}
@@ -149,7 +151,7 @@ export default function HomePage() {
                                 className="object-cover"
                             />
                             <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-6">
-                                <p className="text-lg font-semibold">Deepen My Daily Spiritual Journey</p>
+                                <p className="text-lg font-semibold">{t('home.deepenJourney')}</p>
                             </div>
                         </SwiperSlide>
 
@@ -162,7 +164,7 @@ export default function HomePage() {
                                 className="object-cover"
                             />
                             <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-6">
-                                <p className="text-lg font-semibold">Every zikr is praise and thanksgiving to Allah</p>
+                                <p className="text-lg font-semibold">{t('home.everyZikrPraise')}</p>
                             </div>
                         </SwiperSlide>
 
@@ -175,7 +177,7 @@ export default function HomePage() {
                                 className="object-cover"
                             />
                             <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-6">
-                                <p className="text-lg font-semibold">Every zikr is a firm belief and a purification of the soul</p>
+                                <p className="text-lg font-semibold">{t('home.everyZikrBelief')}</p>
                             </div>
                         </SwiperSlide>
                     </Swiper>
@@ -185,7 +187,7 @@ export default function HomePage() {
             {/* "Our Product Categories" Section */}
             <section className="bg-white py-16 page-content-padding">
                 <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Our product categories</h2>
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-12">{t('home.productCategories')}</h2>
                     
                     {/* Responsive Grid Layout */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -199,10 +201,10 @@ export default function HomePage() {
                                     className="object-cover opacity-70"
                                 />
                                 <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6 text-white">
-                                    <h3 className="text-2xl font-bold mb-2">Zikr Rings</h3>
-                                    <p className="text-sm mb-6">The Inventor of the Zikr Ring.</p>
+                                    <h3 className="text-2xl font-bold mb-2">{t('home.zikrRings')}</h3>
+                                    <p className="text-sm mb-6">{t('home.zikrRingsDesc')}</p>
                                     <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors duration-200">
-                                        Learn More
+                                        {t('common.learnMore')}
                                     </button>
                                 </div>
                             </div>
@@ -218,10 +220,10 @@ export default function HomePage() {
                                     className="object-cover opacity-70"
                                 />
                                 <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6 text-white">
-                                    <h3 className="text-2xl font-bold mb-2">Qwatch</h3>
-                                    <p className="text-sm mb-6">My spiritual companion for Daily Guidance.</p>
+                                    <h3 className="text-2xl font-bold mb-2">{t('home.qwatch')}</h3>
+                                    <p className="text-sm mb-6">{t('home.qwatchDesc')}</p>
                                     <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors duration-200">
-                                        Learn More
+                                        {t('common.learnMore')}
                                     </button>
                                 </div>
                             </div>
@@ -237,10 +239,10 @@ export default function HomePage() {
                                     className="object-cover opacity-70"
                                 />
                                 <div className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center p-6 text-white">
-                                    <h3 className="text-2xl font-bold mb-2">Salat Counter</h3>
-                                    <p className="text-sm mb-6">Helps you focus on the prayer.</p>
+                                    <h3 className="text-2xl font-bold mb-2">{t('home.salatCounter')}</h3>
+                                    <p className="text-sm mb-6">{t('home.salatCounterDesc')}</p>
                                     <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md transition-colors duration-200">
-                                        Learn More
+                                        {t('common.learnMore')}
                                     </button>
                                 </div>
                             </div>
@@ -288,16 +290,16 @@ export default function HomePage() {
             <section className="bg-white py-16 page-content-padding">
                 <div className="container mx-auto px-4">
                     {/* Main Section Headline */}
-                    <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">iQIBLA Life: Embrace our faith, anywhere, anytime</h2>
+                    <h2 className="text-4xl font-bold text-gray-900 text-center mb-12">{t('home.iqiblaLifeTitle')}</h2>
                     
                     {/* Part 1: Two-Column Layout with Card Frame */}
                     <div className="bg-green-50 rounded-xl p-8 overflow-hidden shadow-md">
                         <div className="flex flex-col md:flex-row md:space-x-8 items-center">
                             {/* Left Column (Text Content - 20% width) */}
                             <div className="w-full md:w-1/5 mb-8 md:mb-0">
-                                <h3 className="text-2xl font-semibold text-green-600 mb-4">What is iQIBLA Life</h3>
-                                <p className="text-gray-700 mb-4">With over 1 million downloads worldwide, iQIBLA Life stands as the most reliable and popular app for Muslim lifestyle.</p>
-                                <p className="text-gray-700">In the past 5 years, iQIBLA Life has helped Muslims around the world Maintain accurate prayer times at all times, anywhere, correctly find the direction of Qibla, and lListen to Quran in peace, record every Tasbih, and customize their own Tasbih goals.iQIBLA became an indispensable Islamic companion.</p>
+                                <h3 className="text-2xl font-semibold text-green-600 mb-4">{t('home.whatIsIqiblaLife')}</h3>
+                                <p className="text-gray-700 mb-4">{t('home.iqiblaLifeDesc1')}</p>
+                                <p className="text-gray-700">{t('home.iqiblaLifeDesc2')}</p>
                             </div>
                             
                             {/* Right Column (Image - 80% width) */}
@@ -319,8 +321,8 @@ export default function HomePage() {
                             {/* Card 1: The Holy Quran Player */}
                             <div className="bg-green-50 rounded-xl p-6 shadow-md overflow-hidden flex flex-col justify-between min-h-[800px]">
                                 <div>
-                                    <h3 className="text-xl font-semibold text-green-600 mb-4">The Holy Quran Player</h3>
-                                    <p className="text-gray-700 mb-6">In every quiet moment, iQIBLA Life&apos;s Quran Player brings you spiritual strength. Whether it&apos;s under the first rays of morning sun or under the stars at night, the gentle sound of the recitation will guide us will guide you in your communion with Allah. In iQIBLA Life, you can add all your favorite chapters to the list. They are all your trusted companions accompanying you through every moment of life and feeling the power of faith. Walking with the Quran brings true Walking with the Quran brings tranquility and peace to your soul.</p>
+                                    <h3 className="text-xl font-semibold text-green-600 mb-4">{t('home.holyQuranPlayer')}</h3>
+                                    <p className="text-gray-700 mb-6">{t('home.holyQuranPlayerDesc')}</p>
                                 </div>
                                 <div className="w-full relative h-[450px] rounded-lg overflow-hidden mt-auto">
                                     <video 
@@ -338,8 +340,8 @@ export default function HomePage() {
                             {/* Card 2: Qibla Compass */}
                             <div className="bg-green-50 rounded-xl p-6 shadow-md overflow-hidden flex flex-col justify-between min-h-[800px]">
                                 <div>
-                                    <h3 className="text-xl font-semibold text-green-600 mb-4">Qibla Compass</h3>
-                                    <p className="text-gray-700 mb-6">In every moment of prayer, the Qibla Compass feature in iQIBLA Life provides us with precise navigation. No matter where we are, a simple touch will show you the correct way towards Mecca, ensuring that each prayer is filled with confidence and tranquility.</p>
+                                    <h3 className="text-xl font-semibold text-green-600 mb-4">{t('home.qiblaCompass')}</h3>
+                                    <p className="text-gray-700 mb-6">{t('home.qiblaCompassDesc')}</p>
                                 </div>
                                 <div className="w-full relative h-[450px] rounded-lg overflow-hidden mt-auto">
                                     <video 
@@ -357,8 +359,8 @@ export default function HomePage() {
                             {/* Card 3: 5 Prayer Time Reminders */}
                             <div className="bg-green-50 rounded-xl p-6 shadow-md overflow-hidden flex flex-col justify-between min-h-[800px]">
                                 <div>
-                                    <h3 className="text-xl font-semibold text-green-600 mb-4">5 Prayer Time Reminders</h3>
-                                    <p className="text-gray-700 mb-6">In the iQIBLA Life app, the 5 Prayer Time Reminders feature provides you with precise prayer time notifications, ensuring us never miss the five daily prayers. Users can fine-tune the reminders according to their local time, making each prayer an essential part of your daily routine. This feature gently prompts you to pause and engage in moments of spiritual reflection and tranquility.</p>
+                                    <h3 className="text-xl font-semibold text-green-600 mb-4">{t('home.prayerTimeReminders')}</h3>
+                                    <p className="text-gray-700 mb-6">{t('home.prayerTimeRemindersDesc')}</p>
                                 </div>
                                 <div className="w-full relative h-[450px] rounded-lg overflow-hidden mt-auto">
                                     <video 
@@ -380,8 +382,8 @@ export default function HomePage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Card 1: Custom Tasbih */}
                             <div className="bg-green-50 rounded-xl p-6 shadow-md overflow-hidden flex flex-col min-h-[600px]">
-                                <h3 className="text-xl font-semibold text-green-600 mb-4">Custom Tasbih</h3>
-                                <p className="text-gray-700 mb-6">The Custom Tasbih feature in the iQIBLA Life app allows users to set personalized prayer goals. Whether we want to establish specific prayer counts or choose your preferred prayer phrases, we can customize your experience according to your needs. With an intuitive interface, you can easily track and record each prayer session, Helping you focus on reflect on your spirituality. Custom Tasbih makes your faith journey personalised and flexible, allowing you to maintain a deeper connection with your inner self in your daily life.</p>
+                                <h3 className="text-xl font-semibold text-green-600 mb-4">{t('home.customTasbih')}</h3>
+                                <p className="text-gray-700 mb-6">{t('home.customTasbihDesc')}</p>
                                 <Image
                                     src="/images/custom-tasbih.png"
                                     alt="Custom Tasbih Feature"
@@ -396,8 +398,8 @@ export default function HomePage() {
                                 <div className="flex flex-col md:flex-row gap-6 h-full">
                                     {/* Inner Left Column (Text) */}
                                     <div className="flex-1">
-                                        <h3 className="text-xl font-semibold text-green-600 mb-4">Download iQIBLA Life now and embark on your journey of faith!</h3>
-                                        <p className="text-gray-700 mb-6">This all-in-one Muslim lifestyle assistant that offers accurate prayer times, Qibla guidance, and a plethora of Islamic functions, filling your daily life with spirituality and inspiration. No matter where you are, iQIBLA Life will be your trusted companion. Join us today and experience the beauty and power of faith!</p>
+                                        <h3 className="text-xl font-semibold text-green-600 mb-4">{t('home.downloadIqiblaLife')}</h3>
+                                        <p className="text-gray-700 mb-6">{t('home.downloadIqiblaLifeDesc')}</p>
                                         
                                         {/* App Download Icons */}
                                         <div className="flex space-x-4 mb-2">

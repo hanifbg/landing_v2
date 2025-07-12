@@ -5,8 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 // Importing icons from lucide-react.
 import { ChevronDown, Search, User, ShoppingCart } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Header() {
+    const { language, setLanguage, t } = useLanguage();
+    
     return (
         // Changed background to a dark gray/black matching the screenshot
         // Added shadow-md for a subtle lift
@@ -19,7 +22,7 @@ export default function Header() {
                         {/* Shop with Dropdown */}
                         <div className="relative group">
                             <Link href="/category/zikr-rings" className="flex items-center text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
-                                Shop <ChevronDown size={16} className="ml-1 group-hover:rotate-180 transition-transform duration-200" />
+                                {t('header.shop')} <ChevronDown size={16} className="ml-1 group-hover:rotate-180 transition-transform duration-200" />
                             </Link>
                             {/* Dropdown content */}
                             <div
@@ -70,11 +73,11 @@ export default function Header() {
                         </div>
                         {/* Order Tracker */}
                         <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
-                            Order Tracker
+                            {t('header.orderTracker')}
                         </Link>
                         {/* Affiliate Program */}
                         <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
-                            Affiliate Program
+                            {t('header.affiliateProgram')}
                         </Link>
                     </div>
 
@@ -95,11 +98,11 @@ export default function Header() {
                     <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
                         {/* iQIBLA Life */}
                         <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
-                            iQIBLA Life
+                            {t('header.iqiblaLife')}
                         </Link>
                         {/* Brand Story */}
                         <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
-                            Brand Story
+                            {t('header.brandStory')}
                         </Link>
                         {/* Contact Us (your existing WhatsApp link) */}
                         <a
@@ -108,10 +111,15 @@ export default function Header() {
                             rel="noopener noreferrer"
                             className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200"
                         >
-                            Contact Us
+                            {t('header.contactUs')}
                         </a>
                         {/* Language Selector */}
-                        <select className="bg-transparent border-none text-white cursor-pointer text-sm lg:text-base hover:text-gray-400 transition-colors focus:outline-none">
+                        <select 
+                            value={language}
+                            onChange={(e) => setLanguage(e.target.value as 'en' | 'id')}
+                            className="bg-transparent border-none text-white cursor-pointer text-sm lg:text-base hover:text-gray-400 transition-colors focus:outline-none"
+                            aria-label={t('header.language')}
+                        >
                             <option value="en" className="text-black">English</option>
                             <option value="id" className="text-black">Bahasa Indonesia</option>
                         </select>

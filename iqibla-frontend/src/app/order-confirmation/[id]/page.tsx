@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 // TypeScript Interfaces
 interface OrderPaymentResponse {
@@ -122,6 +123,7 @@ export default function OrderConfirmationPage() {
     const params = useParams();
     // const router = useRouter();
     const orderId = params.id as string;
+    const { t } = useTranslation();
 
     // State Management
     const [order, setOrder] = useState<OrderDetailsResponse | null>(null);
@@ -147,7 +149,7 @@ export default function OrderConfirmationPage() {
             };
             script.onerror = () => {
                 console.error('Failed to load Midtrans Snap script');
-                setNotification('Failed to load payment system. Please refresh the page.');
+                setNotification(t('order.paymentSystemError'));
             };
             document.head.appendChild(script);
         };
@@ -156,7 +158,7 @@ export default function OrderConfirmationPage() {
     }, []);
 
     // Data Fetching
-    const fetchOrder = async (orderId: string) => {
+    const fetchOrder = useCallback(async (orderId: string) => {
         try {
             setLoading(true);
             const response = await fetch(`https://188.166.206.209/api/v1/orders/${orderId}`);
@@ -174,11 +176,11 @@ export default function OrderConfirmationPage() {
             setOrder(data);
         } catch (err) {
             console.error('Error fetching order:', err);
-            setError(err instanceof Error ? err.message : 'Failed to fetch order details');
+            setError(err instanceof Error ? err.message : t('order.fetchError'));
         } finally {
             setLoading(false);
         }
-    };
+    }, [t]);
 
     // Pay Now Button Logic
     const handlePayNow = async () => {
@@ -188,14 +190,14 @@ export default function OrderConfirmationPage() {
         
         try {
             if (order.payment && order.payment.payment_url) {
-                setNotification('Redirecting to payment gateway...');
+                setNotification(t('order.redirectingToPayment'));
                 window.location.href = order.payment.payment_url;
             } else {
-                setNotification('Payment link not available or order already paid/processed.');
+                setNotification(t('order.paymentNotAvailable'));
             }
         } catch (err) {
             console.error('Error processing payment:', err);
-            setNotification('Error processing payment. Please try again.');
+            setNotification(t('order.paymentProcessingError'));
         } finally {
             setIsProcessingPayment(false);
         }
@@ -204,12 +206,12 @@ export default function OrderConfirmationPage() {
     // Proceed to Payment Button Logic with Midtrans SNAP
     const handleProceedToPayment = async () => {
         if (!order || !snapLoaded) {
-            setNotification('Payment system not ready. Please wait or refresh the page.');
+            setNotification(t('order.paymentSystemNotReady'));
             return;
         }
         
         setIsProcessingPayment(true);
-        setNotification('Initiating payment...');
+        setNotification(t('order.initiatingPayment'));
         
         try {
             const response = await fetch(`https://188.166.206.209/api/v1/payments/${order.id}`, {
@@ -232,28 +234,28 @@ export default function OrderConfirmationPage() {
             window.snap.pay(paymentResponse.payment_token, {
                 onSuccess: (result: MidtransSuccessResult) => {
                     console.log('Payment successful:', result);
-                    setNotification('Payment successful! Order confirmed.');
+                    setNotification(t('order.paymentSuccessful'));
                     fetchOrder(orderId); // Re-fetch order details
                 },
                 onPending: (result: MidtransPendingResult) => {
                     console.log('Payment pending:', result);
-                    setNotification('Payment is pending. Please complete payment through Midtrans.');
+                    setNotification(t('order.paymentPending'));
                     fetchOrder(orderId); // Re-fetch order details
                 },
                 onError: (result: MidtransErrorResult) => {
                     console.log('Payment error:', result);
-                    setNotification('Payment failed. Please try again.');
+                    setNotification(t('order.paymentFailed'));
                     fetchOrder(orderId); // Re-fetch order details
                 },
                 onClose: () => {
                     console.log('Payment popup closed');
-                    setNotification('Payment cancelled by user.');
+                    setNotification(t('order.paymentCancelled'));
                     fetchOrder(orderId); // Re-fetch order details
                 }
             });
         } catch (err) {
             console.error('Error initiating payment:', err);
-            setNotification(err instanceof Error ? err.message : 'Failed to initiate payment. Please try again.');
+            setNotification(err instanceof Error ? err.message : t('order.paymentInitiationError'));
         } finally {
             setIsProcessingPayment(false);
         }
@@ -272,7 +274,7 @@ export default function OrderConfirmationPage() {
         if (orderId) {
             fetchOrder(orderId);
         }
-    }, [orderId]);
+    }, [orderId, t, fetchOrder]);
 
     // Loading state
     if (loading) {
@@ -280,7 +282,7 @@ export default function OrderConfirmationPage() {
             <div className="min-h-screen bg-gray-100 py-8 page-content-padding flex items-center justify-center">
                 <div className="text-center">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600 text-xl font-semibold">Loading order details...</p>
+                    <p className="text-gray-600 text-xl font-semibold">{t('order.loadingOrderDetails')}</p>
                 </div>
             </div>
         );
@@ -292,10 +294,10 @@ export default function OrderConfirmationPage() {
             <div className="min-h-screen bg-gray-100 py-8 page-content-padding flex items-center justify-center">
                 <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md">
                     <div className="text-red-600 text-6xl mb-4">⚠️</div>
-                    <h1 className="text-2xl font-bold text-gray-900 mb-4">Error Loading Order</h1>
+                    <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('order.errorLoadingOrder')}</h1>
                     <p className="text-red-600 mb-6">{error}</p>
                     <Link href="/shop" className="bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
-                        Continue Shopping
+                        {t('order.continueShopping')}
                     </Link>
                 </div>
             </div>
@@ -308,10 +310,10 @@ export default function OrderConfirmationPage() {
             <div className="min-h-screen bg-gray-100 py-8 page-content-padding flex items-center justify-center">
                 <div className="bg-white p-6 rounded-lg shadow-lg text-center max-w-md">
                     <div className="text-gray-400 text-6xl mb-4">📋</div>
-                    <h1 className="text-2xl font-bold text-gray-900 mb-4">Order Not Found</h1>
-                    <p className="text-gray-600 mb-6">The order you&apos;re looking for doesn&apos;t exist or has been removed.</p>
+                    <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('order.orderNotFound')}</h1>
+                    <p className="text-gray-600 mb-6">{t('order.orderNotFoundDescription')}</p>
                     <Link href="/shop" className="bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
-                        Continue Shopping
+                        {t('order.continueShopping')}
                     </Link>
                 </div>
             </div>
@@ -335,8 +337,8 @@ export default function OrderConfirmationPage() {
                         <div className="text-6xl mb-4">
                             {order.order_status === 'paid' ? '✅' : '📋'}
                         </div>
-                        <h1 className="text-3xl font-bold text-gray-900 mb-2">Thank you for your order!</h1>
-                        <h2 className="text-xl text-gray-600">Order #{order.order_number}</h2>
+                        <h1 className="text-3xl font-bold text-gray-900 mb-2">{t('order.thankYou')}</h1>
+                        <h2 className="text-xl text-gray-600">{t('order.orderNumber', { number: order.order_number })}</h2>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -344,17 +346,17 @@ export default function OrderConfirmationPage() {
                         <div className="space-y-6">
                             {/* Customer Details */}
                             <div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-3">Customer Information</h3>
+                                <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('order.customerInformation')}</h3>
                                 <div className="space-y-2">
-                                    <p><span className="font-medium text-gray-800">Name:</span> <span className="text-gray-700">{order.customer_name}</span></p>
-                                    <p><span className="font-medium text-gray-800">Email:</span> <span className="text-gray-700">{order.customer_email}</span></p>
-                                    <p><span className="font-medium text-gray-800">Phone:</span> <span className="text-gray-700">{order.customer_phone}</span></p>
+                                    <p><span className="font-medium text-gray-800">{t('order.name')}:</span> <span className="text-gray-700">{order.customer_name}</span></p>
+                                    <p><span className="font-medium text-gray-800">{t('order.email')}:</span> <span className="text-gray-700">{order.customer_email}</span></p>
+                                    <p><span className="font-medium text-gray-800">{t('order.phone')}:</span> <span className="text-gray-700">{order.customer_phone}</span></p>
                                 </div>
                             </div>
 
                             {/* Shipping Address */}
                             <div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-3">Shipping Address</h3>
+                                <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('order.shippingAddress')}</h3>
                                 <div className="space-y-1">
                                     <p className="text-gray-700">{order.shipping_address}</p>
                                     <p className="text-gray-700">City ID: {order.shipping_city_id}</p>
@@ -365,9 +367,9 @@ export default function OrderConfirmationPage() {
 
                             {/* Order Status */}
                             <div>
-                                <h3 className="text-lg font-semibold text-gray-900 mb-3">Status</h3>
+                                <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('order.status')}</h3>
                                 <div className="space-y-2">
-                                    <p><span className="font-medium text-gray-800">Order Status:</span> 
+                                    <p><span className="font-medium text-gray-800">{t('order.orderStatus')}:</span> 
                                         <span className={`ml-2 px-2 py-1 rounded-full text-sm ${
                                             order.order_status === 'processing' ? 'bg-green-100 text-green-800' :
                                             order.order_status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
@@ -376,7 +378,7 @@ export default function OrderConfirmationPage() {
                                             {order.order_status}
                                         </span>
                                     </p>
-                                    <p><span className="font-medium text-gray-800">Payment Status:</span> 
+                                    <p><span className="font-medium text-gray-800">{t('order.paymentStatus')}:</span> 
                                         <span className={`ml-2 px-2 py-1 rounded-full text-sm ${
                                             order.payment?.status === 'paid' ? 'bg-green-100 text-green-800' :
                                             order.payment?.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
@@ -391,7 +393,7 @@ export default function OrderConfirmationPage() {
 
                         {/* Right Column - Order Items */}
                         <div>
-                            <h3 className="text-lg font-semibold text-gray-900 mb-3">Order Items</h3>
+                            <h3 className="text-lg font-semibold text-gray-900 mb-3">{t('order.orderItems')}</h3>
                             <div className="space-y-4">
                                 {order.order_items.map((item) => (
                                     <div key={item.id} className="flex items-center space-x-4 p-4 border border-gray-200 rounded-lg">
@@ -405,8 +407,8 @@ export default function OrderConfirmationPage() {
                                         </div>
                                         <div className="flex-1">
                                             <h4 className="font-medium text-gray-900">{item.product_name}</h4>
-                                            <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
-                                            <p className="text-sm text-gray-600">Price: {formatPrice(item.price_at_purchase)}</p>
+                                            <p className="text-sm text-gray-600">{t('order.quantity')}: {item.quantity}</p>
+                                            <p className="text-sm text-gray-600">{t('order.price')}: {formatPrice(item.price_at_purchase)}</p>
                                         </div>
                                         <div className="text-right">
                                             <p className="font-medium text-gray-900">
@@ -424,21 +426,21 @@ export default function OrderConfirmationPage() {
                         <div className="max-w-md ml-auto">
                             <div className="space-y-2">
                                 <div className="flex justify-between">
-                                    <span className="text-gray-800">Subtotal:</span>
+                                    <span className="text-gray-800">{t('order.subtotal')}:</span>
                                     <span className="text-gray-700">{formatPrice(order.subtotal)}</span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="text-gray-800">Shipping:</span>
+                                    <span className="text-gray-800">{t('order.shipping')}:</span>
                                     <span className="text-gray-700">{formatPrice(order.shipping_cost)}</span>
                                 </div>
                                 {order.discount_amount > 0 && (
                                     <div className="flex justify-between text-green-600">
-                                        <span className="text-gray-800">Discount:</span>
+                                        <span className="text-gray-800">{t('order.discount')}:</span>
                                         <span className="text-gray-700">-{formatPrice(order.discount_amount)}</span>
                                     </div>
                                 )}
                                 <div className="flex justify-between text-lg font-bold border-t pt-2">
-                                    <span className="text-gray-800">Total:</span>
+                                    <span className="text-gray-800">{t('order.total')}:</span>
                                     <span className="text-gray-700">{formatPrice(order.total_amount)}</span>
                                 </div>
                             </div>
@@ -454,7 +456,7 @@ export default function OrderConfirmationPage() {
                                 disabled={isProcessingPayment}
                                 className="bg-blue-600 text-white py-3 px-8 rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                {isProcessingPayment ? 'Processing Payment...' : 'Pay Now'}
+                                {isProcessingPayment ? t('order.processingPayment') : t('order.payNow')}
                             </button>
                         )}
                         
@@ -465,7 +467,7 @@ export default function OrderConfirmationPage() {
                                 disabled={isProcessingPayment || !snapLoaded}
                                 className="bg-blue-600 text-white py-3 px-8 rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                {isProcessingPayment ? 'Processing Payment...' : 'Proceed to Payment'}
+                                {isProcessingPayment ? t('order.processingPayment') : t('order.proceedToPayment')}
                             </button>
                         )}
                         
@@ -474,7 +476,7 @@ export default function OrderConfirmationPage() {
                             href="/shop" 
                             className="bg-gray-600 text-white py-3 px-8 rounded-md hover:bg-gray-700 transition-colors font-semibold text-center"
                         >
-                            Continue Shopping
+                            {t('order.continueShopping')}
                         </Link>
                     </div>
                 </div>

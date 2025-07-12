@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { API_CONFIG } from '@/config/api';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 type JSONMap = { [key: string]: unknown }; // Use unknown for safety
 
@@ -118,6 +119,7 @@ interface ShippingCostApiResponse {
 
 export default function CheckoutPage() {
     const router = useRouter();
+    const { t } = useTranslation();
     
     // State management for cart data
     const [cart, setCart] = useState<CartResponse | null>(null);
@@ -189,7 +191,7 @@ export default function CheckoutPage() {
             setTotalWeight(weight);
         } catch (error) {
             console.error('Error fetching cart:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            setError(error instanceof Error ? error.message : t('common.unknownError'));
         } finally {
             setLoadingCart(false);
         }
@@ -211,11 +213,11 @@ export default function CheckoutPage() {
             setProvinces(data.data);
         } catch (error) {
             console.error('Error fetching provinces:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            setError(error instanceof Error ? error.message : t('common.unknownError'));
         } finally {
             setLoadingProvinces(false);
         }
-    }, []);
+    }, [t]);
 
     // Function to fetch cities based on province
     const fetchCities = useCallback(async (provinceId: string) => {
@@ -235,11 +237,11 @@ export default function CheckoutPage() {
             setCities(data.data);
         } catch (error) {
             console.error('Error fetching cities:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            setError(error instanceof Error ? error.message : t('common.unknownError'));
         } finally {
             setLoadingCities(false);
         }
-    }, []);
+    }, [t]);
 
     // Function to calculate shipping costs
     const calculateShippingCosts = useCallback(async () => {
@@ -280,7 +282,7 @@ export default function CheckoutPage() {
             }
         } catch (error) {
             console.error('Error calculating shipping costs:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            setError(error instanceof Error ? error.message : t('common.unknownError'));
         } finally {
             setLoadingShippingCosts(false);
             
@@ -289,7 +291,7 @@ export default function CheckoutPage() {
                 setNotification(null);
             }, 3000);
         }
-    }, [shippingAddress.city_id, totalWeight]);
+    }, [shippingAddress.city_id, totalWeight, t, setNotification]);
 
     // Handle customer details input change
     const handleCustomerDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -462,7 +464,7 @@ export default function CheckoutPage() {
     if (loadingCart) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
-                <p className="text-gray-600 text-xl font-semibold">Loading checkout...</p>
+                <p className="text-gray-600 text-xl font-semibold">{t('checkout.loading')}</p>
             </div>
         );
     }
@@ -503,17 +505,17 @@ export default function CheckoutPage() {
             )}
 
             <div className="container mx-auto px-4">
-                <h1 className="text-3xl font-bold text-gray-900 mb-6">Checkout</h1>
+                <h1 className="text-3xl font-bold text-gray-900 mb-6">{t('checkout.title')}</h1>
 
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left Column - Customer & Shipping Details */}
                     <div className="lg:col-span-2 space-y-6">
                         {/* Customer Details Section */}
                         <div className="bg-white p-6 rounded-lg shadow-md">
-                            <h2 className="text-xl font-semibold text-gray-900 mb-4">Customer Details</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.customerDetails')}</h2>
                             <div className="space-y-4">
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">{t('checkout.fullName')}</label>
                                     <input
                                         type="text"
                                         id="name"
@@ -525,7 +527,7 @@ export default function CheckoutPage() {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">{t('checkout.emailAddress')}</label>
                                     <input
                                         type="email"
                                         id="email"
@@ -537,7 +539,7 @@ export default function CheckoutPage() {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">{t('checkout.phoneNumber')}</label>
                                     <input
                                         type="tel"
                                         id="phone"
@@ -553,7 +555,7 @@ export default function CheckoutPage() {
 
                         {/* Shipping Address Section */}
                         <div className="bg-white p-6 rounded-lg shadow-md">
-                            <h2 className="text-xl font-semibold text-gray-900 mb-4">Shipping Address</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.shippingAddress')}</h2>
                             <div className="space-y-4">
                                 <div>
                                     <label htmlFor="street" className="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
@@ -643,7 +645,7 @@ export default function CheckoutPage() {
                     <div className="space-y-6">
                         {/* Order Summary */}
                         <div className="bg-white p-6 rounded-lg shadow-md sticky top-24">
-                            <h2 className="text-xl font-semibold text-gray-900 mb-4">Order Summary</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.orderSummary')}</h2>
                             
                             <div className="space-y-3 border-b border-gray-200 pb-4 mb-4">
                                 <div className="flex justify-between">
@@ -706,7 +708,7 @@ export default function CheckoutPage() {
                                     !shippingAddress.street || !shippingAddress.province_id || 
                                     !shippingAddress.city_id || !shippingAddress.postalCode}
                             >
-                                {isPlacingOrder ? 'Placing Order...' : 'Place Order'}
+                                {isPlacingOrder ? t('checkout.placingOrder') : t('checkout.placeOrder')}
                             </button>
                             
                             {/* Return to Cart */}
@@ -714,7 +716,7 @@ export default function CheckoutPage() {
                                 href="/cart" 
                                 className="block w-full text-center text-blue-600 py-2 mt-3 hover:underline transition-colors font-semibold"
                             >
-                                Return to Cart
+                                {t('checkout.returnToCart')}
                             </Link>
                         </div>
                     </div>

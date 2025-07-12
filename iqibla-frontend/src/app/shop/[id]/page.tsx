@@ -5,6 +5,7 @@ import { notFound, useParams } from 'next/navigation';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { API_CONFIG } from '@/config/api';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 type JSONArray = string[];
 type JSONMap = { [key: string]: unknown };
@@ -91,6 +92,7 @@ async function fetchProductData(id: string): Promise<Product | null> {
 
 export default function ProductPage() {
     const { id } = useParams(); // Get ID from URL params in client component
+    const { t } = useTranslation();
     const productId = Array.isArray(id) ? id[0] : id; // Handle potential array for id
 
     const [product, setProduct] = useState<Product | null>(null);
@@ -197,13 +199,13 @@ export default function ProductPage() {
                 if (data.cart_id) {
                     localStorage.setItem('cart_id', data.cart_id);
                 }
-                setNotification("Item added to cart successfully!");
+                setNotification(t('product.addedToCart'));
             } else {
-                setNotification('Failed to add item to cart.');
+                setNotification(t('product.errorAddToCart'));
             }
         } catch (e: unknown) {
             console.error("Error adding to cart:", e);
-            setNotification("Network error. Could not add item to cart.");
+            setNotification(t('product.errorNetwork'));
         } finally {
             setTimeout(() => setNotification(null), 3000); // Clear notification after 3 seconds
         }
@@ -212,7 +214,7 @@ export default function ProductPage() {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
-                <p className="text-gray-600 text-xl font-semibold">Loading product...</p>
+                <p className="text-gray-600 text-xl font-semibold">{t('product.loading')}</p>
             </div>
         );
     }
@@ -221,7 +223,7 @@ export default function ProductPage() {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
                 <p className="text-red-600 text-xl font-semibold">
-                    Error: {fetchError || "Product data could not be loaded."} Please ensure the backend is running and data exists.
+                    {t('common.error')}: {fetchError || t('product.errorLoadData')} {t('product.errorBackend')}
                 </p>
             </div>
         );
@@ -232,7 +234,7 @@ export default function ProductPage() {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
                 <p className="text-red-600 text-xl font-semibold">
-                    Error: No product variants found.
+                    {t('common.error')}: {t('product.noVariants')}
                 </p>
             </div>
         );
@@ -266,7 +268,7 @@ export default function ProductPage() {
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
                             <p className="text-lg text-gray-700 mt-2">{product.brand}</p>
-                            <p className="text-sm text-gray-600">Category: {product.category}</p>
+                            <p className="text-sm text-gray-600">{t('product.category')}: {product.category}</p>
                         </div>
 
                         <div className="text-2xl font-bold text-blue-600">
@@ -274,14 +276,14 @@ export default function ProductPage() {
                         </div>
 
                         <div>
-                            <h2 className="text-lg font-semibold mb-2 text-gray-800">Description</h2>
+                            <h2 className="text-lg font-semibold mb-2 text-gray-800">{t('product.description')}</h2>
                             <p className="text-gray-700">{product.description}</p>
                         </div>
 
                         {/* Variant Selection */}
                         <div>
                             <label htmlFor="variant-select" className="block text-sm font-medium text-gray-700 mb-2">
-                                Select Variant
+                                {t('product.selectVariant')}
                             </label>
                             <select
                                 id="variant-select"
@@ -300,14 +302,14 @@ export default function ProductPage() {
                         {/* Stock Quantity */}
                         <div>
                             <p className="text-sm text-gray-600">
-                                Stock Available: {selectedVariant.stock_quantity}
+                                {t('product.stockAvailable')}: {selectedVariant.stock_quantity}
                             </p>
                         </div>
 
                         {/* Quantity Selector */}
                         <div>
                             <label htmlFor="quantity-input" className="block text-sm font-medium text-gray-700 mb-2">
-                                Quantity
+                                {t('product.quantity')}
                             </label>
                             <div className="flex items-center space-x-2">
                                 <button
@@ -348,7 +350,7 @@ export default function ProductPage() {
                                 onClick={handleAddToCart}
                                 disabled={selectedVariant.stock_quantity <= 0 || quantity <= 0}
                             >
-                                Add to Cart
+                                {t('product.addToCart')}
                             </button>
                             <a
                                 href={whatsappLink}
@@ -356,13 +358,13 @@ export default function ProductPage() {
                                 rel="noopener noreferrer"
                                 className="flex-1 block text-center bg-green-500 text-white py-3 rounded-md hover:bg-green-600 transition-colors font-semibold"
                             >
-                                Chat via WhatsApp
+                                {t('product.chatWhatsApp')}
                             </a>
                         </div>
 
                         {/* Features */}
                         <div>
-                            <h2 className="text-lg font-semibold mb-2 text-gray-800">Key Features</h2>
+                            <h2 className="text-lg font-semibold mb-2 text-gray-800">{t('product.keyFeatures')}</h2>
                             <ul className="list-disc list-inside space-y-1">
                                 {product.features.map((feature, index) => (
                                     <li key={index} className="text-gray-700">{feature}</li>
@@ -372,7 +374,7 @@ export default function ProductPage() {
 
                         {/* In Box Items */}
                         <div>
-                            <h2 className="text-lg font-semibold mb-2 text-gray-800">In the Box</h2>
+                            <h2 className="text-lg font-semibold mb-2 text-gray-800">{t('product.inTheBox')}</h2>
                             <ul className="list-disc list-inside space-y-1">
                                 {product.in_box_items.map((item, index) => (
                                     <li key={index} className="text-gray-700">{item}</li>
@@ -382,7 +384,7 @@ export default function ProductPage() {
 
                         {/* Specifications */}
                         <div>
-                            <h2 className="text-lg font-semibold mb-2 text-gray-800">Specifications</h2>
+                            <h2 className="text-lg font-semibold mb-2 text-gray-800">{t('product.specifications')}</h2>
                             <dl className="space-y-2">
                                 {Object.entries(selectedVariant.specifications).map(([key, value]) => ( // Use selectedVariant specs
                                     <div key={key} className="grid grid-cols-2">
@@ -397,7 +399,7 @@ export default function ProductPage() {
                         {(product.tokopedia_url || product.shopee_url) && (
                             <div className="space-y-4 pt-6 border-t border-gray-200">
                                 <div className="text-center">
-                                    <p className="text-gray-600 mb-2">Also available on:</p>
+                                    <p className="text-gray-600 mb-2">{t('product.alsoAvailableOn')}:</p>
                                     <div className="flex justify-center space-x-4">
                                         {product.tokopedia_url && (
                                             <a
