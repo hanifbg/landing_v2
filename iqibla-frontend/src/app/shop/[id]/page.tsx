@@ -205,7 +205,7 @@ export default function ProductPage() {
             }
         } catch (e: unknown) {
             console.error("Error adding to cart:", e);
-            setNotification(t('product.errorNetwork'));
+            setNotification(t('cart.errorNetwork'));
         } finally {
             setTimeout(() => setNotification(null), 3000); // Clear notification after 3 seconds
         }
