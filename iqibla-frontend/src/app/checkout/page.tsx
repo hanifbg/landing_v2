@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { API_CONFIG } from '@/config/api';
+import { useTranslation } from '@/contexts/LanguageContext';
 
 type JSONMap = { [key: string]: unknown }; // Use unknown for safety
 
@@ -118,6 +119,7 @@ interface ShippingCostApiResponse {
 
 export default function CheckoutPage() {
     const router = useRouter();
+    const { t } = useTranslation();
     
     // State management for cart data
     const [cart, setCart] = useState<CartResponse | null>(null);
@@ -154,6 +156,7 @@ export default function CheckoutPage() {
     
     // Error and notification states
     const [error, setError] = useState<string | null>(null);
+    const [errorKey, setErrorKey] = useState<string | null>(null);
     const [notification, setNotification] = useState<string | null>(null);
 
     // Function to fetch cart data
@@ -189,16 +192,17 @@ export default function CheckoutPage() {
             setTotalWeight(weight);
         } catch (error) {
             console.error('Error fetching cart:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            setError(error instanceof Error ? error.message : `${t('common.error')}. ${t('common.tryAgain')}`);
         } finally {
             setLoadingCart(false);
         }
-    }, [router]);
+    }, [router, t]);
 
     // Function to fetch provinces
     const fetchProvinces = useCallback(async () => {
         setLoadingProvinces(true);
         setError(null);
+        setErrorKey(null);
 
         try {
             const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.SHIPPING_PROVINCES}`);
@@ -206,12 +210,16 @@ export default function CheckoutPage() {
             if (!response.ok) {
                 throw new Error(`Failed to fetch provinces: ${response.status} ${response.statusText}`);
             }
-
+            
             const data: ProvincesApiResponse = await response.json();
             setProvinces(data.data);
         } catch (error) {
             console.error('Error fetching provinces:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setErrorKey('common.error');
+            }
         } finally {
             setLoadingProvinces(false);
         }
@@ -223,6 +231,7 @@ export default function CheckoutPage() {
         
         setLoadingCities(true);
         setError(null);
+        setErrorKey(null);
 
         try {
             const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.SHIPPING_CITIES}?province_id=${provinceId}`);
@@ -235,7 +244,11 @@ export default function CheckoutPage() {
             setCities(data.data);
         } catch (error) {
             console.error('Error fetching cities:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setErrorKey('common.error');
+            }
         } finally {
             setLoadingCities(false);
         }
@@ -247,6 +260,7 @@ export default function CheckoutPage() {
         
         setLoadingShippingCosts(true);
         setError(null);
+        setErrorKey(null);
 
         try {
             const payload: ShippingCostRequestPayload = {
@@ -280,7 +294,11 @@ export default function CheckoutPage() {
             }
         } catch (error) {
             console.error('Error calculating shipping costs:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setErrorKey('common.error');
+            }
         } finally {
             setLoadingShippingCosts(false);
             
@@ -289,7 +307,7 @@ export default function CheckoutPage() {
                 setNotification(null);
             }, 3000);
         }
-    }, [shippingAddress.city_id, totalWeight]);
+    }, [shippingAddress.city_id, totalWeight, setNotification]);
 
     // Handle customer details input change
     const handleCustomerDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -328,38 +346,44 @@ export default function CheckoutPage() {
     const handlePlaceOrder = async () => {
         // Validate form
         if (!cart || cart.items.length === 0) {
-            setError('Your cart is empty');
+            setError(null);
+            setErrorKey('cart.empty');
             return;
         }
 
         if (!customerDetails.name || !customerDetails.email || !customerDetails.phone) {
-            setError('Please fill in all customer details');
+            setError(null);
+            setErrorKey('checkout.customerDetailsRequired');
             return;
         }
         
         if (!shippingAddress.province_id || !shippingAddress.city_id || !shippingAddress.street || !shippingAddress.postalCode) {
-            setError('Please fill in all shipping address details');
+            setError(null);
+            setErrorKey('checkout.shippingAddressRequired');
             return;
         }
         
         if (!selectedShippingOption) {
-            setError('Please select a shipping option');
+            setError(null);
+            setErrorKey('checkout.shippingOptionRequired');
             return;
         }
 
         if (totalWeight <= 0) {
-            setError('Invalid total weight');
+            setError(null);
+            setErrorKey('checkout.invalidWeight');
             return;
         }
 
         setIsPlacingOrder(true);
         setError(null);
+        setErrorKey(null);
 
         try {
             // Get cart_id from localStorage
             const cartId = localStorage.getItem('cart_id');
             if (!cartId) {
-                throw new Error('Cart ID not found');
+                throw new Error(t('checkout.cartIdNotFound'));
             }
 
             // Construct the order payload
@@ -390,7 +414,7 @@ export default function CheckoutPage() {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to place order');
+                throw new Error(errorData.error || t('checkout.orderPlacementFailed'));
             }
 
             // Parse the response
@@ -400,17 +424,24 @@ export default function CheckoutPage() {
             localStorage.removeItem('cart_id');
 
             // Set success notification
-            setNotification('Order placed successfully! Redirecting to order confirmation...');
+            setNotification(t('checkout.orderPlacedSuccess'));
 
             // Redirect to order confirmation page
             router.push('/order-confirmation/' + orderResponse.id);
         } catch (error) {
             console.error('Error placing order:', error);
-            setError(error instanceof Error ? error.message : 'An unknown error occurred');
+            if (error instanceof Error) {
+                setError(error.message);
+                setErrorKey(null);
+            } else {
+                setError(null);
+                setErrorKey('common.error');
+            }
             
             // Clear notification after 5 seconds
             setTimeout(() => {
                 setError(null);
+                setErrorKey(null);
             }, 5000);
         } finally {
             setIsPlacingOrder(false);
@@ -462,17 +493,17 @@ export default function CheckoutPage() {
     if (loadingCart) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gray-100 p-8 pt-20">
-                <p className="text-gray-600 text-xl font-semibold">Loading checkout...</p>
+                <p className="text-gray-600 text-xl font-semibold">{t('checkout.loading')}</p>
             </div>
         );
     }
 
     // Error state
-    if (error) {
+    if (error || errorKey) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8 pt-20">
                 <p className="text-red-600 text-xl font-semibold mb-4">
-                    Error: {error}. Please try again later.
+                    Error: {error || (errorKey && t(errorKey))}. Please try again later.
                 </p>
                 <Link href="/cart" className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
                     Return to Cart
@@ -485,7 +516,7 @@ export default function CheckoutPage() {
     if (!cart || cart.items.length === 0) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8 pt-20">
-                <p className="text-gray-600 text-xl font-semibold mb-4">Your cart is empty.</p>
+                <p className="text-gray-600 text-xl font-semibold mb-4">{t('cart.empty')}.</p>
                 <Link href="/shop" className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
                     Continue Shopping
                 </Link>
@@ -503,17 +534,17 @@ export default function CheckoutPage() {
             )}
 
             <div className="container mx-auto px-4">
-                <h1 className="text-3xl font-bold text-gray-900 mb-6">Checkout</h1>
+                <h1 className="text-3xl font-bold text-gray-900 mb-6">{t('checkout.title')}</h1>
 
                 <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left Column - Customer & Shipping Details */}
                     <div className="lg:col-span-2 space-y-6">
                         {/* Customer Details Section */}
                         <div className="bg-white p-6 rounded-lg shadow-md">
-                            <h2 className="text-xl font-semibold text-gray-900 mb-4">Customer Details</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.customerDetails')}</h2>
                             <div className="space-y-4">
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">{t('checkout.fullName')}</label>
                                     <input
                                         type="text"
                                         id="name"
@@ -525,7 +556,7 @@ export default function CheckoutPage() {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">{t('checkout.emailAddress')}</label>
                                     <input
                                         type="email"
                                         id="email"
@@ -537,7 +568,7 @@ export default function CheckoutPage() {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">{t('checkout.phoneNumber')}</label>
                                     <input
                                         type="tel"
                                         id="phone"
@@ -553,7 +584,7 @@ export default function CheckoutPage() {
 
                         {/* Shipping Address Section */}
                         <div className="bg-white p-6 rounded-lg shadow-md">
-                            <h2 className="text-xl font-semibold text-gray-900 mb-4">Shipping Address</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.shippingAddress')}</h2>
                             <div className="space-y-4">
                                 <div>
                                     <label htmlFor="street" className="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
@@ -643,7 +674,7 @@ export default function CheckoutPage() {
                     <div className="space-y-6">
                         {/* Order Summary */}
                         <div className="bg-white p-6 rounded-lg shadow-md sticky top-24">
-                            <h2 className="text-xl font-semibold text-gray-900 mb-4">Order Summary</h2>
+                            <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.orderSummary')}</h2>
                             
                             <div className="space-y-3 border-b border-gray-200 pb-4 mb-4">
                                 <div className="flex justify-between">
@@ -706,7 +737,7 @@ export default function CheckoutPage() {
                                     !shippingAddress.street || !shippingAddress.province_id || 
                                     !shippingAddress.city_id || !shippingAddress.postalCode}
                             >
-                                {isPlacingOrder ? 'Placing Order...' : 'Place Order'}
+                                {isPlacingOrder ? t('checkout.placingOrder') : t('checkout.placeOrder')}
                             </button>
                             
                             {/* Return to Cart */}
@@ -714,7 +745,7 @@ export default function CheckoutPage() {
                                 href="/cart" 
                                 className="block w-full text-center text-blue-600 py-2 mt-3 hover:underline transition-colors font-semibold"
                             >
-                                Return to Cart
+                                {t('checkout.returnToCart')}
                             </Link>
                         </div>
                     </div>
