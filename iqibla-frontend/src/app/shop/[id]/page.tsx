@@ -199,7 +199,7 @@ export default function ProductPage() {
                 if (data.cart_id) {
                     localStorage.setItem('cart_id', data.cart_id);
                 }
-                setNotification(t('product.addedToCart'));
+                setNotification(t('cart.itemAdded'));
             } else {
                 setNotification(t('product.errorAddToCart'));
             }

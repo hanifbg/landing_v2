@@ -196,7 +196,7 @@ export default function CheckoutPage() {
         } finally {
             setLoadingCart(false);
         }
-    }, [router]);
+    }, [router, t]);
 
     // Function to fetch provinces
     const fetchProvinces = useCallback(async () => {
@@ -346,32 +346,32 @@ export default function CheckoutPage() {
     const handlePlaceOrder = async () => {
         // Validate form
         if (!cart || cart.items.length === 0) {
-            setError('Your cart is empty');
-            setErrorKey(null);
+            setError(null);
+            setErrorKey('cart.empty');
             return;
         }
 
         if (!customerDetails.name || !customerDetails.email || !customerDetails.phone) {
-            setError('Please fill in all customer details');
-            setErrorKey(null);
+            setError(null);
+            setErrorKey('checkout.customerDetailsRequired');
             return;
         }
         
         if (!shippingAddress.province_id || !shippingAddress.city_id || !shippingAddress.street || !shippingAddress.postalCode) {
-            setError('Please fill in all shipping address details');
-            setErrorKey(null);
+            setError(null);
+            setErrorKey('checkout.shippingAddressRequired');
             return;
         }
         
         if (!selectedShippingOption) {
-            setError('Please select a shipping option');
-            setErrorKey(null);
+            setError(null);
+            setErrorKey('checkout.shippingOptionRequired');
             return;
         }
 
         if (totalWeight <= 0) {
-            setError('Invalid total weight');
-            setErrorKey(null);
+            setError(null);
+            setErrorKey('checkout.invalidWeight');
             return;
         }
 
@@ -383,7 +383,7 @@ export default function CheckoutPage() {
             // Get cart_id from localStorage
             const cartId = localStorage.getItem('cart_id');
             if (!cartId) {
-                throw new Error('Cart ID not found');
+                throw new Error(t('checkout.cartIdNotFound'));
             }
 
             // Construct the order payload
@@ -414,7 +414,7 @@ export default function CheckoutPage() {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to place order');
+                throw new Error(errorData.error || t('checkout.orderPlacementFailed'));
             }
 
             // Parse the response
@@ -424,7 +424,7 @@ export default function CheckoutPage() {
             localStorage.removeItem('cart_id');
 
             // Set success notification
-            setNotification('Order placed successfully! Redirecting to order confirmation...');
+            setNotification(t('checkout.orderPlacedSuccess'));
 
             // Redirect to order confirmation page
             router.push('/order-confirmation/' + orderResponse.id);
@@ -516,7 +516,7 @@ export default function CheckoutPage() {
     if (!cart || cart.items.length === 0) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8 pt-20">
-                <p className="text-gray-600 text-xl font-semibold mb-4">Your cart is empty.</p>
+                <p className="text-gray-600 text-xl font-semibold mb-4">{t('cart.empty')}.</p>
                 <Link href="/shop" className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
                     Continue Shopping
                 </Link>

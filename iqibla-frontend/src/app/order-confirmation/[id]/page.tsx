@@ -279,7 +279,7 @@ export default function OrderConfirmationPage() {
         if (orderId) {
             fetchOrder(orderId);
         }
-    }, [orderId, fetchOrder]);
+    }, [orderId, fetchOrder, t]);
 
     // Loading state
     if (loading) {
