@@ -234,7 +234,7 @@ export default function CheckoutPage() {
         setErrorKey(null);
 
         try {
-            const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.SHIPPING_CITIES}?province_id=${provinceId}`);
+            const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.SHIPPING_CITIES}/${provinceId}`);
             
             if (!response.ok) {
                 throw new Error(`Failed to fetch cities: ${response.status} ${response.statusText}`);
