@@ -97,6 +97,15 @@ export default function Header() {
                         <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
                             {t('header.orderTracker')}
                         </Link>
+                        {/* iQIBLA Life - Moved to left side */}
+                        <Link 
+                            href={iqiblaLifeAppUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200"
+                        >
+                            {t('header.iqiblaLife')}
+                        </Link>
                     </div>
                 </div>
 
@@ -119,14 +128,12 @@ export default function Header() {
                 <div className="flex-1 flex items-center justify-end">
                     {/* Right Navigation Links */}
                     <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-                        {/* iQIBLA Life */}
+                        {/* Brand Story - Added to right side */}
                         <Link 
-                            href={iqiblaLifeAppUrl} 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
+                            href="/pages/brand-story" 
                             className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200"
                         >
-                            {t('header.iqiblaLife')}
+                            {t('header.brandStory')}
                         </Link>
                         {/* Contact Us (your existing WhatsApp link) */}
                         <a
@@ -270,6 +277,15 @@ export default function Header() {
                             onClick={toggleMobileMenu}
                         >
                             {t('header.iqiblaLife')}
+                        </Link>
+                        
+                        {/* Brand Story */}
+                        <Link 
+                            href="/pages/brand-story" 
+                            className="text-white text-xl py-4 w-full text-center hover:bg-neutral-700 transition-colors duration-200"
+                            onClick={toggleMobileMenu}
+                        >
+                            {t('header.brandStory')}
                         </Link>
                         
                         {/* Contact Us */}
