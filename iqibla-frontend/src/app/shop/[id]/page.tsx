@@ -349,9 +349,9 @@ export default function ProductPage() {
                         {/* Add to Cart Button and WhatsApp Button */}
                         <div className="flex flex-col sm:flex-row gap-4 mt-6">
                             <button
-                                className="flex-1 bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
-                                onClick={handleAddToCart}
-                                disabled={selectedVariant.stock_quantity <= 0 || quantity <= 0}
+                                className="flex-1 bg-gray-400 text-white py-3 rounded-md hover:bg-gray-400 transition-colors font-semibold cursor-not-allowed"
+                                onClick={() => {}}
+                                disabled={true}
                             >
                                 {t('product.addToCart')}
                             </button>
