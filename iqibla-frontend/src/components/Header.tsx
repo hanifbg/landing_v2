@@ -1,7 +1,7 @@
 // src/components/Header.tsx
 'use client'; // This component needs to be a client component for interactivity (e.g., future mobile menu, dropdowns)
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 // Importing icons from lucide-react.
@@ -14,6 +14,16 @@ export default function Header() {
     const { cartItemCount } = useCart();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
+    const [iqiblaLifeAppUrl, setIqiblaLifeAppUrl] = useState('https://play.google.com/store/apps/details?id=com.umeox.qibla&hl=en');
+    
+    useEffect(() => {
+        // Detect device type and set appropriate app store URL
+        if (typeof navigator !== 'undefined' && navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+            setIqiblaLifeAppUrl('https://apps.apple.com/id/app/iqibla-life/id1577515422');
+        } else {
+            setIqiblaLifeAppUrl('https://play.google.com/store/apps/details?id=com.umeox.qibla&hl=en');
+        }
+    }, []);
     
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -110,7 +120,12 @@ export default function Header() {
                     {/* Right Navigation Links */}
                     <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
                         {/* iQIBLA Life */}
-                        <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
+                        <Link 
+                            href={iqiblaLifeAppUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200"
+                        >
                             {t('header.iqiblaLife')}
                         </Link>
                         {/* Contact Us (your existing WhatsApp link) */}
@@ -248,7 +263,9 @@ export default function Header() {
                         
                         {/* iQIBLA Life */}
                         <Link 
-                            href="#" 
+                            href={iqiblaLifeAppUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
                             className="text-white text-xl py-4 w-full text-center hover:bg-neutral-700 transition-colors duration-200"
                             onClick={toggleMobileMenu}
                         >
