@@ -79,7 +79,8 @@ export default function CategoryPage() {
     const [category, setCategory] = useState<CategoryDetailsResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [featuredProducts] = useState<Product[]>([]);
+    const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+    const [loadingFeatured, setLoadingFeatured] = useState<boolean>(false);
 
     const fetchCategory = async (categorySlug: string) => {
         try {
@@ -106,11 +107,54 @@ export default function CategoryPage() {
         }
     };
 
+    const fetchFeaturedProducts = async (categorySlug: string) => {
+        try {
+            setLoadingFeatured(true);
+            
+            const res = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.CATEGORIES}/${categorySlug}`);
+            
+            if (!res.ok) {
+                if (res.status === 404) {
+                    if (category?.products && category.products.length > 0) {
+                        // Fallback: If no products in the featured category, use the first 4 from the current category
+                        setFeaturedProducts(category.products.slice(0, 4));
+                    }
+                    return;
+                }
+                console.error(`Failed to fetch featured products: ${res.status}`);
+                return;
+            }
+            
+            const data: CategoryDetailsResponse = await res.json();
+            
+            // If we have products from the featured category, use them
+            if (data.products && data.products.length > 0) {
+                // Take up to 4 products
+                setFeaturedProducts(data.products.slice(0, 4));
+            } else if (category?.products && category.products.length > 0) {
+                // Fallback: If no products in the featured category, use the first 4 from the current category
+                setFeaturedProducts(category.products.slice(0, 4));
+            }
+        } catch (err) {
+            console.error('Error fetching featured products:', err);
+        } finally {
+            setLoadingFeatured(false);
+        }
+    };
+
     useEffect(() => {
         if (slug) {
             fetchCategory(slug);
         }
     }, [slug]);
+
+    useEffect(() => {
+        if (category && slug) {
+            // Determine which category to fetch for featured products
+            const featuredCategorySlug = slug === 'zikr-rings' ? 'qwatch' : 'zikr-rings';
+            fetchFeaturedProducts(featuredCategorySlug);
+        }
+    }, [category, slug]);
 
     // Set document title dynamically
     useEffect(() => {
@@ -215,10 +259,14 @@ export default function CategoryPage() {
             </section>
 
             {/* You May Also Like */}
-            {featuredProducts.length > 0 && (
+            {loadingFeatured ? (
+                <section className="max-w-[1280px] mx-auto px-4 py-6 text-center">
+                    <p className="text-gray-500">{t('common.loading')}</p>
+                </section>
+            ) : featuredProducts.length > 0 && (
                 <section className="max-w-[1280px] mx-auto px-4 py-6">
                     <h3 className="text-center font-semibold text-lg mb-6">
-                        You May Also Like
+                        {t('shop.youMayAlsoLike')}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
                         {featuredProducts.map((product) => (
