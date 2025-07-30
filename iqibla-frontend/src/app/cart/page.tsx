@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { API_CONFIG } from '@/config/api';
 import { useTranslation } from '@/contexts/LanguageContext';
 import * as localStorage from '@/utils/localStorage';
+import { useCart } from '@/contexts/CartContext';
 
 type JSONMap = { [key: string]: unknown }; // Use unknown for safety
 
@@ -31,9 +32,16 @@ interface CartResponse {
     items: CartItemResponse[]; // Crucial: 'items' array
 }
 
+// Error response from the API
+interface ErrorResponse {
+    error: string;
+    [key: string]: unknown; // Allow for other properties
+}
+
 export default function CartPage() {
     const router = useRouter();
     const { t } = useTranslation();
+    const { setCartItemCount } = useCart();
     
     // State management
     const [cart, setCart] = useState<CartResponse | null>(null);
@@ -105,14 +113,18 @@ export default function CartPage() {
             const data = await response.json();
 
             if (response.ok) {
+                const cartData = data as CartResponse;
                 setNotification({
                     message: 'Item quantity updated successfully!',
                     type: 'success'
                 });
+                // Update cart count immediately
+                setCartItemCount(cartData.total_items);
                 fetchCart(); // Refresh cart data
             } else {
+                const errorData = data as ErrorResponse;
                 setNotification({
-                    message: `Error: ${data.error || 'Failed to update item quantity'}`,
+                    message: `Error: ${errorData.error || 'Failed to update item quantity'}`,
                     type: 'error'
                 });
             }
@@ -157,21 +169,28 @@ export default function CartPage() {
             const data = await response.json();
 
             if (response.ok) {
+                const cartData = data as CartResponse;
                 setNotification({
                     message: 'Item removed from cart!',
                     type: 'success'
                 });
                 
+                // Update cart count immediately
+                setCartItemCount(cartData.total_items);
+                
                 // Check if cart is now empty
-                if (cart?.items?.length === 1) {
+                if (cartData.total_items === 0) {
                     localStorage.removeItem('cart_id');
+                    localStorage.removeItem('count_cart');
+                    setCartItemCount(0);
                     setCart(null);
                 } else {
                     fetchCart(); // Refresh cart data
                 }
             } else {
+                const errorData = data as ErrorResponse;
                 setNotification({
-                    message: `${t('common.error')}: ${data.error || t('cart.errorRemove')}`,
+                    message: `${t('common.error')}: ${errorData.error || t('cart.errorRemove')}`,
                     type: 'error'
                 });
             }

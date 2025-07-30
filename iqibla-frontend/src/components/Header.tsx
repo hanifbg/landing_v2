@@ -6,9 +6,11 @@ import Image from 'next/image';
 // Importing icons from lucide-react.
 import { ChevronDown, Search, User, ShoppingCart } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useCart } from '@/contexts/CartContext';
 
 export default function Header() {
     const { language, setLanguage, t } = useLanguage();
+    const { cartItemCount } = useCart();
     
     return (
         // Changed background to a dark gray/black matching the screenshot
@@ -136,9 +138,16 @@ export default function Header() {
                     <Link href="/account" className="hover:text-gray-400 transition-colors duration-200">
                         <User size={22} />
                     </Link>
-                    {/* Shopping Cart Icon */}
+                    {/* Shopping Cart Icon with Counter Badge */}
                     <Link href="/cart" className="hover:text-gray-400 transition-colors duration-200">
-                        <ShoppingCart size={22} />
+                        <div className="relative">
+                            <ShoppingCart size={22} />
+                            {cartItemCount > 0 && (
+                                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                                    {cartItemCount}
+                                </span>
+                            )}
+                        </div>
                     </Link>
                 </div>
 

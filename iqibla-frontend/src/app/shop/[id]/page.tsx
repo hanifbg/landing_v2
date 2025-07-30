@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { API_CONFIG } from '@/config/api';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { useCart } from '@/contexts/CartContext';
 
 type JSONArray = string[];
 type JSONMap = { [key: string]: unknown };
@@ -93,6 +94,7 @@ async function fetchProductData(id: string): Promise<Product | null> {
 export default function ProductPage() {
     const { id } = useParams(); // Get ID from URL params in client component
     const { t } = useTranslation();
+    const { setCartItemCount } = useCart();
     const productId = Array.isArray(id) ? id[0] : id; // Handle potential array for id
 
     const [product, setProduct] = useState<Product | null>(null);
@@ -198,6 +200,7 @@ export default function ProductPage() {
                 // *** FIX: Store the cart_id from the response ***
                 if (data.cart_id) {
                     localStorage.setItem('cart_id', data.cart_id);
+                    setCartItemCount(data.total_items);
                 }
                 setNotification(t('cart.itemAdded'));
             } else {
