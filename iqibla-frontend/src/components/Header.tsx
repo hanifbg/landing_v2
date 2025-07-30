@@ -1,16 +1,27 @@
 // src/components/Header.tsx
 'use client'; // This component needs to be a client component for interactivity (e.g., future mobile menu, dropdowns)
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 // Importing icons from lucide-react.
-import { ChevronDown, Search, User, ShoppingCart } from 'lucide-react';
+import { ChevronDown, Search, User, ShoppingCart, Menu, X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useCart } from '@/contexts/CartContext';
 
 export default function Header() {
     const { language, setLanguage, t } = useLanguage();
     const { cartItemCount } = useCart();
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
+    
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+        // Reset shop dropdown state when closing the mobile menu
+        if (isMobileMenuOpen) {
+            setIsShopDropdownOpen(false);
+        }
+    };
     
     return (
         // Changed background to a dark gray/black matching the screenshot
@@ -79,8 +90,11 @@ export default function Header() {
                     </div>
                 </div>
 
-                {/* Centered Logo */}
-                <Link href="/" className="absolute left-1/2 -translate-x-1/2 z-10">
+                {/* Logo - Centered on desktop, right of hamburger on mobile */}
+                <Link 
+                    href="/" 
+                    className="md:absolute md:left-1/2 md:-translate-x-1/2 z-10 ml-12 md:ml-0"
+                >
                     <Image
                         src="/iqibla-logo.png" // Ensure this image is in your /public folder
                         alt="iQibla Logo"
@@ -144,14 +158,169 @@ export default function Header() {
                     </div>
                 </div>
 
-                {/* Mobile Menu Icon (Placeholder, hidden on md and up) */}
-                {/* This would be for a hamburger menu on smaller screens */}
-                {/* <div className="md:hidden">
-                    <button className="text-white hover:text-gray-400">
-                        <Menu size={24} />
-                    </button>
-                </div> */}
+                {/* Mobile Menu Icon moved to the left (visible only on small screens) */}
+                <button 
+                    className="md:hidden absolute left-4 text-white hover:text-gray-400 transition-colors duration-200" 
+                    onClick={toggleMobileMenu}
+                    aria-label="Toggle mobile menu"
+                >
+                    <Menu size={24} />
+                </button>
             </nav>
+            
+            {/* Mobile Menu Overlay */}
+            <div className={`fixed inset-0 bg-neutral-900 z-40 ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
+                <div className="container mx-auto px-4 pt-24 flex flex-col h-full">
+                    {/* Close Button */}
+                    <button 
+                        className="absolute top-4 right-4 text-white hover:text-gray-400 transition-colors duration-200" 
+                        onClick={toggleMobileMenu}
+                        aria-label="Close mobile menu"
+                    >
+                        <X size={24} />
+                    </button>
+                    
+                    {/* Mobile Navigation Links */}
+                    <div className="flex flex-col items-center space-y-6">
+                        {/* Shop Accordion (mobile) */}
+                        <div className="w-full">
+                            <button 
+                                className="text-white text-xl py-4 w-full text-center hover:bg-neutral-700 transition-colors duration-200 flex items-center justify-center"
+                                onClick={() => setIsShopDropdownOpen(!isShopDropdownOpen)}
+                            >
+                                {t('header.shop')}
+                                <ChevronDown 
+                                    size={20} 
+                                    className={`ml-2 transition-transform duration-200 ${isShopDropdownOpen ? 'rotate-180' : ''}`} 
+                                />
+                            </button>
+                            
+                            {/* Shop Dropdown Categories */}
+                            {isShopDropdownOpen && (
+                                <div className="bg-neutral-800 w-full">
+                                    <Link 
+                                        href="/category/zikr-rings" 
+                                        className="text-white text-base pl-8 py-2 w-full block hover:bg-neutral-700 transition-colors duration-200"
+                                        onClick={toggleMobileMenu}
+                                    >
+                                        Zikr Rings
+                                    </Link>
+                                    <Link 
+                                        href="/category/qwatch" 
+                                        className="text-white text-base pl-8 py-2 w-full block hover:bg-neutral-700 transition-colors duration-200"
+                                        onClick={toggleMobileMenu}
+                                    >
+                                        Qwatch
+                                    </Link>
+                                    <Link 
+                                        href="/category/salat-counter" 
+                                        className="text-white text-base pl-8 py-2 w-full block hover:bg-neutral-700 transition-colors duration-200"
+                                        onClick={toggleMobileMenu}
+                                    >
+                                        Salat Counter
+                                    </Link>
+                                    <Link 
+                                        href="/category/qphone" 
+                                        className="text-white text-base pl-8 py-2 w-full block hover:bg-neutral-700 transition-colors duration-200"
+                                        onClick={toggleMobileMenu}
+                                    >
+                                        Qphone
+                                    </Link>
+                                    <Link 
+                                        href="/category/accessories" 
+                                        className="text-white text-base pl-8 py-2 w-full block hover:bg-neutral-700 transition-colors duration-200"
+                                        onClick={toggleMobileMenu}
+                                    >
+                                        Accessories
+                                    </Link>
+                                </div>
+                            )}
+                        </div>
+                        
+                        {/* Order Tracker */}
+                        <Link 
+                            href="#" 
+                            className="text-white text-xl py-4 w-full text-center hover:bg-neutral-700 transition-colors duration-200"
+                            onClick={toggleMobileMenu}
+                        >
+                            {t('header.orderTracker')}
+                        </Link>
+                        
+                        {/* iQIBLA Life */}
+                        <Link 
+                            href="#" 
+                            className="text-white text-xl py-4 w-full text-center hover:bg-neutral-700 transition-colors duration-200"
+                            onClick={toggleMobileMenu}
+                        >
+                            {t('header.iqiblaLife')}
+                        </Link>
+                        
+                        {/* Contact Us */}
+                        <a
+                            href="https://api.whatsapp.com/send?phone=6285179766847&text=Halo iQibla Indonesia, saya ingin bertanya lebih lanjut mengenai produk Anda. Bisakah Anda bantu?"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white text-xl py-4 w-full text-center hover:bg-neutral-700 transition-colors duration-200"
+                            onClick={toggleMobileMenu}
+                        >
+                            {t('header.contactUs')}
+                        </a>
+                    </div>
+                    
+                    {/* Mobile Icons */}
+                    <div className="flex justify-center space-x-8 mt-8">
+                        {/* Search Icon */}
+                        <Link 
+                            href="#" 
+                            className="text-white hover:text-gray-400 transition-colors duration-200"
+                            onClick={toggleMobileMenu}
+                        >
+                            <Search size={28} />
+                        </Link>
+                        
+                        {/* User Icon */}
+                        <Link 
+                            href="/account" 
+                            className="text-white hover:text-gray-400 transition-colors duration-200"
+                            onClick={toggleMobileMenu}
+                        >
+                            <User size={28} />
+                        </Link>
+                        
+                        {/* Shopping Cart Icon with Counter Badge */}
+                        <Link 
+                            href="/cart" 
+                            className="text-white hover:text-gray-400 transition-colors duration-200"
+                            onClick={toggleMobileMenu}
+                        >
+                            <div className="relative">
+                                <ShoppingCart size={28} />
+                                {cartItemCount > 0 && (
+                                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                                        {cartItemCount}
+                                    </span>
+                                )}
+                            </div>
+                        </Link>
+                    </div>
+                    
+                    {/* Mobile Language Selector */}
+                    <div className="mt-8 flex justify-center">
+                        <select 
+                            value={language}
+                            onChange={(e) => {
+                                setLanguage(e.target.value as 'en' | 'id');
+                                toggleMobileMenu();
+                            }}
+                            className="bg-transparent border border-gray-700 rounded-md text-white cursor-pointer text-lg py-2 px-4 hover:bg-neutral-700 transition-colors focus:outline-none"
+                            aria-label={t('header.language')}
+                        >
+                            <option value="en" className="text-black">English</option>
+                            <option value="id" className="text-black">Bahasa Indonesia</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </header>
     );
 }
