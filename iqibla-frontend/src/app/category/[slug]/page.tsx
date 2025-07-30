@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -107,7 +107,7 @@ export default function CategoryPage() {
         }
     };
 
-    const fetchFeaturedProducts = async (categorySlug: string) => {
+    const fetchFeaturedProducts = useCallback(async (categorySlug: string) => {
         try {
             setLoadingFeatured(true);
             
@@ -140,7 +140,7 @@ export default function CategoryPage() {
         } finally {
             setLoadingFeatured(false);
         }
-    };
+    }, [category, setFeaturedProducts, setLoadingFeatured]);
 
     useEffect(() => {
         if (slug) {
@@ -154,7 +154,7 @@ export default function CategoryPage() {
             const featuredCategorySlug = slug === 'zikr-rings' ? 'qwatch' : 'zikr-rings';
             fetchFeaturedProducts(featuredCategorySlug);
         }
-    }, [category, slug]);
+    }, [category, slug, fetchFeaturedProducts]);
 
     // Set document title dynamically
     useEffect(() => {
