@@ -301,7 +301,7 @@ export default function OrderConfirmationPage() {
                     <div className="text-red-600 text-6xl mb-4">⚠️</div>
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('order.errorLoadingOrder')}</h1>
                     <p className="text-red-600 mb-6">{errorMessage || (errorKey ? t(errorKey) : '')}</p>
-                    <Link href="/shop" className="bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
+                    <Link href="/category/zikr-rings" className="bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
                         {t('order.continueShopping')}
                     </Link>
                 </div>
@@ -317,7 +317,7 @@ export default function OrderConfirmationPage() {
                     <div className="text-gray-400 text-6xl mb-4">📋</div>
                     <h1 className="text-2xl font-bold text-gray-900 mb-4">{t('order.orderNotFound')}</h1>
                     <p className="text-gray-600 mb-6">{t('order.orderNotFoundDescription')}</p>
-                    <Link href="/shop" className="bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
+                    <Link href="/category/zikr-rings" className="bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
                         {t('order.continueShopping')}
                     </Link>
                 </div>
@@ -478,7 +478,7 @@ export default function OrderConfirmationPage() {
                         
                         {/* Continue Shopping Link */}
                         <Link 
-                            href="/shop" 
+                            href="/category/zikr-rings" 
                             className="bg-gray-600 text-white py-3 px-8 rounded-md hover:bg-gray-700 transition-colors font-semibold text-center"
                         >
                             {t('order.continueShopping')}

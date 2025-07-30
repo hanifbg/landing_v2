@@ -517,7 +517,7 @@ export default function CheckoutPage() {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-8 pt-20">
                 <p className="text-gray-600 text-xl font-semibold mb-4">{t('cart.empty')}.</p>
-                <Link href="/shop" className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
+                <Link href="/category/zikr-rings" className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">
                     Continue Shopping
                 </Link>
             </div>

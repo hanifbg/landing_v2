@@ -192,7 +192,7 @@ export default function HomePage() {
                     {/* Responsive Grid Layout */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {/* Category Card 1: Zikr Rings */}
-                        <Link href="/shop?category=Zikr%20Rings" className="block h-[400px]">
+                        <Link href="/category/zikr-rings" className="block h-[400px]">
                             <div className="relative w-full h-full bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-105">
                                 <Image 
                                     src="/images/category-zikr-rings.webp" 
@@ -211,7 +211,7 @@ export default function HomePage() {
                         </Link>
                         
                         {/* Category Card 2: Qwatch */}
-                        <Link href="/shop?category=Qwatch" className="block h-[400px]">
+                        <Link href="/category/qwatch" className="block h-[400px]">
                             <div className="relative w-full h-full bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-105">
                                 <Image 
                                     src="/images/category-qwatch.webp" 
@@ -230,7 +230,7 @@ export default function HomePage() {
                         </Link>
                         
                         {/* Category Card 3: Salat Counter */}
-                        <Link href="/shop?category=Salat%20Counter" className="block h-[400px]">
+                        <Link href="/category/salat-counter" className="block h-[400px]">
                             <div className="relative w-full h-full bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-200 hover:scale-105">
                                 <Image 
                                     src="/images/category-salat-counter.webp" 
