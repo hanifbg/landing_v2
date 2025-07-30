@@ -16,10 +16,9 @@ export default function Header() {
         // Changed background to a dark gray/black matching the screenshot
         // Added shadow-md for a subtle lift
         <header className="fixed top-0 left-0 right-0 bg-neutral-800 text-white z-50 shadow-md">
-            <nav className="container mx-auto px-4 py-4 flex items-center justify-between">
-                {/* Left Section: Left Nav + Logo + Right Nav */}
-                <div className="flex items-center justify-start w-full md:w-auto"> {/* Adjusted for flexible width */}
-                    {/* Left Navigation */}
+            <nav className="container mx-auto px-4 py-4 flex items-center justify-between relative">
+                {/* Left Navigation */}
+                <div className="flex-1 flex items-center justify-start">
                     <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
                         {/* Shop with Dropdown */}
                         <div className="relative group">
@@ -77,34 +76,28 @@ export default function Header() {
                         <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
                             {t('header.orderTracker')}
                         </Link>
-                        {/* Affiliate Program */}
-                        <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
-                            {t('header.affiliateProgram')}
-                        </Link>
                     </div>
+                </div>
 
-                    {/* Logo (Centered within this flex container) */}
-                    {/* Removed absolute positioning, now part of the flex flow */}
-                    <Link href="/" className="flex-shrink-0 mx-auto md:mx-8 lg:mx-12"> {/* Added horizontal margin for spacing */}
-                        <Image
-                            src="/iqibla-logo.png" // Ensure this image is in your /public folder
-                            alt="iQibla Logo"
-                            width={120} // Adjust based on your logo size for optimal display
-                            height={40} // Adjust based on your logo size
-                            priority // Prioritize loading for LCP
-                            className="h-10 w-auto" // Ensures consistent height and auto-width
-                        />
-                    </Link>
+                {/* Centered Logo */}
+                <Link href="/" className="absolute left-1/2 -translate-x-1/2 z-10">
+                    <Image
+                        src="/iqibla-logo.png" // Ensure this image is in your /public folder
+                        alt="iQibla Logo"
+                        width={120} // Adjust based on your logo size for optimal display
+                        height={40} // Adjust based on your logo size
+                        priority // Prioritize loading for LCP
+                        className="w-auto" // Ensures consistent height and auto-width
+                    />
+                </Link>
 
-                    {/* Right Navigation (moved here, to the right of the logo) */}
+                {/* Right Navigation and Icons */}
+                <div className="flex-1 flex items-center justify-end">
+                    {/* Right Navigation Links */}
                     <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
                         {/* iQIBLA Life */}
                         <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
                             {t('header.iqiblaLife')}
-                        </Link>
-                        {/* Brand Story */}
-                        <Link href="#" className="text-sm lg:text-base font-medium hover:text-gray-400 transition-colors duration-200">
-                            {t('header.brandStory')}
                         </Link>
                         {/* Contact Us (your existing WhatsApp link) */}
                         <a
@@ -126,29 +119,29 @@ export default function Header() {
                             <option value="id" className="text-black">Bahasa Indonesia</option>
                         </select>
                     </div>
-                </div>
 
-                {/* Rightmost Icons */}
-                <div className="flex items-center space-x-4 lg:space-x-6 pl-4 border-l border-gray-700"> {/* Added border-l for separator */}
-                    {/* Search Icon */}
-                    <Link href="#" className="hover:text-gray-400 transition-colors duration-200">
-                        <Search size={22} />
-                    </Link>
-                    {/* User Icon */}
-                    <Link href="/account" className="hover:text-gray-400 transition-colors duration-200">
-                        <User size={22} />
-                    </Link>
-                    {/* Shopping Cart Icon with Counter Badge */}
-                    <Link href="/cart" className="hover:text-gray-400 transition-colors duration-200">
-                        <div className="relative">
-                            <ShoppingCart size={22} />
-                            {cartItemCount > 0 && (
-                                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                                    {cartItemCount}
-                                </span>
-                            )}
-                        </div>
-                    </Link>
+                    {/* Icons */}
+                    <div className="flex items-center space-x-4 lg:space-x-6 pl-4 border-l border-gray-700 ml-4">
+                        {/* Search Icon */}
+                        <Link href="#" className="hover:text-gray-400 transition-colors duration-200">
+                            <Search size={22} />
+                        </Link>
+                        {/* User Icon */}
+                        <Link href="/account" className="hover:text-gray-400 transition-colors duration-200">
+                            <User size={22} />
+                        </Link>
+                        {/* Shopping Cart Icon with Counter Badge */}
+                        <Link href="/cart" className="hover:text-gray-400 transition-colors duration-200">
+                            <div className="relative">
+                                <ShoppingCart size={22} />
+                                {cartItemCount > 0 && (
+                                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                                        {cartItemCount}
+                                    </span>
+                                )}
+                            </div>
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Mobile Menu Icon (Placeholder, hidden on md and up) */}
