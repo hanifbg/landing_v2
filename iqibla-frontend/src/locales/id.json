@@ -529,5 +529,184 @@
         }
       }
     }
+  },
+  "termsOfService": {
+    "title": "Syarat Layanan",
+    "policyTitle": "Syarat Layanan iQibla",
+    "intro": "Harap baca Syarat Layanan (\"Syarat\") ini dengan seksama karena berisi informasi penting tentang hak, pemulihan, dan kewajiban hukum Anda. Dengan mengakses atau menggunakan Layanan iQibla, Anda setuju untuk mematuhi dan terikat oleh Syarat ini.",
+    "toc": {
+      "useOfService": "PENGGUNAAN LAYANAN iQibla",
+      "creatingAccount": "MEMBUAT AKUN",
+      "contentOwnership": "KONTEN DAN KEPEMILIKAN",
+      "prohibitedActivities": "AKTIVITAS YANG DILARANG",
+      "termination": "PENGHENTIAN",
+      "disclaimers": "PENAFIAN",
+      "indemnity": "GANTI RUGI",
+      "limitationLiability": "BATASAN TANGGUNG JAWAB",
+      "disputeResolution": "PENYELESAIAN SENGKETA",
+      "generalTerms": "KETENTUAN UMUM",
+      "additionalTerms": "KETENTUAN TAMBAHAN",
+      "contactUs": "HUBUNGI KAMI",
+      "paidServices": "SYARAT UNTUK LAYANAN BERBAYAR"
+    },
+    "sections": {
+      "useOfService": {
+        "title": "PENGGUNAAN LAYANAN iQibla",
+        "paragraph1": "Layanan iQibla disediakan semata-mata untuk penggunaan pribadi dan non-komersial Anda. Anda dapat mengunduh dan menggunakan aplikasi iQibla di perangkat seluler Anda, dan mengakses situs web iQibla.",
+        "paragraph2": "Anda tidak boleh menggunakan Layanan iQibla jika Anda berusia di bawah 13 tahun. Jika Anda berusia di bawah 18 tahun (atau usia mayoritas hukum di tempat Anda tinggal), Anda hanya dapat menggunakan Layanan iQibla di bawah pengawasan orang tua atau wali hukum yang setuju untuk terikat oleh Syarat ini.",
+        "paragraph3": "iQibla dapat mengubah atau menghentikan, sementara atau permanen, fitur, komponen, atau konten apa pun dari Layanan iQibla kapan saja tanpa pemberitahuan. iQibla tidak bertanggung jawab kepada Anda atau pihak ketiga mana pun atas modifikasi, penangguhan, atau penghentian fitur, komponen, atau konten apa pun dari Layanan iQibla. Kami berhak untuk menentukan waktu dan konten pembaruan perangkat lunak, yang mungkin secara otomatis diunduh dan diinstal oleh produk iQibla tanpa pemberitahuan sebelumnya kepada Anda."
+      },
+      "creatingAccount": {
+        "title": "MEMBUAT AKUN",
+        "paragraph1": "Penggunaan penuh Layanan iQibla mengharuskan Anda membuat akun dengan memberikan informasi seperti nama, email, dan kata sandi. Anda setuju untuk memberikan informasi yang akurat, terkini, dan lengkap serta memperbarui informasi ini untuk menjaga keakuratannya. Anda bertanggung jawab untuk menjaga kerahasiaan kata sandi Anda dan untuk semua aktivitas yang terjadi di bawah akun Anda. Anda setuju untuk segera memberi tahu iQibla tentang penggunaan akun Anda yang tidak sah.",
+        "paragraph2": "Jika Anda terhubung ke Layanan iQibla menggunakan kredensial Facebook atau layanan pihak ketiga lainnya, Anda mengizinkan kami untuk mengakses dan menggunakan informasi tertentu dari layanan pihak ketiga tersebut."
+      },
+      "contentOwnership": {
+        "title": "KONTEN DAN KEPEMILIKAN",
+        "paragraph1": "Layanan iQibla berisi konten yang dimiliki atau dilisensikan oleh iQibla (\"Konten iQibla\"). Konten iQibla dilindungi oleh hak cipta, merek dagang, paten, rahasia dagang, dan undang-undang lainnya, dan iQibla memiliki dan mempertahankan semua hak dalam Konten iQibla dan Layanan iQibla.",
+        "paragraph2": "iQibla dengan ini memberikan Anda lisensi terbatas, dapat dicabut, tidak dapat disublisensikan untuk mereproduksi dan menampilkan Konten iQibla (tidak termasuk kode perangkat lunak apa pun) semata-mata untuk penggunaan pribadi Anda sehubungan dengan penggunaan Layanan iQibla.",
+        "paragraph3": "Konten yang Anda kirimkan, posting, atau tampilkan di atau melalui Layanan iQibla adalah konten Anda (\"Konten Anda\"). Anda mempertahankan semua hak atas Konten Anda yang Anda posting ke Layanan iQibla. Dengan membuat Konten Anda tersedia di atau melalui Layanan iQibla, Anda memberikan kepada iQibla lisensi non-eksklusif, dapat dialihkan, dapat disublisensikan, di seluruh dunia, bebas royalti untuk menggunakan, menyalin, memodifikasi, menampilkan secara publik, melakukan secara publik, dan mendistribusikan Konten Anda sehubungan dengan pengoperasian dan penyediaan Layanan iQibla kepada Anda dan pengguna lain."
+      },
+      "prohibitedActivities": {
+        "title": "AKTIVITAS YANG DILARANG",
+        "intro": "Anda setuju untuk tidak terlibat dalam aktivitas yang dilarang berikut:",
+        "activities": [
+          "Menyalin, mendistribusikan, atau mengungkapkan bagian apa pun dari Layanan iQibla dalam media apa pun, termasuk tanpa batasan oleh \"scraping\" otomatis atau non-otomatis.",
+          "Menggunakan sistem otomatis apa pun, termasuk tanpa batasan \"robot,\" \"spider,\" \"pembaca offline,\" dll., untuk mengakses Layanan iQibla dengan cara yang mengirimkan lebih banyak pesan permintaan ke server iQibla daripada yang dapat dihasilkan manusia secara wajar dalam periode waktu yang sama dengan menggunakan browser web online konvensional.",
+          "Mengirimkan spam, surat berantai, atau email yang tidak diminta lainnya.",
+          "Mencoba mengganggu, membahayakan integritas atau keamanan sistem, atau memecahkan kode transmisi apa pun ke atau dari server yang menjalankan Layanan iQibla.",
+          "Mengambil tindakan apa pun yang membebankan, atau mungkin membebankan menurut kebijaksanaan kami sendiri, beban yang tidak wajar atau tidak proporsional besar pada infrastruktur kami.",
+          "Mengunggah data yang tidak valid, virus, worm, atau agen perangkat lunak lainnya melalui Layanan iQibla.",
+          "Mengumpulkan atau memanen informasi yang dapat diidentifikasi secara pribadi, termasuk nama akun, dari Layanan iQibla.",
+          "Menggunakan Layanan iQibla untuk tujuan permintaan komersial.",
+          "Menyamar sebagai orang lain atau dengan cara lain salah menyajikan afiliasi Anda dengan orang atau entitas, melakukan penipuan, menyembunyikan atau mencoba menyembunyikan identitas Anda.",
+          "Mengganggu fungsi yang tepat dari Layanan iQibla.",
+          "Mengakses konten apa pun di Layanan iQibla melalui teknologi atau cara apa pun selain yang disediakan atau diizinkan oleh Layanan iQibla.",
+          "Melewati tindakan yang mungkin kami gunakan untuk mencegah atau membatasi akses ke Layanan iQibla, termasuk tanpa batasan fitur yang mencegah atau membatasi penggunaan atau penyalinan konten apa pun atau menerapkan batasan penggunaan Layanan iQibla atau konten di dalamnya."
+        ]
+      },
+      "termination": {
+        "title": "PENGHENTIAN",
+        "content": "Kami berhak untuk menangguhkan atau menonaktifkan akun Anda atau akses Anda ke aspek tertentu atau semua Layanan iQibla, atau untuk mengakhiri Syarat ini, atas kebijakan kami sendiri, kapan saja dan tanpa pemberitahuan atau kewajiban kepada Anda. Setelah penangguhan, penonaktifan, atau penghentian tersebut, kami dapat menghapus atau menghapus Konten Anda dan informasi lain yang terkait dengan akun Anda. Anda dapat menutup akun Anda kapan saja dengan menghubungi Layanan Pelanggan. Setelah penghentian Syarat ini atau penangguhan, penghentian, atau penghentian Layanan iQibla atau akun Anda, ketentuan berikut dari Syarat ini akan tetap berlaku: Bagian 1, 5, 6, 9, 10, 11, 13, 14, 16, 17, 19, 20, 21, 22, 23, 24, 25."
+      },
+      "disclaimers": {
+        "title": "PENAFIAN",
+        "content": "LAYANAN iQibla DAN KONTEN iQibla DISEDIAKAN \"SEBAGAIMANA ADANYA,\" TANPA JAMINAN APA PUN. TANPA MEMBATASI HAL-HAL SEBELUMNYA, KAMI SECARA EKSPLISIT MENOLAK SEMUA JAMINAN TERSURAT ATAU TERSIRAT YANG TIMBUL DARI ATAU TERKAIT DENGAN SYARAT INI ATAU LAYANAN iQibla, TERMASUK JAMINAN APA PUN TENTANG KELAYAKAN UNTUK DIPERDAGANGKAN, KESESUAIAN UNTUK TUJUAN TERTENTU, KENIKMATAN YANG TENANG ATAU NON-PELANGGARAN, DAN JAMINAN APA PUN YANG TIMBUL DARI PERJALANAN TRANSAKSI ATAU PENGGUNAAN PERDAGANGAN. Kami tidak memberikan jaminan bahwa Layanan iQibla atau Konten iQibla akan memenuhi persyaratan Anda atau tersedia tanpa gangguan, aman, atau bebas dari kesalahan. Kami tidak memberikan jaminan mengenai kualitas, akurasi, ketepatan waktu, kebenaran, kelengkapan, atau keandalan Layanan iQibla atau Konten iQibla apa pun."
+      },
+      "indemnity": {
+        "title": "GANTI RUGI",
+        "content": "Anda akan mengganti rugi dan membebaskan iQibla atau petugas, direktur, karyawan, afiliasi, agen, penerima lisensi, dan kontraktornya dari dan terhadap klaim, gugatan, tindakan, tuntutan, perselisihan, tuduhan, atau penyelidikan yang dibawa oleh pihak ketiga, otoritas pemerintah, atau badan industri, dan semua kewajiban, kerusakan, kerugian, biaya, dan pengeluaran, termasuk tanpa batasan biaya pengacara yang wajar, yang timbul dari atau dengan cara apa pun terhubung dengan (i) akses atau penggunaan Anda terhadap Layanan iQibla, (ii) Konten Anda, (iii) pelanggaran atau dugaan pelanggaran Anda terhadap jaminan apa pun yang dibuat oleh Anda di sini atau pelanggaran Anda terhadap ketentuan lain dari Syarat ini, atau (iv) pelanggaran Anda terhadap hukum atau hak pihak ketiga. Kami berhak untuk mengambil alih kendali atas pembelaan dari klaim pihak ketiga yang tunduk pada ganti rugi oleh Anda, dalam hal ini Anda akan bekerja sama dengan kami dalam menegaskan pembelaan yang tersedia."
+      },
+      "limitationLiability": {
+        "title": "BATASAN TANGGUNG JAWAB",
+        "paragraph1": "BAIK iQibla, PEMASOK, ATAU PENERIMA LISENSINYA, ATAU PIHAK LAIN YANG TERLIBAT DALAM MENCIPTAKAN, MEMPRODUKSI, ATAU MENGIRIMKAN LAYANAN iQibla TIDAK AKAN BERTANGGUNG JAWAB ATAS KERUSAKAN INSIDENTAL, KHUSUS, TELADAN, ATAU KONSEKUENSIAL, TERMASUK KEHILANGAN KEUNTUNGAN, KEHILANGAN DATA ATAU GOODWILL, GANGGUAN LAYANAN, KERUSAKAN KOMPUTER, ATAU KEGAGALAN SISTEM ATAU BIAYA LAYANAN PENGGANTI YANG TIMBUL DARI ATAU SEHUBUNGAN DENGAN SYARAT INI ATAU DARI PENGGUNAAN ATAU KETIDAKMAMPUAN UNTUK MENGGUNAKAN LAYANAN iQibla, BAIK BERDASARKAN JAMINAN, KONTRAK, TORT (TERMASUK KELALAIAN), TANGGUNG JAWAB PRODUK, ATAU TEORI HUKUM LAINNYA, DAN APAKAH ATAU TIDAK iQibla TELAH DIBERITAHU TENTANG KEMUNGKINAN KERUSAKAN TERSEBUT, BAHKAN JIKA PEMULIHAN TERBATAS YANG DITETAPKAN DI SINI DITEMUKAN TELAH GAGAL DARI TUJUAN ESENSIALNYA.",
+        "paragraph2": "DALAM KEADAAN APA PUN TOTAL TANGGUNG JAWAB iQibla YANG TIMBUL DARI ATAU SEHUBUNGAN DENGAN SYARAT INI ATAU DARI PENGGUNAAN ATAU KETIDAKMAMPUAN UNTUK MENGGUNAKAN LAYANAN iQibla MELEBIHI JUMLAH YANG TELAH ANDA BAYARKAN KEPADA iQibla UNTUK PENGGUNAAN LAYANAN iQibla ATAU SERATUS DOLAR ($100), JIKA ANDA TIDAK MEMILIKI KEWAJIBAN PEMBAYARAN APA PUN KEPADA iQibla, SEBAGAIMANA BERLAKU.",
+        "paragraph3": "PENGECUALIAN DAN BATASAN KERUSAKAN YANG DITETAPKAN DI ATAS ADALAH ELEMEN FUNDAMENTAL DARI DASAR KESEPAKATAN ANTARA iQibla DAN ANDA.",
+        "paragraph4": "BEBERAPA YURISDIKSI TIDAK MENGIZINKAN PENGECUALIAN ATAU BATASAN TANGGUNG JAWAB UNTUK KERUSAKAN KONSEKUENSIAL ATAU INSIDENTAL, SEHINGGA BATASAN DI ATAS MUNGKIN TIDAK BERLAKU UNTUK ANDA."
+      },
+      "disputeResolution": {
+        "title": "PENYELESAIAN SENGKETA",
+        "warning": "HARAP BACA BAGIAN BERIKUT DENGAN SEKSAMA KARENA MENGHARUSKAN ANDA UNTUK MENGARBITRASI SENGKETA DAN KLAIM TERTENTU DENGAN KAMI DAN MEMBATASI CARA ANDA DAPAT MENCARI BANTUAN DARI KAMI.",
+        "paragraph1": "Anda setuju bahwa setiap sengketa antara Anda dan iQibla yang timbul dari atau berkaitan dengan Syarat Layanan ini, Layanan iQibla, atau produk atau layanan iQibla lainnya (secara kolektif, \"Sengketa\") akan diatur oleh prosedur arbitrase yang diuraikan di bawah ini.",
+        "governingLaw": {
+          "title": "Hukum yang Mengatur:",
+          "content": "Kecuali jika diwajibkan lain oleh hukum yang berlaku, Syarat Layanan dan penyelesaian Sengketa apa pun akan diatur oleh dan ditafsirkan sesuai dengan hukum setempat tanpa memperhatikan prinsip-prinsip konflik hukumnya."
+        },
+        "informalResolution": {
+          "title": "Penyelesaian Sengketa Informal:",
+          "content": "Kami ingin mengatasi kekhawatiran Anda tanpa perlu kasus hukum formal. Sebelum mengajukan klaim terhadap iQibla, Anda setuju untuk mencoba menyelesaikan Sengketa secara informal dengan menghubungi support@iQibla.com. Kami akan mencoba menyelesaikan Sengketa secara informal dengan menghubungi Anda melalui email. Jika sengketa tidak diselesaikan dalam waktu 15 hari setelah pengajuan, Anda atau iQibla dapat membawa proses formal."
+        },
+        "arbitrationAgreement": {
+          "title": "Kami Berdua Setuju Untuk Arbitrase:",
+          "content": "Anda dan iQibla setuju untuk menyelesaikan Sengketa apa pun melalui arbitrase final dan mengikat, kecuali sebagaimana diatur dalam Pengecualian terhadap Perjanjian untuk Arbitrase di bawah ini."
+        },
+        "optOut": {
+          "title": "Opt-out dari Perjanjian untuk Arbitrase:",
+          "content": "Anda dapat menolak perjanjian arbitrase ini dengan menghubungi support@iQibla.com dalam waktu 30 hari sejak pertama kali menerima Syarat Layanan ini dan menyatakan bahwa Anda (sertakan nama depan dan belakang Anda) menolak perjanjian arbitrase ini."
+        },
+        "exceptions": {
+          "title": "Pengecualian terhadap Perjanjian untuk Arbitrase:",
+          "content": "Salah satu pihak dapat mengajukan gugatan semata-mata untuk bantuan injunctive untuk menghentikan penggunaan atau penyalahgunaan yang tidak sah dari produk iQibla atau Layanan iQibla, atau pelanggaran hak kekayaan intelektual (misalnya, merek dagang, rahasia dagang, hak cipta, atau hak paten) tanpa terlebih dahulu terlibat dalam arbitrase atau proses penyelesaian sengketa informal yang dijelaskan di atas."
+        },
+        "noClassActions": {
+          "title": "Tidak Ada Tindakan Kelas:",
+          "content": "Anda hanya dapat menyelesaikan Sengketa dengan iQibla secara individual, dan tidak dapat mengajukan klaim sebagai penggugat atau anggota kelas dalam tindakan kelas, konsolidasi, atau perwakilan. Arbitrase kelas, tindakan kelas, tindakan pengacara umum swasta, dan konsolidasi dengan arbitrase lain tidak diperbolehkan berdasarkan perjanjian kami."
+        },
+        "judicialForum": {
+          "title": "Forum Yudisial untuk Sengketa:",
+          "content": "Kecuali jika diwajibkan lain oleh hukum yang berlaku, dalam hal perjanjian untuk arbitrase ditemukan tidak berlaku untuk Anda atau klaim Anda, Anda dan iQibla setuju bahwa proses peradilan apa pun (selain tindakan klaim kecil) akan dibawa ke pengadilan setempat. Baik Anda maupun iQibla menyetujui tempat dan yurisdiksi pribadi di sana. Kami berdua setuju untuk melepaskan hak kami untuk pengadilan juri."
+        },
+        "limitationOnClaims": {
+          "title": "Batasan pada Klaim:",
+          "content": "Terlepas dari undang-undang atau hukum apa pun yang bertentangan, klaim atau penyebab tindakan apa pun yang timbul dari atau terkait dengan penggunaan Anda atas produk iQibla atau Layanan iQibla harus diajukan dalam waktu satu (1) tahun setelah klaim atau penyebab tindakan tersebut timbul, atau klaim atau penyebab tindakan tersebut akan dilarang selamanya."
+        }
+      },
+      "generalTerms": {
+        "title": "KETENTUAN UMUM",
+        "paragraph1": "Kecuali dinyatakan lain di sini, Syarat ini merupakan pemahaman dan perjanjian eksklusif dan eksklusif antara iQibla dan Anda mengenai Layanan iQibla, dan Syarat ini menggantikan dan menggantikan semua pemahaman atau perjanjian lisan atau tertulis sebelumnya antara iQibla dan Anda mengenai Layanan iQibla dan Konten iQibla.",
+        "paragraph2": "Kami akan memberi tahu Anda sebelum kami membuat perubahan material pada Syarat ini dan memberi Anda kesempatan untuk meninjau Syarat yang direvisi sebelum melanjutkan untuk menggunakan Layanan iQibla. Ketika Anda menggunakan Layanan iQibla setelah modifikasi menjadi efektif, Anda memberi tahu kami bahwa Anda menerima Syarat yang dimodifikasi.",
+        "paragraph3": "Jika karena alasan apa pun pengadilan yurisdiksi yang kompeten menemukan ketentuan apa pun dari Syarat ini tidak valid atau tidak dapat dilaksanakan, ketentuan tersebut akan dilaksanakan sejauh maksimum yang diizinkan dan ketentuan lain dari Syarat ini akan tetap berlaku penuh.",
+        "paragraph4": "Anda tidak boleh menetapkan, mendelegasikan, atau mentransfer Syarat ini, dengan operasi hukum atau lainnya, tanpa persetujuan tertulis sebelumnya dari iQibla. Setiap upaya oleh Anda untuk menetapkan atau mentransfer Syarat ini, tanpa persetujuan tersebut, akan batal. iQibla dapat dengan bebas menetapkan atau mentransfer Syarat ini tanpa batasan. Tunduk pada hal-hal di atas, Syarat ini akan mengikat dan berlaku untuk kepentingan para pihak, penerus mereka, dan penerima yang diizinkan.",
+        "paragraph5": "Setiap pemberitahuan atau komunikasi lain yang disediakan oleh iQibla berdasarkan Syarat ini, termasuk yang mengenai modifikasi Syarat ini, akan diberikan: (i) melalui email atau (ii) dengan posting ke Layanan iQibla. Untuk pemberitahuan yang dibuat melalui e-mail, tanggal penerimaan pada pesan akan dianggap sebagai tanggal di mana pemberitahuan tersebut dikirimkan.",
+        "paragraph6": "Kegagalan iQibla untuk menegakkan hak atau ketentuan apa pun dari Syarat ini tidak akan dianggap sebagai pengesampingan hak atau ketentuan tersebut. Pengesampingan hak atau ketentuan tersebut hanya akan efektif jika tertulis dan ditandatangani oleh perwakilan iQibla yang berwenang. Kecuali sebagaimana dinyatakan secara tegas dalam Syarat ini, pelaksanaan oleh salah satu pihak dari remedinya berdasarkan Syarat ini akan tanpa prasangka terhadap remedinya yang lain berdasarkan Syarat ini atau lainnya."
+      },
+      "additionalTerms": {
+        "title": "KETENTUAN TAMBAHAN MUNGKIN BERLAKU",
+        "content": "Ketentuan tambahan mungkin berlaku untuk produk atau layanan tertentu. Dalam hal terjadi konflik antara Syarat ini dan ketentuan tambahan, ketentuan tambahan akan mengontrol."
+      },
+      "contactUs": {
+        "title": "HUBUNGI KAMI",
+        "subtitle": "SILAKAN HUBUNGI KAMI JIKA ANDA MEMILIKI PERTANYAAN TENTANG SYARAT INI.",
+        "content": "Anda dapat menghubungi kami di support@iQibla.com atau di alamat surat kami di bawah ini."
+      },
+      "paidServices": {
+        "title": "SYARAT iQibla UNTUK LAYANAN BERBAYAR",
+        "intro": {
+          "paragraph1": "Syarat iQibla untuk Layanan Berbayar ini (\"Syarat Layanan Berbayar\") berlaku untuk pembelian dan penggunaan Anda atas layanan iQibla berbayar apa pun, termasuk layanan berlangganan yang diperpanjang secara otomatis, layanan pembinaan langsung yang dipersonalisasi (\"Layanan Pembinaan Langsung\"), dan pembelian satu kali (secara kolektif \"Layanan Berbayar\"). Syarat Layanan Berbayar ini hanya berlaku untuk layanan yang kami tawarkan untuk dibeli, dan tidak berlaku untuk penjualan barang fisik kami (\"Produk\"). Untuk ketentuan pembayaran yang terkait dengan penjualan Produk, silakan lihat Kebijakan Pengiriman kami.",
+          "paragraph2": "Dengan membeli atau menggunakan Layanan Berbayar, Anda setuju untuk terikat oleh Syarat Layanan iQibla, yang menggabungkan Syarat Layanan Berbayar ini dan mencakup ketentuan arbitrase wajib, dan syarat dan ketentuan terpisah apa pun yang disajikan kepada Anda sehubungan dengan penggunaan Anda atas Layanan Berbayar. Jika Anda tidak menerima syarat ini, jangan membeli, mengakses, atau menggunakan Layanan Berbayar kami."
+        },
+        "paidServicesSection": {
+          "title": "1. LAYANAN BERBAYAR",
+          "content": "Layanan Berbayar mencakup konten dan layanan interaktif yang dipersonalisasi. Mereka mungkin berupa pembelian satu kali atau layanan berlangganan yang diperpanjang secara otomatis, seperti Program kami dan Layanan Pembinaan Langsung (\"Langganan\"). Silakan lihat halaman produk untuk Layanan Berbayar spesifik Anda untuk informasi lebih lanjut. Kami dapat membuat perubahan pada, menangguhkan, atau menghentikan Layanan Berbayar kapan saja untuk alasan apa pun, dan kami memiliki kebijaksanaan tunggal untuk menentukan bagian mana dari Layanan iQibla yang memerlukan pembayaran."
+        },
+        "subscriptionsSection": {
+          "title": "2. LANGGANAN",
+          "autoRenew": {
+            "title": "Langganan yang Diperpanjang Secara Otomatis.",
+            "content": "Jangka waktu Langganan Anda dapat bervariasi, misalnya, dengan jangka waktu perpanjangan otomatis bulanan atau tahunan (\"Jangka Waktu Langganan\"), sebagaimana dijelaskan dalam transaksi Anda. Langganan Anda akan diperpanjang secara otomatis untuk Jangka Waktu Langganan tambahan selama Langganan Anda berlanjut, sampai Anda membatalkannya atau kami menangguhkan atau berhenti menyediakan Langganan sesuai dengan Syarat Layanan kami. Kecuali ditunjukkan lain oleh kami, Anda akan dikenakan biaya sebelum, atau pada awal, setiap jangka waktu perpanjangan. Sebelum menagih Anda untuk Jangka Waktu Langganan, kami akan memberi tahu Anda tentang biaya yang berlaku, dan perpanjangan akan terjadi dengan harga yang berlaku saat itu untuk Layanan Berbayar."
+          },
+          "cancellation": {
+            "title": "Pembatalan Langganan.",
+            "content": "Anda dapat membatalkan Langganan Anda kapan saja. Pembatalan Anda akan berlaku pada akhir Jangka Waktu Langganan saat ini.",
+            "note": "Dalam hal Anda membatalkan Langganan Anda, perhatikan bahwa kami masih dapat mengirimkan komunikasi promosi tentang iQibla kepada Anda, kecuali jika Anda memilih untuk tidak menerima komunikasi tersebut dengan mengikuti instruksi berhenti berlangganan yang disediakan dalam komunikasi."
+          },
+          "noRefunds": {
+            "title": "Tidak Ada Pengembalian Dana pada Langganan.",
+            "content": "Ketika Anda membatalkan Langganan, Anda hanya membatalkan biaya masa depan untuk Langganan Anda. Anda tidak akan menerima pengembalian dana untuk Jangka Waktu Langganan saat ini yang telah Anda bayar, tetapi Anda akan terus memiliki akses penuh ke Langganan tersebut sampai akhir Jangka Waktu Langganan saat ini. Kapan saja untuk alasan apa pun, kami dapat memberikan pengembalian dana, diskon, atau pertimbangan lain (\"kredit\") kepada beberapa atau semua pengguna kami. Jumlah dan bentuk kredit tersebut, dan keputusan untuk menyediakannya, adalah atas kebijaksanaan tunggal dan mutlak kami. Penyediaan kredit dalam satu contoh tidak memberi Anda hak untuk kredit di masa depan untuk contoh serupa, juga tidak mewajibkan kami untuk memberikan kredit di masa depan."
+          },
+          "freeTrials": {
+            "title": "Uji Coba Gratis.",
+            "content": "Dari waktu ke waktu, kami dapat menawarkan uji coba gratis dari Langganan tertentu untuk jangka waktu tertentu tanpa pembayaran. Jika kami menawarkan Anda uji coba gratis, syarat spesifik dari uji coba gratis Anda akan disediakan dalam materi pemasaran yang menjelaskan uji coba tertentu. Setelah uji coba gratis Anda berakhir, kami (atau prosesor pembayaran pihak ketiga kami) akan mulai menagih metode pembayaran yang Anda tentukan secara berulang untuk Langganan Anda (ditambah pajak dan biaya lain yang berlaku) selama Langganan Anda berlanjut, kecuali jika Anda membatalkan Langganan Anda sebelum akhir uji coba gratis Anda. Instruksi untuk membatalkan Langganan Anda dijelaskan dalam bagian di atas. Untuk menghindari biaya apa pun, Anda harus membatalkan Langganan Anda sebelum akhir periode uji coba gratis Anda. Sebelum menagih Anda pada akhir periode uji coba gratis Anda, kami akan memberi tahu Anda tentang biaya yang berlaku."
+          },
+          "priceChanges": {
+            "title": "Perubahan Harga.",
+            "content": "Kami berhak untuk menyesuaikan harga untuk Layanan Berbayar kami atau komponen apa pun darinya dengan cara apa pun dan kapan saja. Perubahan harga apa pun akan berlaku setelah pemberitahuan kepada Anda."
+          }
+        },
+        "oneTimePurchases": {
+          "title": "3. PEMBELIAN SATU KALI",
+          "content": "Layanan Berbayar tertentu adalah pembelian satu kali, dan bukan berbasis langganan. Pembelian satu kali tidak dapat dibatalkan dan Anda tidak berhak atas pengembalian dana untuk layanan tersebut."
+        },
+        "paymentBilling": {
+          "title": "4. PEMBAYARAN DAN PENAGIHAN",
+          "paragraph1": "Anda mengizinkan iQibla untuk menagih metode pembayaran pilihan Anda untuk Layanan Berbayar. Dengan menyediakan metode pembayaran yang kami terima, Anda menyatakan dan menjamin bahwa Anda berwenang untuk menggunakan metode pembayaran yang ditentukan dan bahwa Anda mengizinkan kami (atau prosesor pembayaran pihak ketiga kami) untuk menagih metode pembayaran Anda untuk jumlah total pembelian Anda (termasuk pajak yang berlaku dan biaya lainnya). Jika metode pembayaran tidak dapat diverifikasi, tidak valid, atau tidak dapat diterima, Layanan Berbayar Anda dapat ditangguhkan atau dibatalkan. Anda harus menyelesaikan masalah apa pun yang kami temui sehubungan dengan metode pembayaran yang Anda pilih untuk melanjutkan penggunaan Layanan Anda.",
+          "paragraph2": "Harap perhatikan bahwa jika Anda menerima penawaran promosi atau membuat perubahan pada Layanan Berbayar Anda, jumlah yang ditagih mungkin bervariasi. Ini juga dapat berfluktuasi karena perubahan dalam pajak yang berlaku atau nilai tukar mata uang. Anda mengizinkan kami (atau prosesor pembayaran pihak ketiga kami) untuk menagih metode pembayaran Anda untuk jumlah yang sesuai."
+        },
+        "representations": {
+          "title": "5. PERNYATAAN, JAMINAN, DAN PERJANJIAN",
+          "content": "Layanan Berbayar apa pun bersifat pribadi untuk Anda dan tidak boleh digunakan oleh orang lain. Anda tidak akan mengizinkan orang lain untuk menggunakan Layanan Berbayar Anda, dan Anda tidak akan mentransfer Langganan apa pun atau mengungkapkan kata sandi Anda kepada orang lain. Anda akan melaporkan kepada iQibla setiap penggunaan Layanan Berbayar Anda yang tidak sah atau dilarang."
+        }
+      }
+    }
   }
 }
