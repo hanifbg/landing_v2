@@ -74,6 +74,7 @@ main {
 .content-section li {
     margin-bottom: 10px;
     line-height: 1.6;
+    color: #222; /* Added darker color for better visibility */
 }
 
 /* Table of Contents */

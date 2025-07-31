@@ -370,6 +370,164 @@
         "description": "Lihat informasi pemecahan masalah lengkap kami di",
         "blog": "BLOG"
       }
+    },
+    "privacyPolicy": {
+      "title": "Kebijakan Privasi",
+      "policyTitle": "Kebijakan Privasi iQibla",
+      "intro": {
+        "paragraph1": "Di iQibla, kami peduli tentang ibadah umat Muslim. Kami menghargai bahwa Anda mempercayakan kami dengan informasi ibadah yang penting bagi Anda, dan kami ingin menjelaskan bagaimana kami menggunakannya.",
+        "paragraph2": "Di sini kami menjelaskan praktik privasi untuk perangkat, aplikasi, perangkat lunak, situs web, produk, dan layanan kami (\"Layanan\"). Anda akan mempelajari tentang data yang kami kumpulkan, bagaimana kami menggunakannya, kontrol yang kami berikan atas informasi Anda, dan langkah-langkah yang kami ambil untuk menjaga keamanannya.",
+        "paragraph3": "Secara khusus, kami akan membahas:"
+      },
+      "toc": {
+        "informationWeCollect": "INFORMASI YANG KAMI KUMPULKAN",
+        "howWeUseInformation": "BAGAIMANA KAMI MENGGUNAKAN INFORMASI",
+        "cookiesUse": "PENGGUNAAN COOKIES",
+        "howInformationIsShared": "BAGAIMANA INFORMASI DIBAGIKAN",
+        "yourRights": "HAK ANDA UNTUK MENGAKSES DAN MENGONTROL DATA PRIBADI ANDA",
+        "dataRetention": "PENYIMPANAN DATA",
+        "analytics": "LAYANAN ANALITIK DAN PERIKLANAN YANG DISEDIAKAN OLEH PIHAK LAIN",
+        "children": "KEBIJAKAN KAMI UNTUK ANAK-ANAK",
+        "informationSecurity": "KEAMANAN INFORMASI",
+        "international": "OPERASI INTERNASIONAL DAN TRANSFER DATA KAMI",
+        "accountSecurity": "AKUN DAN KEAMANAN",
+        "changes": "PERUBAHAN PADA KEBIJAKAN INI",
+        "contact": "SIAPA KAMI DAN CARA MENGHUBUNGI KAMI"
+      },
+      "sections": {
+        "informationWeCollect": {
+          "title": "INFORMASI YANG KAMI KUMPULKAN",
+          "intro": "Ketika Anda menggunakan Layanan kami, kami mengumpulkan jenis informasi berikut.",
+          "informationYouProvide": {
+            "title": "INFORMASI YANG ANDA BERIKAN KEPADA KAMI"
+          },
+          "accountInformation": {
+            "title": "INFORMASI AKUN",
+            "content": "Beberapa informasi diperlukan untuk membuat akun di Layanan kami, seperti nama, alamat email, kata sandi, tanggal lahir, jenis kelamin, tinggi badan, berat badan, dan dalam beberapa kasus nomor telepon seluler Anda. Ini adalah satu-satunya informasi yang harus Anda berikan untuk membuat akun dengan kami. Anda juga dapat memilih untuk memberikan jenis informasi lain, seperti foto profil, biografi, informasi negara, dan nama pengguna komunitas."
+          },
+          "additionalInformation": {
+            "title": "INFORMASI TAMBAHAN",
+            "paragraph1": "Untuk membantu meningkatkan pengalaman Anda atau mengaktifkan fitur tertentu dari Layanan, Anda dapat memilih untuk memberikan kami informasi tambahan, seperti log untuk pelacakan berat badan, tidur, atau kesehatan; alarm; dan pesan di papan diskusi atau kepada teman Anda di Layanan.",
+            "paragraph2": "Anda juga dapat terhubung dengan teman di Layanan atau mengundang teman yang belum bergabung dengan memberikan alamat email mereka, mengakses akun jejaring sosial, atau menggunakan daftar kontak di perangkat seluler Anda. Kami tidak menyimpan daftar kontak Anda dan menghapusnya setelah digunakan untuk menambahkan kontak sebagai teman.",
+            "paragraph3": "Jika Anda menghubungi kami atau berpartisipasi dalam survei, kontes, atau promosi, kami mengumpulkan informasi yang Anda kirimkan seperti nama, informasi kontak, dan pesan Anda."
+          },
+          "paymentInformation": {
+            "title": "INFORMASI PEMBAYARAN DAN KARTU",
+            "paragraph1": "Beberapa perangkat iQibla mendukung pembayaran dan transaksi dengan pihak ketiga. Jika Anda mengaktifkan fitur ini, Anda harus memberikan informasi tertentu untuk identifikasi dan verifikasi, seperti nama, nomor kartu kredit, debit atau kartu lainnya, tanggal kedaluwarsa kartu, dan kode CVV. Informasi ini dienkripsi dan dikirim ke jaringan kartu Anda, yang setelah persetujuan mengirimkan kembali ke perangkat Anda token, yang merupakan serangkaian digit acak untuk melakukan transaksi tanpa mengekspos nomor kartu Anda. Untuk kenyamanan Anda, kami menyimpan empat digit terakhir nomor kartu Anda dan nama serta informasi kontak penerbit kartu Anda. Anda dapat menghapus token dari akun Anda menggunakan pengaturan akun Anda. Kami tidak menyimpan riwayat transaksi Anda.",
+            "paragraph2": "Jika Anda membeli barang dagangan iQibla di situs web kami, Anda memberikan informasi pembayaran Anda, termasuk nama, nomor kartu kredit atau debit, tanggal kedaluwarsa kartu, kode CVV, dan alamat penagihan. Kami tidak menyimpan informasi pembayaran ini. Kami menyimpan alamat pengiriman Anda untuk memenuhi pesanan Anda. Perhatikan bahwa prosesor pembayaran pihak ketiga dapat menyimpan informasi ini sesuai dengan kebijakan privasi dan persyaratan mereka sendiri."
+          },
+          "informationFromServices": {
+            "title": "INFORMASI YANG KAMI TERIMA DARI PENGGUNAAN LAYANAN KAMI"
+          },
+          "deviceInformation": {
+            "title": "INFORMASI PERANGKAT",
+            "content": "Perangkat Anda mengumpulkan data untuk memperkirakan berbagai metrik seperti jumlah langkah yang Anda ambil, jarak yang ditempuh, kalori yang terbakar, berat badan, detak jantung, tahapan tidur, menit aktif, dan lokasi. Data yang dikumpulkan bervariasi tergantung pada perangkat yang Anda gunakan. Ketika perangkat Anda disinkronkan dengan aplikasi atau perangkat lunak kami, data yang direkam pada perangkat Anda ditransfer dari perangkat Anda ke server kami."
+          },
+          "geolocationInformation": {
+            "title": "INFORMASI GEOLOKASI",
+            "content": "Layanan ini mencakup fitur yang menggunakan data geolokasi yang tepat, termasuk sinyal GPS, sensor perangkat, titik akses Wi-Fi, dan ID menara sel. Kami mengumpulkan jenis data ini jika Anda memberikan kami akses ke lokasi Anda. Anda selalu dapat menghapus akses kami menggunakan perangkat iQibla atau pengaturan perangkat seluler Anda. Kami juga dapat memperoleh perkiraan lokasi Anda dari alamat IP Anda."
+          },
+          "usageInformation": {
+            "title": "INFORMASI PENGGUNAAN",
+            "paragraph1": "Ketika Anda mengakses atau menggunakan Layanan kami, kami menerima informasi penggunaan atau aktivitas jaringan tertentu. Ini termasuk informasi tentang interaksi Anda dengan Layanan, misalnya, ketika Anda melihat atau mencari konten, menginstal aplikasi atau perangkat lunak, membuat atau masuk ke akun Anda, memasangkan perangkat Anda ke akun Anda, atau membuka atau berinteraksi dengan aplikasi di perangkat iQibla Anda.",
+            "paragraph2": "Kami juga mengumpulkan data tentang perangkat dan komputer yang Anda gunakan untuk mengakses Layanan, termasuk alamat IP, jenis browser, bahasa, sistem operasi, informasi perangkat iQibla atau seluler (termasuk pengidentifikasi perangkat dan aplikasi), halaman web yang merujuk, halaman yang dikunjungi, lokasi (tergantung pada izin yang telah Anda berikan kepada kami), dan informasi cookie."
+          },
+          "thirdPartyInformation": {
+            "title": "INFORMASI YANG KAMI TERIMA DARI PIHAK KETIGA",
+            "paragraph1": "Jika Anda memilih untuk menghubungkan akun Anda di Layanan kami ke akun Anda di layanan lain, kami mungkin menerima informasi dari layanan lain tersebut. Misalnya, jika Anda terhubung ke Facebook atau Google, kami mungkin menerima informasi seperti nama, gambar profil, rentang usia, bahasa, alamat email, dan daftar teman Anda. Anda juga dapat memilih untuk memberikan kami akses ke data latihan atau aktivitas Anda dari layanan lain. Anda dapat berhenti berbagi informasi dari layanan lain dengan kami dengan menghapus akses kami ke layanan lain tersebut.",
+            "paragraph2": "Kami dapat bermitra dengan pihak ketiga, dalam kasus seperti itu, perusahaan-perusahaan tersebut dapat memberikan kami nama, alamat email, atau informasi serupa Anda (seperti nomor telepon atau ID pelanggan) sehingga kami dapat mengundang Anda untuk berpartisipasi atau menentukan kelayakan Anda untuk manfaat tertentu, seperti diskon atau layanan gratis."
+          }
+        },
+        "howWeUseInformation": {
+          "title": "BAGAIMANA KAMI MENGGUNAKAN INFORMASI",
+          "intro": "Kami menggunakan informasi yang kami kumpulkan untuk tujuan berikut.",
+          "provideServices": {
+            "title": "MENYEDIAKAN DAN MEMELIHARA LAYANAN",
+            "paragraph1": "Dengan menggunakan informasi yang kami kumpulkan, kami dapat memberikan Layanan kepada Anda dan menghormati kontrak Ketentuan Layanan kami dengan Anda. Misalnya, kami perlu menggunakan informasi Anda untuk menyediakan dasbor iQibla Anda yang melacak latihan, aktivitas, dan tren lainnya; untuk mengaktifkan fitur komunitas Layanan; dan untuk memberikan dukungan pelanggan kepada Anda.",
+            "paragraph2": "Untuk fitur komunitas Layanan, kami dapat menggunakan informasi Anda untuk membantu Anda menemukan dan terhubung dengan pengguna lain dan untuk memungkinkan pengguna lain menemukan dan terhubung dengan Anda. Misalnya, informasi kontak akun Anda memungkinkan pengguna lain menambahkan Anda sebagai teman. Ketika pengguna lain memiliki email atau nomor telepon seluler Anda dalam daftar kontak mereka atau dalam jaringan teman mereka di layanan yang terhubung, kami menunjukkan kepada pengguna tersebut bahwa Anda adalah pengguna Layanan."
+          },
+          "improveServices": {
+            "title": "MENINGKATKAN, MEMPERSONALISASI, DAN MENGEMBANGKAN LAYANAN",
+            "paragraph1": "Kami menggunakan informasi yang kami kumpulkan untuk meningkatkan dan mempersonalisasi Layanan dan untuk mengembangkan yang baru. Misalnya, kami menggunakan informasi untuk memecahkan masalah dan melindungi dari kesalahan; melakukan analisis data dan pengujian; melakukan penelitian dan survei; dan mengembangkan fitur dan Layanan baru.",
+            "paragraph2": "Ketika Anda mengizinkan kami mengumpulkan informasi lokasi yang tepat, kami menggunakan informasi tersebut untuk menyediakan dan meningkatkan fitur Layanan seperti arah Kiblat yang akurat dan waktu shalat.",
+            "paragraph3": "Kami juga menggunakan informasi Anda untuk membuat kesimpulan dan menampilkan konten yang lebih relevan bagi Anda. Berikut beberapa contoh:",
+            "examples": [
+              "Informasi seperti tinggi badan, berat badan, jenis kelamin, dan usia Anda memungkinkan kami meningkatkan akurasi statistik latihan dan aktivitas harian Anda seperti jumlah kalori yang Anda bakar dan jarak yang Anda tempuh.",
+              "Berdasarkan data tidur Anda, kami dapat membuat kesimpulan tentang pola tidur Anda dan memberikan wawasan yang disesuaikan untuk membantu Anda meningkatkan tidur Anda."
+            ],
+            "bulletPoints": {
+              "point1": "Informasi seperti tinggi badan, berat badan, jenis kelamin, dan usia Anda memungkinkan kami meningkatkan akurasi statistik latihan dan aktivitas harian Anda seperti jumlah kalori yang Anda bakar dan jarak yang Anda tempuh.",
+              "point2": "Berdasarkan data tidur Anda, kami dapat membuat kesimpulan tentang pola tidur Anda dan memberikan wawasan yang disesuaikan untuk membantu Anda meningkatkan tidur Anda."
+            }
+          }
+        },
+        "cookiesUse": {
+          "title": "PENGGUNAAN COOKIES",
+          "paragraph1": "Kami menggunakan cookies dan teknologi serupa untuk menyediakan, melindungi, dan meningkatkan Layanan kami. Misalnya, kami menggunakan teknologi ini untuk mengingat preferensi pengguna Anda, memahami bagaimana Anda menggunakan situs web dan Layanan kami, dan mempersonalisasi konten.",
+          "paragraph2": "Anda dapat mengonfigurasi browser Anda untuk menerima semua cookies, menolak semua cookies, atau memberi tahu Anda ketika cookie ditetapkan. Namun, jika Anda menolak cookies, beberapa fitur Layanan kami mungkin tidak berfungsi dengan baik."
+        },
+        "howInformationIsShared": {
+          "title": "BAGAIMANA INFORMASI DIBAGIKAN",
+          "intro": "Kami tidak membagikan informasi pribadi Anda kecuali dalam keadaan terbatas yang dijelaskan di bawah ini.",
+          "whenYouAgree": {
+            "title": "KETIKA ANDA SETUJU ATAU MENGARAHKAN KAMI UNTUK BERBAGI",
+            "content": "Anda dapat mengarahkan kami untuk mengungkapkan informasi Anda kepada orang lain, seperti ketika Anda menggunakan fitur komunitas kami seperti forum, papan peringkat 7 hari, dan alat sosial lainnya. Untuk informasi tertentu, kami memberi Anda preferensi privasi dalam pengaturan akun dan alat lain untuk mengontrol bagaimana informasi Anda terlihat oleh pengguna lain Layanan."
+          },
+          "externalProcessing": {
+            "title": "UNTUK PEMROSESAN EKSTERNAL",
+            "content": "Kami mentransfer informasi ke afiliasi korporat, penyedia layanan, dan mitra lain kami yang memprosesnya untuk kami, berdasarkan instruksi kami, dan sesuai dengan kebijakan ini dan langkah-langkah kerahasiaan dan keamanan yang sesuai lainnya. Mitra-mitra ini menyediakan layanan bagi kami secara global, termasuk untuk dukungan pelanggan, teknologi informasi, pembayaran, penjualan, pemasaran, analisis data, penelitian, dan survei."
+          },
+          "legalReasons": {
+            "title": "UNTUK ALASAN HUKUM",
+            "content": "Kami dapat menyimpan atau mengungkapkan informasi tentang Anda untuk mematuhi hukum, peraturan, proses hukum, atau permintaan pemerintah; untuk menegaskan hak hukum atau membela diri dari klaim hukum; atau untuk mencegah, mendeteksi, atau menyelidiki aktivitas ilegal, penipuan, penyalahgunaan, pelanggaran terhadap ketentuan kami, atau ancaman terhadap keamanan Layanan atau keselamatan fisik siapa pun."
+          }
+        },
+        "yourRights": {
+          "title": "HAK ANDA UNTUK MENGAKSES DAN MENGONTROL DATA PRIBADI ANDA",
+          "intro": "Kami memberi Anda pengaturan akun dan alat untuk mengakses dan mengontrol data pribadi Anda, sebagaimana dijelaskan di bawah ini, terlepas dari di mana Anda tinggal. Jika Anda tinggal di Wilayah Ekonomi Eropa, Inggris, dan Swiss (\"Negara yang Ditunjuk\"), Anda memiliki sejumlah hak hukum sehubungan dengan informasi Anda, yang pengaturan dan alat akun Anda memungkinkan Anda untuk menggunakannya, sebagaimana diuraikan di bawah ini.",
+          "accessingData": {
+            "title": "MENGAKSES DAN MENGEKSPOR DATA",
+            "content": "Dengan masuk ke akun Anda, Anda dapat mengakses sebagian besar informasi pribadi Anda, termasuk dasbor Anda dengan statistik latihan dan aktivitas harian Anda. Menggunakan pengaturan akun Anda, Anda juga dapat mengunduh informasi dalam format file yang umum digunakan, termasuk data tentang aktivitas, tubuh, makanan, dan tidur Anda."
+          },
+          "editingData": {
+            "title": "MENGEDIT DAN MENGHAPUS DATA",
+            "content": "Pengaturan akun Anda memungkinkan Anda mengubah dan menghapus informasi pribadi Anda. Misalnya, Anda dapat mengedit atau menghapus data profil yang Anda berikan dan menghapus akun Anda jika Anda mau."
+          }
+        },
+        "dataRetention": {
+          "title": "PENYIMPANAN DATA",
+          "content": "Kami menyimpan informasi akun Anda, seperti nama, alamat email, dan kata sandi, selama akun Anda ada karena kami membutuhkannya untuk mengoperasikan akun Anda. Dalam beberapa kasus, ketika Anda memberi kami informasi untuk fitur Layanan, kami menghapus data setelah tidak lagi diperlukan untuk fitur tersebut. Misalnya, ketika Anda memberikan daftar kontak Anda untuk menemukan teman di Layanan, kami menghapus daftar tersebut setelah digunakan untuk menambahkan kontak sebagai teman. Kami menyimpan informasi lain, seperti data latihan atau aktivitas Anda, sampai Anda menggunakan pengaturan atau alat akun Anda untuk menghapus data atau akun Anda karena kami menggunakan data ini untuk memberi Anda statistik pribadi dan aspek lain dari Layanan. Kami juga menyimpan informasi tentang Anda dan penggunaan Layanan Anda selama diperlukan untuk kepentingan bisnis yang sah, untuk alasan hukum, dan untuk mencegah bahaya, termasuk sebagaimana dijelaskan dalam bagian Bagaimana Kami Menggunakan Informasi dan Bagaimana Informasi Dibagikan."
+        },
+        "analytics": {
+          "title": "LAYANAN ANALITIK DAN PERIKLANAN YANG DISEDIAKAN OLEH PIHAK LAIN",
+          "content": "Kami bekerja dengan mitra yang menyediakan layanan analitik dan periklanan. Ini termasuk membantu kami memahami bagaimana pengguna berinteraksi dengan Layanan, menyajikan iklan atas nama kami di seluruh internet, dan mengukur kinerja iklan tersebut. Perusahaan-perusahaan ini dapat menggunakan cookie dan teknologi serupa untuk mengumpulkan informasi tentang interaksi Anda dengan Layanan dan situs web dan aplikasi lainnya."
+        },
+        "children": {
+          "title": "KEBIJAKAN KAMI UNTUK ANAK-ANAK",
+          "content": "Kami menghargai pentingnya mengambil langkah-langkah tambahan untuk melindungi privasi anak-anak. Orang di bawah usia 13 tahun, atau usia minimum yang lebih tinggi di yurisdiksi tempat orang tersebut tinggal, tidak diizinkan untuk membuat akun kecuali orang tua mereka telah menyetujui sesuai dengan hukum yang berlaku. Jika kami mengetahui bahwa kami telah mengumpulkan informasi pribadi anak di bawah usia minimum yang relevan tanpa persetujuan orang tua, kami akan mengambil langkah-langkah untuk menghapus informasi tersebut sesegera mungkin. Orang tua yang percaya bahwa anak mereka telah mengirimkan informasi pribadi kepada kami dan ingin menghapusnya dapat menghubungi kami di privacy@iqibla.com."
+        },
+        "informationSecurity": {
+          "title": "KEAMANAN INFORMASI",
+          "content": "Kami bekerja keras untuk menjaga keamanan data Anda. Kami menggunakan kombinasi kontrol teknis, administratif, dan fisik untuk menjaga keamanan data Anda. Ini termasuk menggunakan Transport Layer Security (\"TLS\") untuk mengenkripsi banyak Layanan kami. Namun, tidak ada metode transmisi atau penyimpanan data yang sepenuhnya aman. Jika Anda memiliki masalah terkait keamanan, silakan hubungi dukungan pelanggan."
+        },
+        "international": {
+          "title": "OPERASI INTERNASIONAL DAN TRANSFER DATA KAMI",
+          "content": "Kami beroperasi secara internasional dan mentransfer informasi ke Amerika Serikat dan negara lain untuk tujuan yang dijelaskan dalam kebijakan ini. Kami mengandalkan beberapa dasar hukum untuk secara sah mentransfer data pribadi di seluruh dunia. Ini termasuk persetujuan Anda, EU-US dan Swiss-US Privacy Shield, dan klausul kontraktual model yang disetujui Komisi UE, yang mengharuskan perlindungan privasi dan keamanan tertentu."
+        },
+        "accountSecurity": {
+          "title": "AKUN DAN KEAMANAN",
+          "content": "Anda bertanggung jawab untuk melindungi kata sandi Anda dan untuk mengontrol akses ke akun Anda. Kami mendorong Anda untuk menggunakan kata sandi yang kuat dan untuk keluar setelah menggunakan Layanan. Jika Anda yakin akun Anda telah disusupi, segera hubungi dukungan pelanggan."
+        },
+        "changes": {
+          "title": "PERUBAHAN PADA KEBIJAKAN INI",
+          "content": "Kami akan memberi tahu Anda sebelum kami membuat perubahan material pada kebijakan ini dan memberi Anda kesempatan untuk meninjau kebijakan yang direvisi sebelum memutuskan apakah Anda ingin terus menggunakan Layanan. Anda dapat meninjau versi sebelumnya dari kebijakan di arsip kami."
+        },
+        "contact": {
+          "title": "SIAPA KAMI DAN CARA MENGHUBUNGI KAMI",
+          "paragraph1": "Jika Anda memiliki pertanyaan, saran, atau kekhawatiran tentang kebijakan ini, atau tentang penggunaan informasi Anda oleh kami, silakan hubungi kami di privacy@iqibla.com.",
+          "paragraph2": "Jika Anda tinggal di Wilayah Ekonomi Eropa, Inggris, atau Swiss, iQibla, Inc. adalah pengontrol data yang bertanggung jawab atas data pribadi yang kami kumpulkan. Anda dapat menghubungi Petugas Perlindungan Data kami di dpo@iqibla.com."
+        }
+      }
     }
   }
 }
