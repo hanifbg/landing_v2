@@ -156,7 +156,7 @@ export default function OrderConfirmationPage() {
         };
 
         loadSnapScript();
-    }, []);
+    }, [t]); // Added 't' to dependency array
 
     // Data Fetching
     const fetchOrder = useCallback(async (orderId: string) => {

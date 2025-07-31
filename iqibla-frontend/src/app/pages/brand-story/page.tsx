@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Image from 'next/image';
 import { useTranslation } from '@/contexts/LanguageContext';
 
@@ -14,13 +14,25 @@ export default function BrandStoryPage() {
   // We'll use translation in future updates
   const { } = useTranslation();
   const [activeSection, setActiveSection] = useState<SectionId>('journey');
-  const sections: SectionId[] = ['journey', 'innovation', 'revelation', 'global-impact'];
-  const sectionRefs = {
-    journey: useRef<HTMLElement>(null),
-    innovation: useRef<HTMLElement>(null),
-    revelation: useRef<HTMLElement>(null),
-    'global-impact': useRef<HTMLElement>(null),
-  };
+  
+  // Wrap sections array in useMemo to prevent it from changing on every render
+  const sections = useMemo<SectionId[]>(() => [
+    'journey', 'innovation', 'revelation', 'global-impact'
+  ], []);
+  
+  // Create refs outside of useMemo
+  const journeyRef = useRef<HTMLElement>(null);
+  const innovationRef = useRef<HTMLElement>(null);
+  const revelationRef = useRef<HTMLElement>(null);
+  const globalImpactRef = useRef<HTMLElement>(null);
+  
+  // Wrap sectionRefs in useMemo to prevent it from changing on every render
+  const sectionRefs = useMemo(() => ({
+    journey: journeyRef,
+    innovation: innovationRef,
+    revelation: revelationRef,
+    'global-impact': globalImpactRef,
+  }), [journeyRef, innovationRef, revelationRef, globalImpactRef]);
 
   // Handle timeline navigation
   const handleTimelineClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, sectionId: SectionId) => {
@@ -80,7 +92,7 @@ export default function BrandStoryPage() {
     return () => {
       observer.disconnect();
     };
-  }, [sections, setActiveSection]);
+  }, [sections, setActiveSection, sectionRefs]); // Added sectionRefs to dependency array
 
   // Add keyboard navigation
   useEffect(() => {
