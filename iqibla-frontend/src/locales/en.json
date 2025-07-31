@@ -336,6 +336,25 @@
         "next": "Next",
         "goToItem": "Go to item"
       }
+    },
+    "manual": {
+      "title": "Manuals & Tutorials",
+      "getStarted": {
+        "title": "Get Started with iQibla",
+        "description": "Looking for extra help setting up your iQibla Watch? Follow the steps below and make setup a breeze."
+      },
+      "setupSteps": {
+        "title": "Now get set up in 4 easy steps:",
+        "step1": "Download and log in to the iQibla App",
+        "step2": "Wake your iQibla Watch up",
+        "step3": "Start setup",
+        "step4": "Get going on your goals"
+      },
+      "needHelp": {
+        "title": "Need more help?",
+        "description": "Check out our complete troubleshooting information on our",
+        "blog": "BLOG"
+      }
     }
   }
 }

@@ -351,6 +351,25 @@
         "next": "Selanjutnya",
         "goToItem": "Pergi ke item"
       }
+    },
+    "manual": {
+      "title": "Manual & Tutorial",
+      "getStarted": {
+        "title": "Memulai dengan iQibla",
+        "description": "Mencari bantuan tambahan untuk mengatur Jam Tangan iQibla Anda? Ikuti langkah-langkah di bawah ini dan buat pengaturan menjadi mudah."
+      },
+      "setupSteps": {
+        "title": "Sekarang siapkan dalam 4 langkah mudah:",
+        "step1": "Unduh dan masuk ke Aplikasi iQibla",
+        "step2": "Bangunkan Jam Tangan iQibla Anda",
+        "step3": "Mulai pengaturan",
+        "step4": "Mulai mencapai tujuan Anda"
+      },
+      "needHelp": {
+        "title": "Butuh bantuan lebih?",
+        "description": "Lihat informasi pemecahan masalah lengkap kami di",
+        "blog": "BLOG"
+      }
     }
   }
 }
