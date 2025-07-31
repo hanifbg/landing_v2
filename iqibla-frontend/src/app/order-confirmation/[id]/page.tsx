@@ -5,6 +5,7 @@ import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from '@/contexts/LanguageContext';
+import { API_CONFIG } from '@/config/api';
 
 // TypeScript Interfaces
 interface OrderPaymentResponse {
@@ -162,7 +163,9 @@ export default function OrderConfirmationPage() {
     const fetchOrder = useCallback(async (orderId: string) => {
         try {
             setLoading(true);
-            const response = await fetch(`https://188.166.206.209/api/v1/orders/${orderId}`);
+            // Using buildApiUrl for the base endpoint and manually appending the orderId as a path parameter
+            const orderEndpoint = `${API_CONFIG.ENDPOINTS.ORDERS}/${orderId}`;
+            const response = await fetch(`${API_CONFIG.BASE_URL}${orderEndpoint}`);
             
             if (response.status === 404) {
                 notFound();
@@ -219,7 +222,9 @@ export default function OrderConfirmationPage() {
         setNotification(t('order.initiatingPayment'));
         
         try {
-            const response = await fetch(`https://188.166.206.209/api/v1/payments/${order.id}`, {
+            // Using API_CONFIG for the base URL and constructing the payments endpoint
+            const paymentsEndpoint = `/payments/${order.id}`;
+            const response = await fetch(`${API_CONFIG.BASE_URL}${paymentsEndpoint}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
