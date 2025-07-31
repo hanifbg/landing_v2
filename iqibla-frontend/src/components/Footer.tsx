@@ -48,7 +48,22 @@ export default function Footer() {
             <h3 className="font-semibold text-gray-900 mb-4">{t('footer.information')}</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-gray-700 hover:text-gray-900 transition-colors">
+                <Link href="/pages/brand-story" className="text-gray-700 hover:text-gray-900 transition-colors">
+                  {t('footer.aboutUs')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/pages/privacy-policy" className="text-gray-700 hover:text-gray-900 transition-colors">
+                  {t('footer.privacyPolicy')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/pages/terms-of-service" className="text-gray-700 hover:text-gray-900 transition-colors">
+                  {t('footer.termsOfService')}
+                </Link>
+              </li>
+              <li>
+                <Link href="/pages/manual" className="text-gray-700 hover:text-gray-900 transition-colors">
                   {t('footer.manualsTutorials')}
                 </Link>
               </li>
