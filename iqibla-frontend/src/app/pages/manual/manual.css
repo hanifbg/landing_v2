@@ -1,0 +1,116 @@
+/* Manual Page Styles */
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #ffffff;
+}
+
+/* Header Section */
+.header-section {
+    text-align: center;
+    margin-bottom: 40px;
+    background-color: #f9f9ff;
+    padding: 30px;
+    border-radius: 12px;
+}
+
+.header-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #222;
+}
+
+/* Content Section */
+.content-section {
+    margin-bottom: 40px;
+    background-color: #fafafa;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+}
+
+/* Manual Title - Larger and Darker */
+.manual-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #000;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #eaeaea;
+}
+
+.content-section h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #222;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.content-section h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.content-section p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #444;
+}
+
+.content-section ul {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.content-section li {
+    margin-bottom: 10px;
+    color: #333; /* Darker text color for list items */
+    font-weight: 500; /* Slightly bolder text */
+}
+
+/* Setup Steps List */
+.setup-steps li {
+    color: #222; /* Even darker text for setup steps */
+    font-weight: 600; /* Bolder text */
+    margin-bottom: 12px; /* Slightly more spacing between items */
+    padding-left: 5px; /* Add a little padding */
+    border-left: 3px solid #0066cc; /* Blue left border for emphasis */
+}
+
+/* Links */
+.content-section a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.content-section a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .header-section h1 {
+        font-size: 2rem;
+    }
+    
+    .manual-title {
+        font-size: 1.8rem;
+    }
+    
+    .content-section h3 {
+        font-size: 1.3rem;
+    }
+    
+    .content-section h4 {
+        font-size: 1.1rem;
+    }
+}
