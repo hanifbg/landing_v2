@@ -11,8 +11,8 @@ import './brand-story.css';
 type SectionId = 'journey' | 'innovation' | 'revelation' | 'global-impact';
 
 export default function BrandStoryPage() {
-  // We'll use translation in future updates
-  const { } = useTranslation();
+  // Use translation for multilingual support
+  const { t } = useTranslation();
   const [activeSection, setActiveSection] = useState<SectionId>('journey');
   
   // Wrap sections array in useMemo to prevent it from changing on every render
@@ -117,7 +117,7 @@ export default function BrandStoryPage() {
       <section id="hero">
         <Image 
           src="/images/brand-story/hero-banner.png" 
-          alt="iQIBLA Banner – Technology for Faith"
+          alt={t('pages.brandStory.hero.altText')}
           width={2880}
           height={1280}
           priority
@@ -129,8 +129,8 @@ export default function BrandStoryPage() {
       <main>
         {/* About iQIBLA */}
         <section id="about">
-          <h1>About iQIBLA</h1>
-          <p className="subtitle">The World&apos;s No. 1 Muslim Technology Brand</p>
+          <h1>{t('pages.brandStory.about.title')}</h1>
+          <p className="subtitle">{t('pages.brandStory.about.subtitle')}</p>
         </section>
 
         {/* Section 1: Cultural Convergence */}
@@ -138,15 +138,15 @@ export default function BrandStoryPage() {
           <div className="content-wrapper">
             <Image 
               src="/images/brand-story/cultural-convergence.png" 
-              alt="Jack Shao's Middle Eastern Journey"
+              alt={t('pages.brandStory.journey.altText')}
               width={1500}
               height={1500}
               className="section-image"
             />
             <div className="text-content">
-              <h2>Cultural Convergence: Jack Shao&apos;s Middle Eastern Journey</h2>
-              <p>&quot;Jack Shao, the founder of iQIBLA, has been traveling in the Middle East since 1999, covering countries such as Saudi Arabia, Dubai, and Turkey, and founded Eleca Electronic Technology in the early years, with companies in Dubai, Riyadh, Istanbul, and Nigeria since 2001.</p>
-              <p>He has a deep understanding of Islamic, Christian, Jewish and Chinese cultures.</p>
+              <h2>{t('pages.brandStory.journey.title')}</h2>
+              <p>{t('pages.brandStory.journey.paragraph1')}</p>
+              <p>{t('pages.brandStory.journey.paragraph2')}</p>
             </div>
           </div>
         </section>
@@ -156,14 +156,14 @@ export default function BrandStoryPage() {
           <div className="content-wrapper">
             <Image 
               src="/images/brand-story/innovating-future.png" 
-              alt="Jackshao's Path of Innovation"
+              alt={t('pages.brandStory.innovation.altText')}
               width={1500}
               height={1500}
               className="section-image"
             />
             <div className="text-content">
-              <h2>Innovating the Future: Jackshao&apos;s Path of Innovation</h2>
-              <p>Since 2015, Jackshao has founded a company that is dedicated to the development of smart technology, having invented the world&apos;s first children&apos;s locator watch phone (2011), the world&apos;s first Android watch phone, Omate (2013), and the world&apos;s first smart translator, Travis (2017), and he founded the Maxcares Smart Iot Ecosystem, which provides data services to more than 50 countries around the world.</p>
+              <h2>{t('pages.brandStory.innovation.title')}</h2>
+              <p>{t('pages.brandStory.innovation.paragraph1')}</p>
             </div>
           </div>
         </section>
@@ -173,15 +173,15 @@ export default function BrandStoryPage() {
           <div className="content-wrapper">
             <Image 
               src="/images/brand-story/moment-revelation.png" 
-              alt="Birth of iQIBLA"
+              alt={t('pages.brandStory.revelation.altText')}
               width={1500}
               height={1500}
               className="section-image"
             />
             <div className="text-content">
-              <h2>A Moment of Revelation: The Birth of iQIBLA</h2>
-              <p>On the 1st day of December 2020, when Jackshao took a moment to think about how to create a tech brand that serves humanity, a revelation came to mind. A voice told him to build a tech brand comparable to Apple for the 2 billion Muslims around the world! Helping people to find their way with technology, the brand iQIBLA was born.</p>
-              <p>After that, jackshao led a team of hundreds of the best engineering developers, software developers, designers and marketers to develop iQIBLA smart technology products from scratch.</p>
+              <h2>{t('pages.brandStory.revelation.title')}</h2>
+              <p>{t('pages.brandStory.revelation.paragraph1')}</p>
+              <p>{t('pages.brandStory.revelation.paragraph2')}</p>
             </div>
           </div>
         </section>
@@ -191,16 +191,16 @@ export default function BrandStoryPage() {
           <div className="content-wrapper">
             <Image 
               src="/images/brand-story/leading-future.png" 
-              alt="iQIBLA Global Impact"
+              alt={t('pages.brandStory.globalImpact.altText')}
               width={1500}
               height={1500}
               className="section-image"
             />
             <div className="text-content">
-              <h2>Leading the Future: iQIBLA&apos;s Global Impact</h2>
-              <p>In 2021 released the world&apos;s first Smart Zamzam Ring - Zikr Ring, which is the newer generation of Smart Zamzam Rings that allows a person to record his Zamzam to Allah, the God of the world, every single day with the iQibla Life App. And served more than 2 million Muslims in two years. iQIBLA team is confident to serve more than 10 million Muslim users in three years, says Jackshao.</p>
-              <p>In addition to Zikr Ring, iQIBLA has launched Qwatch, Qphone, Salat Counter and many other smart technology products.</p>
-              <p>Today, iQIBLA has become the most popular technology brand among Muslims around the world.&quot;</p>
+              <h2>{t('pages.brandStory.globalImpact.title')}</h2>
+              <p>{t('pages.brandStory.globalImpact.paragraph1')}</p>
+              <p>{t('pages.brandStory.globalImpact.paragraph2')}</p>
+              <p>{t('pages.brandStory.globalImpact.paragraph3')}</p>
             </div>
           </div>
         </section>
@@ -216,14 +216,14 @@ export default function BrandStoryPage() {
                   className={activeSection === section ? 'active' : ''}
                   onClick={(e) => handleTimelineClick(e, section)}
                 >
-                  Go to item {index + 1} {section === 'journey' ? '1999' : section === 'innovation' ? '2015' : section === 'revelation' ? '2020' : '2021'}
+                  {t('pages.brandStory.navigation.goToItem')} {index + 1} {section === 'journey' ? '1999' : section === 'innovation' ? '2015' : section === 'revelation' ? '2020' : '2021'}
                 </a>
               </li>
             ))}
           </ul>
           <div className="nav-controls">
-            <button id="prev-btn" onClick={() => handleNavigation('prev')}>Previous</button>
-            <button id="next-btn" onClick={() => handleNavigation('next')}>Next</button>
+            <button id="prev-btn" onClick={() => handleNavigation('prev')}>{t('pages.brandStory.navigation.previous')}</button>
+            <button id="next-btn" onClick={() => handleNavigation('next')}>{t('pages.brandStory.navigation.next')}</button>
           </div>
         </nav>
       </main>

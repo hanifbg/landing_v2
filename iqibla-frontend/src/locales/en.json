@@ -297,5 +297,45 @@
       "enterAddress": "Enter your address",
       "enterNotes": "Enter additional notes (optional)"
     }
+  },
+  "pages": {
+    "brandStory": {
+      "hero": {
+        "altText": "iQIBLA Banner – Technology for Faith"
+      },
+      "about": {
+        "title": "About iQIBLA",
+        "subtitle": "The World's No. 1 Muslim Technology Brand"
+      },
+      "journey": {
+        "title": "Cultural Convergence: Jack Shao's Middle Eastern Journey",
+        "paragraph1": "Jack Shao, the founder of iQIBLA, has been traveling in the Middle East since 1999, covering countries such as Saudi Arabia, Dubai, and Turkey, and founded Eleca Electronic Technology in the early years, with companies in Dubai, Riyadh, Istanbul, and Nigeria since 2001.",
+        "paragraph2": "He has a deep understanding of Islamic, Christian, Jewish and Chinese cultures.",
+        "altText": "Jack Shao's Middle Eastern Journey"
+      },
+      "innovation": {
+        "title": "Innovating the Future: Jackshao's Path of Innovation",
+        "paragraph1": "Since 2015, Jackshao has founded a company that is dedicated to the development of smart technology, having invented the world's first children's locator watch phone (2011), the world's first Android watch phone, Omate (2013), and the world's first smart translator, Travis (2017), and he founded the Maxcares Smart Iot Ecosystem, which provides data services to more than 50 countries around the world.",
+        "altText": "Jackshao's Path of Innovation"
+      },
+      "revelation": {
+        "title": "A Moment of Revelation: The Birth of iQIBLA",
+        "paragraph1": "On the 1st day of December 2020, when Jackshao took a moment to think about how to create a tech brand that serves humanity, a revelation came to mind. A voice told him to build a tech brand comparable to Apple for the 2 billion Muslims around the world! Helping people to find their way with technology, the brand iQIBLA was born.",
+        "paragraph2": "After that, jackshao led a team of hundreds of the best engineering developers, software developers, designers and marketers to develop iQIBLA smart technology products from scratch.",
+        "altText": "Birth of iQIBLA"
+      },
+      "globalImpact": {
+        "title": "Leading the Future: iQIBLA's Global Impact",
+        "paragraph1": "In 2021 released the world's first Smart Zamzam Ring - Zikr Ring, which is the newer generation of Smart Zamzam Rings that allows a person to record his Zamzam to Allah, the God of the world, every single day with the iQibla Life App. And served more than 2 million Muslims in two years. iQIBLA team is confident to serve more than 10 million Muslim users in three years, says Jackshao.",
+        "paragraph2": "In addition to Zikr Ring, iQIBLA has launched Qwatch, Qphone, Salat Counter and many other smart technology products.",
+        "paragraph3": "Today, iQIBLA has become the most popular technology brand among Muslims around the world.",
+        "altText": "iQIBLA Global Impact"
+      },
+      "navigation": {
+        "previous": "Previous",
+        "next": "Next",
+        "goToItem": "Go to item"
+      }
+    }
   }
 }

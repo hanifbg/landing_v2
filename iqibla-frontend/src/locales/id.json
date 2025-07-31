@@ -312,5 +312,45 @@
       "enterAddress": "Masukkan alamat Anda",
       "enterNotes": "Masukkan catatan tambahan (opsional)"
     }
+  },
+  "pages": {
+    "brandStory": {
+      "hero": {
+        "altText": "Banner iQIBLA – Teknologi untuk Iman"
+      },
+      "about": {
+        "title": "Tentang iQIBLA",
+        "subtitle": "Brand Teknologi Muslim No. 1 di Dunia"
+      },
+      "journey": {
+        "title": "Konvergensi Budaya: Perjalanan Jack Shao di Timur Tengah",
+        "paragraph1": "Jack Shao, pendiri iQIBLA, telah melakukan perjalanan di Timur Tengah sejak 1999, meliputi negara-negara seperti Arab Saudi, Dubai, dan Turki, dan mendirikan Eleca Electronic Technology pada tahun-tahun awal, dengan perusahaan di Dubai, Riyadh, Istanbul, dan Nigeria sejak 2001.",
+        "paragraph2": "Dia memiliki pemahaman mendalam tentang budaya Islam, Kristen, Yahudi, dan Tiongkok.",
+        "altText": "Perjalanan Jack Shao di Timur Tengah"
+      },
+      "innovation": {
+        "title": "Berinovasi untuk Masa Depan: Jalur Inovasi Jackshao",
+        "paragraph1": "Sejak 2015, Jackshao telah mendirikan perusahaan yang didedikasikan untuk pengembangan teknologi pintar, telah menciptakan jam tangan pelacak lokasi anak pertama di dunia (2011), jam tangan ponsel Android pertama di dunia, Omate (2013), dan penerjemah pintar pertama di dunia, Travis (2017), dan dia mendirikan Ekosistem Maxcares Smart IoT, yang menyediakan layanan data ke lebih dari 50 negara di seluruh dunia.",
+        "altText": "Jalur Inovasi Jackshao"
+      },
+      "revelation": {
+        "title": "Momen Wahyu: Kelahiran iQIBLA",
+        "paragraph1": "Pada hari pertama Desember 2020, ketika Jackshao mengambil waktu untuk memikirkan bagaimana menciptakan brand teknologi yang melayani kemanusiaan, sebuah wahyu muncul di benaknya. Sebuah suara menyuruhnya untuk membangun brand teknologi yang sebanding dengan Apple untuk 2 miliar Muslim di seluruh dunia! Membantu orang menemukan jalan mereka dengan teknologi, brand iQIBLA lahir.",
+        "paragraph2": "Setelah itu, Jackshao memimpin tim yang terdiri dari ratusan pengembang teknik terbaik, pengembang perangkat lunak, desainer, dan pemasar untuk mengembangkan produk teknologi pintar iQIBLA dari awal.",
+        "altText": "Kelahiran iQIBLA"
+      },
+      "globalImpact": {
+        "title": "Memimpin Masa Depan: Dampak Global iQIBLA",
+        "paragraph1": "Pada tahun 2021 merilis Cincin Zamzam Pintar pertama di dunia - Cincin Zikir, yang merupakan generasi baru dari Cincin Zamzam Pintar yang memungkinkan seseorang untuk merekam Zamzamnya kepada Allah, Tuhan semesta alam, setiap hari dengan Aplikasi iQibla Life. Dan telah melayani lebih dari 2 juta Muslim dalam dua tahun. Tim iQIBLA yakin untuk melayani lebih dari 10 juta pengguna Muslim dalam tiga tahun, kata Jackshao.",
+        "paragraph2": "Selain Cincin Zikir, iQIBLA telah meluncurkan Qwatch, Qphone, Penghitung Sholat, dan banyak produk teknologi pintar lainnya.",
+        "paragraph3": "Saat ini, iQIBLA telah menjadi brand teknologi paling populer di kalangan Muslim di seluruh dunia.",
+        "altText": "Dampak Global iQIBLA"
+      },
+      "navigation": {
+        "previous": "Sebelumnya",
+        "next": "Selanjutnya",
+        "goToItem": "Pergi ke item"
+      }
+    }
   }
 }
