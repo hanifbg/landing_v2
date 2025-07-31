@@ -528,9 +528,8 @@
           "paragraph2": "Jika Anda tinggal di Wilayah Ekonomi Eropa, Inggris, atau Swiss, iQibla, Inc. adalah pengontrol data yang bertanggung jawab atas data pribadi yang kami kumpulkan. Anda dapat menghubungi Petugas Perlindungan Data kami di dpo@iqibla.com."
         }
       }
-    }
-  },
-  "termsOfService": {
+    },
+    "termsOfService": {
     "title": "Syarat Layanan",
     "policyTitle": "Syarat Layanan iQibla",
     "intro": "Harap baca Syarat Layanan (\"Syarat\") ini dengan seksama karena berisi informasi penting tentang hak, pemulihan, dan kewajiban hukum Anda. Dengan mengakses atau menggunakan Layanan iQibla, Anda setuju untuk mematuhi dan terikat oleh Syarat ini.",
@@ -570,20 +569,18 @@
       "prohibitedActivities": {
         "title": "AKTIVITAS YANG DILARANG",
         "intro": "Anda setuju untuk tidak terlibat dalam aktivitas yang dilarang berikut:",
-        "activities": [
-          "Menyalin, mendistribusikan, atau mengungkapkan bagian apa pun dari Layanan iQibla dalam media apa pun, termasuk tanpa batasan oleh \"scraping\" otomatis atau non-otomatis.",
-          "Menggunakan sistem otomatis apa pun, termasuk tanpa batasan \"robot,\" \"spider,\" \"pembaca offline,\" dll., untuk mengakses Layanan iQibla dengan cara yang mengirimkan lebih banyak pesan permintaan ke server iQibla daripada yang dapat dihasilkan manusia secara wajar dalam periode waktu yang sama dengan menggunakan browser web online konvensional.",
-          "Mengirimkan spam, surat berantai, atau email yang tidak diminta lainnya.",
-          "Mencoba mengganggu, membahayakan integritas atau keamanan sistem, atau memecahkan kode transmisi apa pun ke atau dari server yang menjalankan Layanan iQibla.",
-          "Mengambil tindakan apa pun yang membebankan, atau mungkin membebankan menurut kebijaksanaan kami sendiri, beban yang tidak wajar atau tidak proporsional besar pada infrastruktur kami.",
-          "Mengunggah data yang tidak valid, virus, worm, atau agen perangkat lunak lainnya melalui Layanan iQibla.",
-          "Mengumpulkan atau memanen informasi yang dapat diidentifikasi secara pribadi, termasuk nama akun, dari Layanan iQibla.",
-          "Menggunakan Layanan iQibla untuk tujuan permintaan komersial.",
-          "Menyamar sebagai orang lain atau dengan cara lain salah menyajikan afiliasi Anda dengan orang atau entitas, melakukan penipuan, menyembunyikan atau mencoba menyembunyikan identitas Anda.",
-          "Mengganggu fungsi yang tepat dari Layanan iQibla.",
-          "Mengakses konten apa pun di Layanan iQibla melalui teknologi atau cara apa pun selain yang disediakan atau diizinkan oleh Layanan iQibla.",
-          "Melewati tindakan yang mungkin kami gunakan untuk mencegah atau membatasi akses ke Layanan iQibla, termasuk tanpa batasan fitur yang mencegah atau membatasi penggunaan atau penyalinan konten apa pun atau menerapkan batasan penggunaan Layanan iQibla atau konten di dalamnya."
-        ]
+        "activities1": "Menyalin, mendistribusikan, atau mengungkapkan bagian apa pun dari Layanan iQibla dalam media apa pun, termasuk tanpa batasan oleh \"scraping\" otomatis atau non-otomatis.",
+        "activities2": "Menggunakan sistem otomatis apa pun, termasuk tanpa batasan \"robot,\" \"spider,\" \"pembaca offline,\" dll., untuk mengakses Layanan iQibla dengan cara yang mengirimkan lebih banyak pesan permintaan ke server iQibla daripada yang dapat dihasilkan manusia secara wajar dalam periode waktu yang sama dengan menggunakan browser web online konvensional.",
+        "activities3": "Mengirimkan spam, surat berantai, atau email yang tidak diminta lainnya.",
+        "activities4": "Mencoba mengganggu, membahayakan integritas atau keamanan sistem, atau memecahkan kode transmisi apa pun ke atau dari server yang menjalankan Layanan iQibla.",
+        "activities5": "Mengambil tindakan apa pun yang membebankan, atau mungkin membebankan menurut kebijaksanaan kami sendiri, beban yang tidak wajar atau tidak proporsional besar pada infrastruktur kami.",
+        "activities6": "Mengunggah data yang tidak valid, virus, worm, atau agen perangkat lunak lainnya melalui Layanan iQibla.",
+        "activities7": "Mengumpulkan atau memanen informasi yang dapat diidentifikasi secara pribadi, termasuk nama akun, dari Layanan iQibla.",
+        "activities8": "Menggunakan Layanan iQibla untuk tujuan permintaan komersial.",
+        "activities9": "Menyamar sebagai orang lain atau dengan cara lain salah menyajikan afiliasi Anda dengan orang atau entitas, melakukan penipuan, menyembunyikan atau mencoba menyembunyikan identitas Anda.",
+        "activities10": "Mengganggu fungsi yang tepat dari Layanan iQibla.",
+        "activities11": "Mengakses konten apa pun di Layanan iQibla melalui teknologi atau cara apa pun selain yang disediakan atau diizinkan oleh Layanan iQibla.",
+        "activities12": "Melewati tindakan yang mungkin kami gunakan untuk mencegah atau membatasi akses ke Layanan iQibla, termasuk tanpa batasan fitur yang mencegah atau membatasi penggunaan atau penyalinan konten apa pun atau menerapkan batasan penggunaan Layanan iQibla atau konten di dalamnya."
       },
       "termination": {
         "title": "PENGHENTIAN",
@@ -708,5 +705,6 @@
         }
       }
     }
+  }
   }
 }

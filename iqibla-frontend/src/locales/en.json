@@ -554,20 +554,18 @@
         "prohibitedActivities": {
           "title": "PROHIBITED ACTIVITIES",
           "intro": "You agree not to engage in any of the following prohibited activities:",
-          "activities": [
-            "Copying, distributing, or disclosing any part of the iQibla Service in any medium, including without limitation by any automated or non-automated \"scraping\".",
-            "Using any automated system, including without limitation \"robots,\" \"spiders,\" \"offline readers,\" etc., to access the iQibla Service in a manner that sends more request messages to the iQibla servers than a human can reasonably produce in the same period of time by using a conventional online web browser.",
-            "Transmitting spam, chain letters, or other unsolicited email.",
-            "Attempting to interfere with, compromise the system integrity or security, or decipher any transmissions to or from the servers running the iQibla Service.",
-            "Taking any action that imposes, or may impose at our sole discretion an unreasonable or disproportionately large load on our infrastructure.",
-            "Uploading invalid data, viruses, worms, or other software agents through the iQibla Service.",
-            "Collecting or harvesting any personally identifiable information, including account names, from the iQibla Service.",
-            "Using the iQibla Service for any commercial solicitation purposes.",
-            "Impersonating another person or otherwise misrepresenting your affiliation with a person or entity, conducting fraud, hiding or attempting to hide your identity.",
-            "Interfering with the proper working of the iQibla Service.",
-            "Accessing any content on the iQibla Service through any technology or means other than those provided or authorized by the iQibla Service.",
-            "Bypassing the measures we may use to prevent or restrict access to the iQibla Service, including without limitation features that prevent or restrict use or copying of any content or enforce limitations on use of the iQibla Service or the content therein."
-          ]
+          "activities1": "Copying, distributing, or disclosing any part of the iQibla Service in any medium, including without limitation by any automated or non-automated \"scraping\".",
+          "activities2":  "Using any automated system, including without limitation \"robots,\" \"spiders,\" \"offline readers,\" etc., to access the iQibla Service in a manner that sends more request messages to the iQibla servers than a human can reasonably produce in the same period of time by using a conventional online web browser.",
+          "activities3":  "Transmitting spam, chain letters, or other unsolicited email.",
+          "activities4":  "Attempting to interfere with, compromise the system integrity or security, or decipher any transmissions to or from the servers running the iQibla Service.",
+          "activities5":  "Taking any action that imposes, or may impose at our sole discretion an unreasonable or disproportionately large load on our infrastructure.",
+          "activities6":  "Uploading invalid data, viruses, worms, or other software agents through the iQibla Service.",
+          "activities7":  "Collecting or harvesting any personally identifiable information, including account names, from the iQibla Service.",
+          "activities8":  "Using the iQibla Service for any commercial solicitation purposes.",
+          "activities9":  "Impersonating another person or otherwise misrepresenting your affiliation with a person or entity, conducting fraud, hiding or attempting to hide your identity.",
+          "activities10":  "Interfering with the proper working of the iQibla Service.",
+          "activities11":  "Accessing any content on the iQibla Service through any technology or means other than those provided or authorized by the iQibla Service.",
+          "activities12":  "Bypassing the measures we may use to prevent or restrict access to the iQibla Service, including without limitation features that prevent or restrict use or copying of any content or enforce limitations on use of the iQibla Service or the content therein."
         },
         "termination": {
           "title": "TERMINATION",
