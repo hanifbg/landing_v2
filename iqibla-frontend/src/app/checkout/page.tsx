@@ -46,6 +46,14 @@ interface CityResponseItem {
     postal_code: string;
 }
 
+interface DistrictResponseItem {
+    district_id: string;
+    city_id: string;
+    province_id: string;
+    district_name: string;
+    postal_code: string;
+}
+
 // Shipping cost request payload
 interface ShippingCostRequestPayload {
     origin: string; // City ID Origin (hardcode to a default origin City ID for now)
@@ -71,6 +79,10 @@ interface CreateOrderRequestPayload {
     shipping_address: string; // The street address
     shipping_city_id: string;
     shipping_province_id: string;
+    shipping_district_id: string;
+    shipping_province_name: string;
+    shipping_city_name: string;
+    shipping_district_name: string;
     shipping_postal_code: string;
     shipping_courier: string; // e.g., "jne"
     shipping_service: string; // e.g., "REG", "OKE", "YES"
@@ -112,6 +124,11 @@ interface CitiesApiResponse {
     message: string;
 }
 
+interface DistrictsApiResponse {
+    data: DistrictResponseItem[];
+    message: string;
+}
+
 interface ShippingCostApiResponse {
     data: ShippingOptionResponse[];
     message: string;
@@ -128,6 +145,7 @@ export default function CheckoutPage() {
     // State management for shipping data
     const [provinces, setProvinces] = useState<ProvinceResponseItem[]>([]);
     const [cities, setCities] = useState<CityResponseItem[]>([]);
+    const [districts, setDistricts] = useState<DistrictResponseItem[]>([]);
     const [shippingOptions, setShippingOptions] = useState<ShippingOptionResponse[]>([]);
     const [selectedShippingOption, setSelectedShippingOption] = useState<ShippingOptionResponse | null>(null);
     
@@ -141,16 +159,29 @@ export default function CheckoutPage() {
     // State management for shipping address
     const [shippingAddress, setShippingAddress] = useState({
         province_id: '',
+        province_name:'',
         city_id: '',
+        city_name:'',
+        district_id: '',
+        district_name: '',
         street: '',
         postalCode: '',
-        country: 'Indonesia' // Default to Indonesia
+        country: 'Indonesia', // Default to Indonesia
     });
+    
+    // State for searchable dropdowns
+    const [provinceSearch, setProvinceSearch] = useState('');
+    const [citySearch, setCitySearch] = useState('');
+    const [districtSearch, setDistrictSearch] = useState('');
+    const [showProvinceDropdown, setShowProvinceDropdown] = useState(false);
+    const [showCityDropdown, setShowCityDropdown] = useState(false);
+    const [showDistrictDropdown, setShowDistrictDropdown] = useState(false);
     
     // Loading states
     const [loadingCart, setLoadingCart] = useState<boolean>(true);
     const [loadingProvinces, setLoadingProvinces] = useState<boolean>(false);
     const [loadingCities, setLoadingCities] = useState<boolean>(false);
+    const [loadingDistricts, setLoadingDistricts] = useState<boolean>(false);
     const [loadingShippingCosts, setLoadingShippingCosts] = useState<boolean>(false);
     const [isPlacingOrder, setIsPlacingOrder] = useState<boolean>(false);
     
@@ -254,9 +285,42 @@ export default function CheckoutPage() {
         }
     }, []);
 
+    // Function to fetch districts based on city
+    const fetchDistricts = useCallback(async (cityId: string) => {
+        if (!cityId) return;
+        
+        setLoadingDistricts(true);
+        setError(null);
+        setErrorKey(null);
+
+        try {
+            const response = await fetch(`${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.SHIPPING_DISTRICTS}/${cityId}`);
+            
+            if (!response.ok) {
+                throw new Error(`Failed to fetch districts: ${response.status} ${response.statusText}`);
+            }
+
+            const data: DistrictsApiResponse = await response.json();
+            setDistricts(data.data);
+        } catch (error) {
+            console.error('Error fetching districts:', error);
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setErrorKey('common.error');
+            }
+        } finally {
+            setLoadingDistricts(false);
+        }
+    }, []);
+
     // Function to calculate shipping costs
     const calculateShippingCosts = useCallback(async () => {
-        if (!shippingAddress.city_id || totalWeight <= 0) return;
+        console.log('calculateShippingCosts called with district_id:', shippingAddress.district_id, 'totalWeight:', totalWeight);
+        if (!shippingAddress.district_id || totalWeight <= 0) {
+            console.log('calculateShippingCosts early return - missing district_id or totalWeight');
+            return;
+        }
         
         setLoadingShippingCosts(true);
         setError(null);
@@ -264,8 +328,8 @@ export default function CheckoutPage() {
 
         try {
             const payload: ShippingCostRequestPayload = {
-                origin: '154', // Jakarta Pusat as default origin
-                destination: shippingAddress.city_id,
+                origin: '1359', // kramat jati jakarta timur
+                destination: shippingAddress.district_id, // Use district_id as destination
                 weight: totalWeight,
                 courier: 'jne' // Using JNE as the courier
             };
@@ -307,7 +371,7 @@ export default function CheckoutPage() {
                 setNotification(null);
             }, 3000);
         }
-    }, [shippingAddress.city_id, totalWeight, setNotification]);
+    }, [shippingAddress.district_id, totalWeight]);
 
     // Handle customer details input change
     const handleCustomerDetailsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -321,21 +385,126 @@ export default function CheckoutPage() {
     // Handle shipping address input change
     const handleShippingAddressChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
+
+        // Validasi hanya angka untuk postalCode
+        if (name === 'postalCode' && value && !/^[0-9]*$/.test(value)) {
+            return; // Tidak update state jika bukan angka
+        }
+
+        console.log('handleShippingAddressChange - name:', name, 'value:', value);
         setShippingAddress(prev => ({
             ...prev,
             [name]: value
         }));
         
-        // Reset city and shipping options when province changes
+        // Reset city, district and shipping options when province changes
         if (name === 'province_id') {
             setShippingAddress(prev => ({
                 ...prev,
-                city_id: ''
+                city_id: '',
+                district_id: ''
             }));
+            setCities([]);
+            setDistricts([]);
+            setShippingOptions([]);
+            setSelectedShippingOption(null);
+            setCitySearch('');
+            setDistrictSearch('');
+            setShowCityDropdown(false);
+            setShowDistrictDropdown(false);
+        }
+        // Reset district and shipping options when city changes
+        if (name === 'city_id') {
+            setShippingAddress(prev => ({
+                ...prev,
+                district_id: ''
+            }));
+            setDistricts([]);
+            setShippingOptions([]);
+            setSelectedShippingOption(null);
+            setDistrictSearch('');
+            setShowDistrictDropdown(false);
+        }
+        // Reset shipping options when district changes
+        if (name === 'district_id') {
             setShippingOptions([]);
             setSelectedShippingOption(null);
         }
     };
+
+    // Handle searchable dropdown functions
+    const handleProvinceSelect = (province: ProvinceResponseItem) => {
+        setShippingAddress(prev => ({
+            ...prev,
+            province_id: province.province_id,
+            province_name: province.province
+        }));
+        setProvinceSearch(province.province);
+        setShowProvinceDropdown(false);
+        
+        // Reset related fields
+        setShippingAddress(prev => ({
+            ...prev,
+            city_id: '',
+            district_id: ''
+        }));
+        setCities([]);
+        setDistricts([]);
+        setShippingOptions([]);
+        setSelectedShippingOption(null);
+        setCitySearch('');
+        setDistrictSearch('');
+        setShowCityDropdown(false);
+        setShowDistrictDropdown(false);
+    };
+
+    const handleCitySelect = (city: CityResponseItem) => {
+        setShippingAddress(prev => ({
+            ...prev,
+            city_id: city.city_id,
+            city_name: city.city_name ? city.city_name : '-'
+        }));
+        setCitySearch(city.city_name ? city.city_name : '-');
+        setShowCityDropdown(false);
+        
+        // Reset related fields
+        setShippingAddress(prev => ({
+            ...prev,
+            district_id: ''
+        }));
+        setDistricts([]);
+        setShippingOptions([]);
+        setSelectedShippingOption(null);
+        setDistrictSearch('');
+        setShowDistrictDropdown(false);
+    };
+
+    const handleDistrictSelect = (district: DistrictResponseItem) => {
+        setShippingAddress(prev => ({
+            ...prev,
+            district_id: district.district_id,
+            district_name: district.district_name
+        }));
+        setDistrictSearch(district.district_name);
+        setShowDistrictDropdown(false);
+        
+        // Reset shipping options
+        setShippingOptions([]);
+        setSelectedShippingOption(null);
+    };
+
+    // Filter functions for searchable dropdowns
+    const filteredProvinces = provinces.filter(province =>
+        province.province.toLowerCase().includes(provinceSearch.toLowerCase())
+    );
+
+    const filteredCities = cities.filter(city =>
+        `${city.type || ''} ${city.city_name || ''}`.toLowerCase().includes(citySearch.toLowerCase())
+    );
+
+    const filteredDistricts = districts.filter(district =>
+        district.district_name.toLowerCase().includes(districtSearch.toLowerCase())
+    );
 
     // Handle shipping option selection
     const handleShippingOptionChange = (option: ShippingOptionResponse) => {
@@ -357,9 +526,15 @@ export default function CheckoutPage() {
             return;
         }
         
-        if (!shippingAddress.province_id || !shippingAddress.city_id || !shippingAddress.street || !shippingAddress.postalCode) {
+        if (!shippingAddress.province_id || !shippingAddress.city_id || !shippingAddress.district_id || !shippingAddress.street || !shippingAddress.postalCode) {
             setError(null);
             setErrorKey('checkout.shippingAddressRequired');
+            return;
+        }
+        // Validasi postal code hanya angka
+        if (!/^[0-9]+$/.test(shippingAddress.postalCode)) {
+            setError(null);
+            setErrorKey('checkout.invalidPostalCode');
             return;
         }
         
@@ -386,6 +561,11 @@ export default function CheckoutPage() {
                 throw new Error(t('checkout.cartIdNotFound'));
             }
 
+            // Temukan objek terpilih
+            const selectedProvince = provinces.find(p => p.province_id === shippingAddress.province_id);
+            const selectedCity = cities.find(c => c.city_id === shippingAddress.city_id);
+            const selectedDistrict = districts.find(d => d.district_id === shippingAddress.district_id);
+
             // Construct the order payload
             const orderPayload: CreateOrderRequestPayload = {
                 cart_id: cartId,
@@ -395,6 +575,10 @@ export default function CheckoutPage() {
                 shipping_address: shippingAddress.street,
                 shipping_city_id: shippingAddress.city_id,
                 shipping_province_id: shippingAddress.province_id,
+                shipping_district_id: shippingAddress.district_id,
+                shipping_province_name: selectedProvince?.province || '',
+                shipping_city_name: selectedCity ? `${selectedCity.type || ''} ${selectedCity.city_name || ''}`.trim() : '',
+                shipping_district_name: selectedDistrict?.district_name || '',
                 shipping_postal_code: shippingAddress.postalCode,
                 shipping_courier: 'jne', // Hardcoded to jne for now
                 shipping_service: selectedShippingOption.service,
@@ -482,12 +666,38 @@ export default function CheckoutPage() {
         }
     }, [shippingAddress.province_id, fetchCities]);
 
-    // Calculate shipping costs when city changes
+    // Fetch districts when city changes
     useEffect(() => {
-        if (shippingAddress.city_id && totalWeight > 0) {
+        if (shippingAddress.city_id) {
+            fetchDistricts(shippingAddress.city_id);
+        }
+    }, [shippingAddress.city_id, fetchDistricts]);
+
+    // Calculate shipping costs when district changes
+    useEffect(() => {
+        console.log('useEffect triggered - district_id:', shippingAddress.district_id, 'totalWeight:', totalWeight);
+        if (shippingAddress.district_id && totalWeight > 0) {
+            console.log('Calling calculateShippingCosts from useEffect');
             calculateShippingCosts();
         }
-    }, [shippingAddress.city_id, totalWeight, calculateShippingCosts]);
+    }, [shippingAddress.district_id, totalWeight]);
+
+    // Close dropdowns when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            const target = event.target as Element;
+            if (!target.closest('.dropdown-container')) {
+                setShowProvinceDropdown(false);
+                setShowCityDropdown(false);
+                setShowDistrictDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     // Loading state
     if (loadingCart) {
@@ -533,14 +743,14 @@ export default function CheckoutPage() {
                 </div>
             )}
 
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 max-w-7xl">
                 <h1 className="text-3xl font-bold text-gray-900 mb-6">{t('checkout.title')}</h1>
 
-                <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 xl:grid-cols-3 gap-6 lg:gap-8">
                     {/* Left Column - Customer & Shipping Details */}
-                    <div className="lg:col-span-2 space-y-6">
+                    <div className="lg:col-span-7 xl:col-span-2 space-y-6">
                         {/* Customer Details Section */}
-                        <div className="bg-white p-6 rounded-lg shadow-md">
+                        <div className="bg-white p-6 lg:p-8 rounded-lg shadow-md">
                             <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.customerDetails')}</h2>
                             <div className="space-y-4">
                                 <div>
@@ -583,7 +793,7 @@ export default function CheckoutPage() {
                         </div>
 
                         {/* Shipping Address Section */}
-                        <div className="bg-white p-6 rounded-lg shadow-md">
+                        <div className="bg-white p-6 lg:p-8 rounded-lg shadow-md">
                             <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.shippingAddress')}</h2>
                             <div className="space-y-4">
                                 <div>
@@ -600,48 +810,113 @@ export default function CheckoutPage() {
                                 </div>
                                 <div>
                                     <label htmlFor="province_id" className="block text-sm font-medium text-gray-700 mb-1">Province</label>
-                                    <select
-                                        id="province_id"
-                                        name="province_id"
-                                        value={shippingAddress.province_id}
-                                        onChange={handleShippingAddressChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
-                                        required
-                                    >
-                                        <option value="">Select Province</option>
-                                        {loadingProvinces ? (
-                                            <option value="" disabled>Loading provinces...</option>
-                                        ) : (
-                                            provinces.map(province => (
-                                                <option key={province.province_id} value={province.province_id}>
-                                                    {province.province}
-                                                </option>
-                                            ))
+                                    <div className="relative dropdown-container">
+                                        <input
+                                            type="text"
+                                            placeholder="Search province..."
+                                            value={provinceSearch}
+                                            onChange={(e) => {
+                                                setProvinceSearch(e.target.value);
+                                                setShowProvinceDropdown(true);
+                                            }}
+                                            onFocus={() => setShowProvinceDropdown(true)}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
+                                            required
+                                        />
+                                        {showProvinceDropdown && (
+                                            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                                {loadingProvinces ? (
+                                                    <div className="px-4 py-2 text-gray-500">Loading provinces...</div>
+                                                ) : filteredProvinces.length > 0 ? (
+                                                    filteredProvinces.map(province => (
+                                                        <div
+                                                            key={province.province_id}
+                                                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black"
+                                                            onClick={() => handleProvinceSelect(province)}
+                                                        >
+                                                            {province.province}
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <div className="px-4 py-2 text-gray-500">No provinces found</div>
+                                                )}
+                                            </div>
                                         )}
-                                    </select>
+                                    </div>
                                 </div>
                                 <div>
                                     <label htmlFor="city_id" className="block text-sm font-medium text-gray-700 mb-1">City</label>
-                                    <select
-                                        id="city_id"
-                                        name="city_id"
-                                        value={shippingAddress.city_id}
-                                        onChange={handleShippingAddressChange}
-                                        className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
-                                        required
-                                        disabled={!shippingAddress.province_id || loadingCities}
-                                    >
-                                        <option value="">Select City</option>
-                                        {loadingCities ? (
-                                            <option value="" disabled>Loading cities...</option>
-                                        ) : (
-                                            cities.map(city => (
-                                                <option key={city.city_id} value={city.city_id}>
-                                                    {city.type} {city.city_name}
-                                                </option>
-                                            ))
+                                    <div className="relative dropdown-container">
+                                        <input
+                                            type="text"
+                                            placeholder="Search city..."
+                                            value={citySearch}
+                                            onChange={(e) => {
+                                                setCitySearch(e.target.value);
+                                                setShowCityDropdown(true);
+                                            }}
+                                            onFocus={() => setShowCityDropdown(true)}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
+                                            required
+                                            disabled={!shippingAddress.province_id || loadingCities}
+                                        />
+                                        {showCityDropdown && (
+                                            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                                {loadingCities ? (
+                                                    <div className="px-4 py-2 text-gray-500">Loading cities...</div>
+                                                ) : filteredCities.length > 0 ? (
+                                                    filteredCities.map(city => (
+                                                        <div
+                                                            key={city.city_id}
+                                                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black"
+                                                            onClick={() => handleCitySelect(city)}
+                                                        >
+                                                            {city.type || ''} {city.city_name || ''}
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <div className="px-4 py-2 text-gray-500">No cities found</div>
+                                                )}
+                                            </div>
                                         )}
-                                    </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label htmlFor="district_id" className="block text-sm font-medium text-gray-700 mb-1">District</label>
+                                    <div className="relative dropdown-container">
+                                        <input
+                                            type="text"
+                                            placeholder="Search district..."
+                                            value={districtSearch}
+                                            onChange={(e) => {
+                                                setDistrictSearch(e.target.value);
+                                                setShowDistrictDropdown(true);
+                                            }}
+                                            onFocus={() => setShowDistrictDropdown(true)}
+                                            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 bg-white"
+                                            required
+                                            disabled={!shippingAddress.city_id || loadingDistricts}
+                                        />
+                                        {showDistrictDropdown && (
+                                            <div className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                                {loadingDistricts ? (
+                                                    <div className="px-4 py-2 text-gray-500">Loading districts...</div>
+                                                ) : filteredDistricts.length > 0 ? (
+                                                    filteredDistricts.map(district => (
+                                                        <div
+                                                            key={district.district_id}
+                                                            className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-black"
+                                                            onClick={() => handleDistrictSelect(district)}
+                                                        >
+                                                            {district.district_name}
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <div className="px-4 py-2 text-gray-500">No districts found</div>
+                                                )}
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                                 <div>
                                     <label htmlFor="postalCode" className="block text-sm font-medium text-gray-700 mb-1">Postal Code</label>
@@ -671,9 +946,9 @@ export default function CheckoutPage() {
                     </div>
 
                     {/* Right Column - Order Summary & Shipping Options */}
-                    <div className="space-y-6">
+                    <div className="lg:col-span-5 xl:col-span-1 space-y-6">
                         {/* Order Summary */}
-                        <div className="bg-white p-6 rounded-lg shadow-md sticky top-24">
+                        <div className="bg-white p-6 lg:p-8 rounded-lg shadow-md lg:sticky lg:top-24">
                             <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.orderSummary')}</h2>
                             
                             <div className="space-y-3 border-b border-gray-200 pb-4 mb-4">
@@ -715,10 +990,10 @@ export default function CheckoutPage() {
                                             </div>
                                         ))}
                                     </div>
-                                ) : shippingAddress.city_id ? (
+                                ) : shippingAddress.district_id ? (
                                     <p className="text-yellow-600">No shipping options available for this destination.</p>
                                 ) : (
-                                    <p className="text-gray-600">Please select your city to see shipping options.</p>
+                                    <p className="text-gray-600">Please select your district to see shipping options.</p>
                                 )}
                             </div>
                             
@@ -735,7 +1010,7 @@ export default function CheckoutPage() {
                                 disabled={loadingShippingCosts || isPlacingOrder || !selectedShippingOption || 
                                     !customerDetails.name || !customerDetails.email || !customerDetails.phone || 
                                     !shippingAddress.street || !shippingAddress.province_id || 
-                                    !shippingAddress.city_id || !shippingAddress.postalCode}
+                                    !shippingAddress.city_id || !shippingAddress.district_id || !shippingAddress.postalCode}
                             >
                                 {isPlacingOrder ? t('checkout.placingOrder') : t('checkout.placeOrder')}
                             </button>
