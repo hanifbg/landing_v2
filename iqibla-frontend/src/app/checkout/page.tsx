@@ -743,14 +743,14 @@ export default function CheckoutPage() {
                 </div>
             )}
 
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto px-4 max-w-7xl">
                 <h1 className="text-3xl font-bold text-gray-900 mb-6">{t('checkout.title')}</h1>
 
-                <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 xl:grid-cols-3 gap-6 lg:gap-8">
                     {/* Left Column - Customer & Shipping Details */}
-                    <div className="lg:col-span-2 space-y-6">
+                    <div className="lg:col-span-7 xl:col-span-2 space-y-6">
                         {/* Customer Details Section */}
-                        <div className="bg-white p-6 rounded-lg shadow-md">
+                        <div className="bg-white p-6 lg:p-8 rounded-lg shadow-md">
                             <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.customerDetails')}</h2>
                             <div className="space-y-4">
                                 <div>
@@ -793,7 +793,7 @@ export default function CheckoutPage() {
                         </div>
 
                         {/* Shipping Address Section */}
-                        <div className="bg-white p-6 rounded-lg shadow-md">
+                        <div className="bg-white p-6 lg:p-8 rounded-lg shadow-md">
                             <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.shippingAddress')}</h2>
                             <div className="space-y-4">
                                 <div>
@@ -946,9 +946,9 @@ export default function CheckoutPage() {
                     </div>
 
                     {/* Right Column - Order Summary & Shipping Options */}
-                    <div className="space-y-6">
+                    <div className="lg:col-span-5 xl:col-span-1 space-y-6">
                         {/* Order Summary */}
-                        <div className="bg-white p-6 rounded-lg shadow-md sticky top-24">
+                        <div className="bg-white p-6 lg:p-8 rounded-lg shadow-md lg:sticky lg:top-24">
                             <h2 className="text-xl font-semibold text-gray-900 mb-4">{t('checkout.orderSummary')}</h2>
                             
                             <div className="space-y-3 border-b border-gray-200 pb-4 mb-4">
