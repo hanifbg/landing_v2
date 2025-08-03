@@ -18,6 +18,7 @@ export const API_CONFIG = {
     SHIPPING_PROVINCES: '/shipping/provinces',
     SHIPPING_CITIES: '/shipping/cities',
     SHIPPING_COST: '/shipping/cost',
+    SHIPPING_DISTRICTS: '/shipping/districts',
     
     // Order endpoints
     ORDERS: '/orders'
