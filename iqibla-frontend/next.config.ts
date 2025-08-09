@@ -34,6 +34,12 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**', // This allows any path from this domain
       },
+      {
+        protocol: 'https',
+        hostname: 'id.iqibla.com',
+        port: '',
+        pathname: '/**', // This allows any path from this domain
+      },
       // Add other remote patterns if you have images from other domains
     ],
   },
