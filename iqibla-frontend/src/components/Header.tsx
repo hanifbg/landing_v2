@@ -152,12 +152,12 @@ export default function Header() {
                     {/* Right Navigation Links - Desktop Only */}
                     <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
                         {/* Brand Story */}
-                        <Link 
+                        {/* <Link 
                             href="/pages/brand-story" 
                             className="text-sm xl:text-base font-medium hover:text-gray-400 transition-colors duration-200"
                         >
                             {t('header.brandStory')}
-                        </Link>
+                        </Link> */}
                         {/* Contact Us */}
                         <a
                             href="https://api.whatsapp.com/send?phone=6285179766847&text=Halo iQibla Indonesia, saya ingin bertanya lebih lanjut mengenai produk Anda. Bisakah Anda bantu?"
