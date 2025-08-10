@@ -118,7 +118,7 @@ export default function Header() {
                         </div>
                     </div>
                     {/* Order Tracker */}
-                    <Link href="#" className="text-sm xl:text-base font-medium hover:text-gray-400 transition-colors duration-200">
+                    <Link href="/track" className="text-sm xl:text-base font-medium hover:text-gray-400 transition-colors duration-200">
                         {t('header.orderTracker')}
                     </Link>
                     {/* iQIBLA Life */}
@@ -275,7 +275,7 @@ export default function Header() {
                         
                         {/* Order Tracker */}
                         <Link 
-                            href="#" 
+                            href="/track" 
                             className="text-white text-lg py-3 w-full text-left hover:bg-neutral-700 transition-colors duration-200 px-4 rounded-md"
                             onClick={toggleMobileMenu}
                         >
@@ -294,13 +294,13 @@ export default function Header() {
                         </Link>
                         
                         {/* Brand Story */}
-                        <Link 
+                        {/* <Link 
                             href="/pages/brand-story" 
                             className="text-white text-lg py-3 w-full text-left hover:bg-neutral-700 transition-colors duration-200 px-4 rounded-md"
                             onClick={toggleMobileMenu}
                         >
                             {t('header.brandStory')}
-                        </Link>
+                        </Link> */}
                         
                         {/* Contact Us */}
                         <a
