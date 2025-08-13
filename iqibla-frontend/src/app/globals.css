@@ -48,3 +48,113 @@ body {
   background-color: theme('colors.white');
   transform: translateY(-50%) scale(1.1);
 }
+
+/* Mobile-specific styles for hero slider */
+@media (max-width: 768px) {
+  .hero-slider .swiper-slide {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .hero-slider .swiper-slide .image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .hero-slider .swiper-slide img,
+  .hero-slider .swiper-slide video {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.3); /* Scale up to ensure content is visible */
+    transition: transform 0.3s ease;
+  }
+}
+
+/* Additional responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .hero-slider .swiper-slide img,
+  .hero-slider .swiper-slide video {
+    transform: scale(1.6); /* Scale up more on very small screens */
+  }
+  
+  .hero-slider .swiper-slide .image-container {
+    transform: scale(1.1);
+  }
+}
+
+/* Medium mobile screens */
+@media (max-width: 640px) {
+  .hero-slider .swiper-slide img,
+  .hero-slider .swiper-slide video {
+    transform: scale(1.5);
+  }
+}
+
+/* Large mobile screens */
+@media (max-width: 768px) and (min-width: 641px) {
+  .hero-slider .swiper-slide img,
+  .hero-slider .swiper-slide video {
+    transform: scale(1.2);
+  }
+}
+
+/* Ensure smooth transitions and proper positioning */
+.hero-slider .swiper-slide {
+  position: relative;
+}
+
+.hero-slider .swiper-slide .image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hero-slider .swiper-slide img,
+.hero-slider .swiper-slide video {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+/* Special positioning for Salat Counter image */
+.hero-slider .swiper-slide .salat-counter-image img {
+  object-position: center;
+  transform: scale(1.4); /* Scale up more to ensure left side is visible */
+}
+
+/* Mobile-specific styling for Salat Counter mobile image */
+@media (max-width: 768px) {
+  .hero-slider .swiper-slide .salat-counter-image img[alt="Salat Counter Product Mobile"] {
+    object-position: center;
+    transform: scale(1.0); /* No zoom for mobile image */
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-slider .swiper-slide .salat-counter-image img[alt="Salat Counter Product Mobile"] {
+    transform: scale(1.0); /* No zoom for mobile image */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-slider .swiper-slide .salat-counter-image img[alt="Salat Counter Product Mobile"] {
+    transform: scale(1.0); /* No zoom for mobile image */
+  }
+}

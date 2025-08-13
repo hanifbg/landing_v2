@@ -21,7 +21,8 @@ export const API_CONFIG = {
     SHIPPING_DISTRICTS: '/shipping/districts',
     
     // Order endpoints
-    ORDERS: '/orders'
+    ORDERS: '/orders',
+    ORDER_TRACK: '/orders/track'
   }
 };
 
